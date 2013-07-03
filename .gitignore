@@ -222,3 +222,4 @@ pip-log.txt
 
 data/db.php
 _core/
+*/cache/
