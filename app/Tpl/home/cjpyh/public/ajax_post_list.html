@@ -1,64 +1,82 @@
 <volist name="post_list" id="val">
-<div class="showitem J_item">
-    <div class="showcont clearfix">
-        <div class="showitemTitle clearfix">
-            <h3 class="fl" sp="{$req.sp}"><a href="{:post_url($val['id'],$val['post_key'])}" target="_blank" <if condition="$val['tcolor']">style="color: {$val.tcolor};"</if>>{$val.title}<span>&nbsp;&nbsp;{$val.prices}</span></a></h3>
-            <div class="showitemTime">{:date("m-d H:i",$val['add_time'])}</div>
+
+<div class="row-fluid span12">
+    <div class="row-fluid">
+        <div class="span12 productTitle">
+            <h3 sp="{$req.sp}"><a href="{:post_url($val['id'],$val['post_key'])}" target="_blank" <if condition="$val['tcolor']">style="color: {$val.tcolor};"</if>>{$val.title}<span class="badge badge-important">&nbsp;&nbsp;{$val.prices}</span></a></h3>
         </div>
-        <div style="width: 684px;height: 100%;">
-            <div class="showcont_l fl">
-                <div class="showtext">
-                    <div class="showtext_head clearfix">
-                        <span class="fl">分类：
-                            <volist name="val['cate_list']" id="c">
+        <div class="span3 offset9 dateTime">
+            {:date("m-d H:i",$val['add_time'])}
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span8">
+            <div class="row-fluid">
+                <div class="span8">
+                    <p>分类：
+                        <volist name="val['cate_list']" id="c">
                             <a href="{:u('post_cate/index',array('id'=>$c['cate_id']))}" target="_blank">{$c.cate.name}</a>
                             <if condition="$i lt count($val['cate_list'])">,</if>
-                            </volist>
-                        </span>
-                        <span class="fr">推荐人：{$val.uname}</span>
-                    </div>
+                        </volist>
+                    </p>
+                </div>
+                <div class="span4">
+                    <p class="text-right">推荐人：{$val.uname}</p>
                 </div>
             </div>
-            <div class="showcont_r fr">
-                <div class="product">
-                    <div class="like">
-                        <div class="collect"><a class="J_favs" data-id="{$val.id}">{$val.favs}</a></div>
-                        <div class="commentCount">
-                            <a href="{:u('post/index',array('id'=>$val['id']))}#J_messagebox">{$val.comments}</a>
-                        </div>
-                    </div>
-                    <div class="pro_img">
-                        <a href="{:u('post/index',array('id'=>$val['id']))}" class="proimg_pic"><img src="./data/upload/post/{$val.img}"/></a>
-                    </div>
-                    <div class="zhida" >
-                        <!-- <a rel="nofollow" href="{:u('index/go',array('id'=>$val['id']))}" class="border_radius_3" target="_blank">直 达 链 接</a> -->
-                        <a rel="nofollow" href="go/{$val.id}" class="border_radius_3" target="_blank">直 达 链 接</a>
-                    </div>
-                </div>
-                <div class="mall"><span>商城:{$val.mall.title}</span></div>
-            </div>
-            <div class="showtext_body fl showcont_l">
+            <div class="row-fluid">
                 {$val.info}
+                <div class="span3 offset9">
+                    <a onclick="toggle_content($(this))" class="short_content">展开全文<i class="icon-chevron-down"></i></a>
+                </div>
             </div>
-            <div class="clearfix toggle_wrap showcont_l" style="text-align: right;">
-                <a onclick="toggle_content($(this))" class="short_content">展开全文</a>                    
-            </div>                
-        </div>        
-    </div>
-    <div class="score clearfix">
-        <div class="score_l fl">
-            <span class="evaluate_text">评价文本</span>
-            <div class="worth fl">
-                <a class="worth_1" data-id="{$val.id}" data-type="rate_best" href="javascript:;" title="超值">{$val.rate_best}</a>
-                <a class="worth_2" data-id="{$val.id}" data-type="rate_good" href="javascript:;" title="一般值">{$val.rate_good}</a>
-                <a class="worth_3" data-id="{$val.id}" data-type="rate_bad" href="javascript:;" title="不值">{$val.rate_bad}</a>
-            </div>
-            <span class="rating_text" id="J_rate_result_{$val.id}">{$val["rate_best"]+$val["rate_good"]+$val["rate_bad"]}位网友中的 <i>{$val["rate_best"]+$val["rate_good"]}</i> 位认为值得买！</span>
         </div>
-        <div class="score_r fr">
+        <div class="span4">
+            <div class="row-fluid ListRightBox">
+                <div class="row-fluid like">
+                    <div class="span6 collect">
+                        <a data-id="{$val.id}">{$val.favs}</a>
+                    </div>
+                    <div class="span6 commentCount">
+                        <a href="{:u('post/index',array('id'=>$val['id']))}#J_messagebox">{$val.comments}</a>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <ul class="thumbnails">
+                        <li>
+                            <a href="{:u('post/index',array('id'=>$val['id']))}" class="thumbnail"><img src="./data/upload/post/{$val.img}"/></a>
+                        </li>
+                    </ul>
+                        
+                </div>
+                <div class="row-fluid">
+                    <a rel="nofollow" href="go/{$val.id}" class="border_radius_3" target="_blank">直 达 链 接</a>
+                </div>
+                 <div class="row-fluid">
+                    <span>商城:{$val.mall.title}</span>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span8">
+            <ul class="inline">
+                <li><p>评价本文<i class="icon-chevron-right"></i> </p></li>
+                <li>
+                    <a class="worth_1" data-id="{$val.id}" data-type="rate_best" href="javascript:;" title="超值">{$val.rate_best}</a>
+                    <a class="worth_2" data-id="{$val.id}" data-type="rate_good" href="javascript:;" title="一般值">{$val.rate_good}</a>
+                    <a class="worth_3" data-id="{$val.id}" data-type="rate_bad" href="javascript:;" title="不值">{$val.rate_bad}</a>
+                </li>
+                <li>
+                    <span id="J_rate_result_{$val.id}">{$val["rate_best"]+$val["rate_good"]+$val["rate_bad"]}位网友中的 <i>{$val["rate_best"]+$val["rate_good"]}</i> 位认为值得买！</span>
+                </li>
+            </ul>
+        </div>
+        <div class="span4">
             <!-- Baidu Button BEGIN -->
             <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare" data="<literal>{</literal>'bdDes':'{$val.title}','text':'{$val.title}',pic:'http://{$server.HTTP_HOST}/data/upload/post/{$val.img}'<literal>}</literal>">
-                <span class="fl" style="display: block;padding-top: 6px;">分享到：</span>
+                <p class="muted share_direction" style="width:;">分享到：</p>
                 <a class="bds_qzone"></a>
                 <a class="bds_tsina"></a>
                 <a class="bds_tqq"></a>
@@ -70,4 +88,5 @@
         </div>
     </div>
 </div>
+
 </volist> 

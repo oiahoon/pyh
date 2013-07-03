@@ -1,5 +1,5 @@
 <!doctype html>
-<html xmlns:wb="http://open.weibo.com/wb">
+<html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,17 +17,18 @@
     </if>    
     var def={$def};
    
-	</script>   
+	</script>
+    <load href="__ROOT__/bootstrap/css/bootstrap-responsive.min.css" />   
     <style>
     body {
         padding-top: 60px;
         padding-bottom: 40px;
       }
-      .sidebar-nav {
+    .sidebar-nav {
         padding: 9px 0;
       }
 
-      @media (max-width: 980px) {
+    @media (max-width: 980px) {
         /* Enable use of floated navbar text */
         .navbar-text.pull-right {
           float: none;
@@ -35,16 +36,123 @@
           padding-right: 5px;
         }
       }
+    .hotactivity {
+        margin: 5px 0;
+        padding: 12px 0px 10px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+        }
+    .hotactivity:after {
+        content: "Example";
+        position: absolute;
+        top: -1px;
+        left: -1px;
+        padding: 3px 7px;
+        font-size: 12px;
+        font-weight: bold;
+        background-color: #f5f5f5;
+        border: 1px solid #ddd;
+        color: #9da0a4;
+        -webkit-border-radius: 4px 0 4px 0;
+        -moz-border-radius: 4px 0 4px 0;
+        border-radius: 4px 0 4px 0;
+    }
+    .hotactivity>ul>li {
+        font-size: 12px;
+        font-family: Arial,"SimSun";
+        padding-left: 18px;
+        height: 26px;
+        width: 18%;
+        overflow:hidden;
+        text-overflow:ellipsis;
+        white-space:nowrap;
+        float: left;
+        line-height: 26px;
+    }
+        /* Echo out a label for the example */
+    .hotTitle { 
+        width: 100%;
+        height: 25px;
+        line-height: 25px;
+        font-family: "Microsoft YaHei","SimSun";
+        font-size: 18px;
+        font-weight: bold;
+        color: #444;
+        padding-left: 15px;
+        }
+    .productTitle {
+        line-height: 20px;
+    }
+    .productTitle a {
+        color: #000;
+    }
+    .productTitle a:hover {
+        color: #000;
+    }
+    .dateTime {
+        font-size: 14px;
+        font-family: arial;
+        width: 100px;
+        color: #888;
+        font-weight: normal;
+        position: relative;
+        top:-20px;
+        right: 0;
+        float: right;
+        height: 0;
+    }
+    #bdshare {
+        width: 100%;
+        overflow:hidden;
+    }
+    .share_direction {
+        cursor: pointer;
+        display: block;
+        height: 16px;
+        color: #666;
+        padding-bottom: 3px;
+        padding-left: 22px;
+        padding-top: 8px;
+        margin-top: 5px;
+    }
+    .ListRightBox {
+        margin-bottom: 15px;
+        border: 1px solid #e5e5e5;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+    }
+    .thumbnails>li {
+         margin-left: 0px;
+    }
+    .like {
+        height: 26px;
+        width: 160px;
+    }
+    .collect {
+        background: #08c;
+        border-top-left-radius: 3px;
+    }
+    .commentCount {
+        background: #08c;
+        border-top-right-radius: 3px;
+    }
+    .collect a:hover {
+        color: #fff;
+    }
     </style> 
-    <load href="__ROOT__/bootstrap/css/bootstrap-responsive.min.css" />
+    
 </head>
 <body>
-    <script src="http://code.jquery.com/jquery.js"></script>
-    <script src="__ROOT__/bootstrap/js/bootstrap.min.js"></script>
+    
 <!--头部开始-->
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container-fluid">
+          <div class="span8 offset4">
           <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -73,16 +181,16 @@
                             <a href="{:u('user/register')}" class="regbtn">注册</a>
                         </li>
                         <li class="divider-vertical"></li>
-                        <li>
-                            <form class="navbar-search pull-left"  method="get" id="searchform" action="/">
-                                <input type="text" class="search-query" placeholder="{$search.keyword}">
-                                <input type="hidden" name="m" value="index"/>
-                                <input type="hidden" name="a" value="index"/>
-                            </form>
                     <else/>
-                        <a href="#" class="navbar-link">{$visitor.username}</a>欢迎您
-                        <a href="{:u('user/index')}">个人中心</a>|
-                        <a href="{:u('user/logout')}">注销</a>
+                        <li>
+                            <a href="#" class="navbar-link">{$visitor.username}</a> 
+                        </li>
+                        <li>
+                            <a href="{:u('user/index')}"><i class="icon-user"></i> 个人中心</a>
+                        </li>
+                        <li>
+                            <a href="{:u('user/logout')}">注销</a>
+                        </li>
                     </if>
                 </li>
             </ul>
@@ -97,12 +205,60 @@
                 </li>
             </ul>
           </div><!--/.nav-collapse -->
-        </div>
       </div>
-    </div>
-	<!--推荐类别开始-->
+        </div><!--/.container-fluid -->
+      </div><!--/.navbar-inner -->
+    </div><!--/.navbar navbar-inverse navbar-fixed-top -->
 	
-	<!--推荐类别结束-->
-	
+    <!--推荐类别开始 侧边栏-->
+	<div class="container-fluid"> <!-- 流式布局 -->
+      <div class="row-fluid"> <!-- 栅格布局 -->
+        <div class="span8 offset2"> <!-- 建立一个10单位宽度的div 来做container -->
+        <div class="span2"> <!-- 2单位宽度的侧边 -->
+          <div class="well sidebar-nav affix">
+            <ul class="nav nav-list">
+              <li class="nav-header"><a href="{:u('post_cate/index',array('id'=>1))}">推荐类别</a></li>
+              <volist name="recommend_cate" id="val">
+                    <li class="sub{$i}"><a href="{:u('post_cate/index',array('id'=>$val['id']))}">{$val.name}</a></li>
+                </volist>
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+	<!--推荐类别结束 侧边栏-->
+    <div class="span8">
+        <div class="row">
+            <div class="navbar">
+              <div class="navbar-inner">
+                <ul class="nav">
+                    <li><a href="./"><i class="icon-home"></i> 首页</a></li><li class="divider-vertical"></li>
+                    <li class="dropdown">
+                    <a href="{:u('post_cate/index',array('id'=>2))}" class="dropdown-toggle" data-toggle="dropdown" data-target="#"><i class="icon-heart"></i> 特色推荐<b class="caret"></b>
+                    </a>
+                        <ul class="dropdown-menu">
+                            <volist name="tese_cate" id="val">
+                                <li><a href="{:u('post_cate/index',array('id'=>$val['id']))}">{$val.name}</a></li>
+                            </volist>
+                        </ul>
+                    </li>
+                    <volist name="main_nav_list" id="val">
+                        <li class="divider-vertical"></li>
+                        <li class="{$val.alias}"><a class="navicon" href="{$val.link}" <if condition="$val['target'] eq 1">target="_blank"</if>><i class="icon-th-large"></i> {$val.name}</a></li>
+                    </volist>
+                </ul>
+                <ul class="nav pull-right">
+                        <li>
+                        <form  method="get" id="searchform" action="/" class="navbar-search">
+                        <div class="input-prepend">
+                          <span class="add-on"><i class="icon-search"></i></span>
+                          <input type="text" placeholder="搜索" value="{$search.keyword}">
+                        </div>
+                          <input type="hidden" name="m" value="index"/>
+                          <input type="hidden" name="a" value="index"/>
+                        </form>
+                    </li>
+                </ul>
+              </div>
+            </div>
+        </div> <!-- /div row-->
 
 <!--头部结束-->
