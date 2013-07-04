@@ -10,7 +10,7 @@
         </div>
     </div>
     <div class="row-fluid">
-        <div class="span8">
+        <div class="span9">
             <div class="row-fluid">
                 <div class="span8">
                     <p>分类：
@@ -31,15 +31,14 @@
                 </div>
             </div>
         </div>
-        <div class="span4">
+        <div class="span3">
             <div class="row-fluid ListRightBox">
                 <div class="row-fluid like">
-                    <div class="span6 collect">
-                        <a data-id="{$val.id}">{$val.favs}</a>
-                    </div>
-                    <div class="span6 commentCount">
-                        <a href="{:u('post/index',array('id'=>$val['id']))}#J_messagebox">{$val.comments}</a>
-                    </div>
+                    <ul class="like">
+                        <li class="span6 collect"><a href="#" data-id="{$val.id}">{$val.favs}</a></li>
+                        <li class="span6 commentCount"><a href="{:u('post/index',array('id'=>$val['id']))}#J_messagebox">{$val.comments}</a></li>
+                    </ul>
+                    
                 </div>
                 <div class="row-fluid">
                     <ul class="thumbnails">
@@ -47,13 +46,12 @@
                             <a href="{:u('post/index',array('id'=>$val['id']))}" class="thumbnail"><img src="./data/upload/post/{$val.img}"/></a>
                         </li>
                     </ul>
-                        
                 </div>
-                <div class="row-fluid">
-                    <a rel="nofollow" href="go/{$val.id}" class="border_radius_3" target="_blank">直 达 链 接</a>
+                <div class="row-fluid forward">
+                    <a rel="nofollow" href="go/{$val.id}" class="border_radius_3" target="_blank">直 达 链 接 &gt;</a>
                 </div>
-                 <div class="row-fluid">
-                    <span>商城:{$val.mall.title}</span>
+                 <div class="row-fluid shop">
+                    <span class="muted">商城：{$val.mall.title}</span>
                 </div>
             </div>
             
@@ -73,10 +71,10 @@
                 </li>
             </ul>
         </div>
-        <div class="span4">
+        <div class="bdshare pull-right">
             <!-- Baidu Button BEGIN -->
-            <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare" data="<literal>{</literal>'bdDes':'{$val.title}','text':'{$val.title}',pic:'http://{$server.HTTP_HOST}/data/upload/post/{$val.img}'<literal>}</literal>">
-                <p class="muted share_direction" style="width:;">分享到：</p>
+            <div id="bdshare" class="span12 bdshare_t bds_tools get-codes-bdshare" data="<literal>{</literal>'bdDes':'{$val.title}','text':'{$val.title}',pic:'http://{$server.HTTP_HOST}/data/upload/post/{$val.img}'<literal>}</literal>">
+                <p class="muted share_direction" style="width:auto;">分享到：</p>
                 <a class="bds_qzone"></a>
                 <a class="bds_tsina"></a>
                 <a class="bds_tqq"></a>

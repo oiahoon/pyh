@@ -27,7 +27,11 @@
     .sidebar-nav {
         padding: 9px 0;
       }
-
+    .sidebar {
+        position: absolute;
+        top: 100px;
+        left: 30px;
+    }
     @media (max-width: 980px) {
         /* Enable use of floated navbar text */
         .navbar-text.pull-right {
@@ -104,20 +108,15 @@
         float: right;
         height: 0;
     }
-    #bdshare {
-        width: 100%;
-        overflow:hidden;
+
+    .bdshare {
+        width: 188px;
     }
-    .share_direction {
-        cursor: pointer;
-        display: block;
-        height: 16px;
-        color: #666;
-        padding-bottom: 3px;
-        padding-left: 22px;
-        padding-top: 8px;
-        margin-top: 5px;
+    #bdshare > p{
+        padding-top: 6px;
+        width:auto;
     }
+
     .ListRightBox {
         margin-bottom: 15px;
         border: 1px solid #e5e5e5;
@@ -128,20 +127,81 @@
     .thumbnails>li {
          margin-left: 0px;
     }
+
     .like {
-        height: 26px;
-        width: 160px;
-    }
-    .collect {
-        background: #08c;
+
+        float: left;
+        width: 100%;
+        height: 36px;
+        background: #fff;
         border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+        margin: 0;
+        padding: 0;
+    }
+    .like > li {
+        text-align: center;
+        line-height: 36px;
+    }
+    .like > li:hover{
+        background: #08c;
+    }
+    .like > li > a {
+        display: block;
+        text-decoration: none;
+        color: #555;
+        text-shadow: 0 -1px 0 rgba(0,0,0,0.2);
+    }
+    .like > li > a:hover {
+        color: #fff;
+    }
+    .collect{
+        -webkit-border-radius: 6px 0px 0 0;
+        -moz-border-radius: 6px 0px 0 0;
+        border-radius: 6px 0px 0 0;
+        border-top-left-radius: 6px;
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 0px;
     }
     .commentCount {
-        background: #08c;
-        border-top-right-radius: 3px;
+        -webkit-border-radius: 0px 6px 0 0;
+        -moz-border-radius: 0px 6px 0 0;
+        border-radius: 0px 6px 0 0;
+        border-top-left-radius: 0px;
+        border-top-right-radius: 6px;
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 0px;
     }
-    .collect a:hover {
+    .forward {
+         -webkit-border-radius: 0 0 6px 6px;
+        -moz-border-radius: 0 0 6px 6px;
+        border-radius: 0 0 6px 6px;
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 6px;
+        border-bottom-left-radius: 6px;
+        margin-top:-26px;
+        line-height: 36px;
+        background: #fff;
+        cursor: pointer;
+        text-align: center;
+    }
+    .forward > a {
+        display: block;
+        text-decoration: none;
+        color: #555;
+        text-shadow: 0 -1px 0 rgba(0,0,0,0.2);
+    }
+    .forward > a:hover {
         color: #fff;
+    }
+    .forward:hover{
+        color:#fff;
+        background: #08c;
+    }
+    .shop {
+        text-align: center;
     }
     </style> 
     
@@ -209,12 +269,8 @@
         </div><!--/.container-fluid -->
       </div><!--/.navbar-inner -->
     </div><!--/.navbar navbar-inverse navbar-fixed-top -->
-	
-    <!--推荐类别开始 侧边栏-->
-	<div class="container-fluid"> <!-- 流式布局 -->
-      <div class="row-fluid"> <!-- 栅格布局 -->
-        <div class="span8 offset2"> <!-- 建立一个10单位宽度的div 来做container -->
-        <div class="span2"> <!-- 2单位宽度的侧边 -->
+
+	<div class="span2 sidebar"> <!-- 2单位宽度的侧边 -->
           <div class="well sidebar-nav affix">
             <ul class="nav nav-list">
               <li class="nav-header"><a href="{:u('post_cate/index',array('id'=>1))}">推荐类别</a></li>
@@ -224,8 +280,14 @@
             </ul>
           </div><!--/.well -->
         </div><!--/span-->
+
+    <!--推荐类别开始 侧边栏-->
+	<div class="container-fluid"> <!-- 流式布局 -->
+      <div class="row-fluid"> <!-- 栅格布局 -->
+        <div class="span8 offset2"> <!-- 建立一个10单位宽度的div 来做container -->
+        
 	<!--推荐类别结束 侧边栏-->
-    <div class="span8">
+    <div class="span12">
         <div class="row">
             <div class="navbar">
               <div class="navbar-inner">
