@@ -224,3 +224,4 @@ data/db.php
 _core/
 */cache/
 */Cache/
+data/runtime/Cache/
