@@ -111,8 +111,8 @@
         width: 188px;
     }
     #bdshare > p{
-        padding-top: 6px!;
-        width:auto!;
+        padding-top: 6px;
+        width:auto;
     }
 
     .ListRightBox {
