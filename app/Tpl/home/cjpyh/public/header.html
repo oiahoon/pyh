@@ -28,7 +28,7 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container-fluid">
-          <div class="span8 offset4">
+          <div class="span8 offset2">
           <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -53,6 +53,7 @@
                                 </li>
                             </ul>
                         </li>
+                        <li class="divider-vertical"></li>
                         <li>
                             <a href="{:u('user/register')}" class="regbtn">注册</a>
                         </li>
@@ -71,8 +72,8 @@
                 </li>
             </ul>
             <ul class="nav">
-                <li class="active"><a href="./">首页</a></li>
-                <li class="dropdown"><a href="{:u('post_cate/index',array('id'=>2))}" class="dropdown-toggle" data-toggle="dropdown" data-target="#">特色推荐<b class="caret"></b></a>
+                <li class="divider-vertical"></li>
+                <li class="dropdown"><a href="{:u('post_cate/index',array('id'=>2))}" class="dropdown-toggle" data-toggle="dropdown" data-target="#">站点导航(待做)<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <volist name="tese_cate" id="val">
                             <li><a href="{:u('post_cate/index',array('id'=>$val['id']))}">{$val.name}</a></li>
