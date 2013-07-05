@@ -26,7 +26,7 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container-fluid">
-          <div class="span8 offset4">
+          <div class="span8 offset2">
           <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -48,6 +48,7 @@
                                 </li>
                             </ul>
                         </li>
+                        <li class="divider-vertical"></li>
                         <li>
                             <a href="<?php echo u('user/register');?>" class="regbtn">注册</a>
                         </li>
@@ -65,8 +66,8 @@
                 </li>
             </ul>
             <ul class="nav">
-                <li class="active"><a href="./">首页</a></li>
-                <li class="dropdown"><a href="<?php echo u('post_cate/index',array('id'=>2));?>" class="dropdown-toggle" data-toggle="dropdown" data-target="#">特色推荐<b class="caret"></b></a>
+                <li class="divider-vertical"></li>
+                <li class="dropdown"><a href="<?php echo u('post_cate/index',array('id'=>2));?>" class="dropdown-toggle" data-toggle="dropdown" data-target="#">站点导航(待做)<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <?php if(is_array($tese_cate)): $i = 0; $__LIST__ = $tese_cate;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$val): $mod = ($i % 2 );++$i;?><li><a href="<?php echo u('post_cate/index',array('id'=>$val['id']));?>"><?php echo ($val["name"]); ?></a></li><?php endforeach; endif; else: echo "" ;endif; ?>
                     </ul>
