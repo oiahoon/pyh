@@ -183,13 +183,13 @@ class Page {
         $upRow          =   $this->nowPage-1;
         $downRow        =   $this->nowPage+1;
         if ($upRow>0){
-            $upPage     =   "<a href='".str_replace('__PAGE__',$upRow,$url)."'>".$this->config['prev']."</a>";
+            $upPage     =   "<li><a href='".str_replace('__PAGE__',$upRow,$url)."'>&laquo;</a></li>";
         }else{
             $upPage     =   '';
         }
 
         if ($downRow <= $this->totalPages){
-            $downPage   =   "<a href='".str_replace('__PAGE__',$downRow,$url)."'>".$this->config['next']."</a>";
+            $downPage   =   "<li><a href='".str_replace('__PAGE__',$downRow,$url)."'>&raquo;</a></li>";
         }else{
             $downPage   =   '';
         }
@@ -200,13 +200,13 @@ class Page {
             if($this->nowPage - $middle < 1){
                 $theFirst   =   '';
             }else{
-                $theFirst   =   "<a href='".str_replace('__PAGE__',1,$url)."' >1</a> <i>...</i>";
+                $theFirst   =   "<li><a href='".str_replace('__PAGE__',1,$url)."' >1</a></li> <li class='disabled'><a>...</a></li>";
             }
             if($this->nowPage + $middle > $this->totalPages){
                 $theEnd     =   '';
             }else{
                 $theEndRow  =   $this->totalPages;
-                $theEnd     =   "<i>...</i> <a href='".str_replace('__PAGE__',$theEndRow,$url)."' >".$theEndRow."</a>";
+                $theEnd     =   "<li class='disabled'><a>...</a></li> <li><a href='".str_replace('__PAGE__',$theEndRow,$url)."' >".$theEndRow."</a></li>";
             }
         }
 
@@ -227,9 +227,9 @@ class Page {
             $end > $this->totalPages && $end = $this->totalPages;
             for ($page = $start; $page <= $end; $page++) {
                 if ($page != $this->nowPage) {
-                    $linkPage .= " <a href='".str_replace('__PAGE__',$page,$url)."'>&nbsp;".$page."&nbsp;</a>";
+                    $linkPage .= "<li><a href='".str_replace('__PAGE__',$page,$url)."'>".$page."</a></li>";
                 } else {
-                    $linkPage .= " <span class='current'>".$page."</span>";
+                    $linkPage .= "<li class='active'><a href='#'>".$page."</a></li>";
                 }
             }
         }
