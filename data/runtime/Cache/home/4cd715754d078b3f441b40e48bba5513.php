@@ -17,6 +17,11 @@
    
 	</script>
     <link rel="stylesheet" type="text/css" href="__ROOT__/bootstrap/css/bootstrap-responsive.min.css" />   
+<<<<<<< HEAD
+=======
+    <link rel="stylesheet" type="text/css" href="__ROOT__/bootstrap/css/cjpyh.css" /> 
+    
+>>>>>>> fa9bc55116076b4c8d17201ee54f2dfb907ec99f
 </head>
 <body>
     
@@ -89,7 +94,11 @@
     <!--推荐类别开始 侧边栏-->
 	<div class="container-fluid"> <!-- 流式布局 -->
       <div class="row-fluid"> <!-- 栅格布局 -->
+<<<<<<< HEAD
         <div class="span9 offset2"> <!-- 建立一个10单位宽度的div 来做container -->
+=======
+        <div class="span8 offset2"> <!-- 建立一个10单位宽度的div 来做container -->
+>>>>>>> fa9bc55116076b4c8d17201ee54f2dfb907ec99f
         
 	<!--推荐类别结束 侧边栏-->
     <div class="span12">
@@ -144,6 +153,7 @@
 
     <!-- 产品展示方式开始 -->
     <div class="row-fluid">
+<<<<<<< HEAD
         <?php if(is_array($post_list)): $i = 0; $__LIST__ = $post_list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$val): $mod = ($i % 2 );++$i;?><div class="row-fluid product">
     <div class="row-fluid productTop">
         <div class="span12 productTitle">
@@ -158,15 +168,38 @@
             <div class="row-fluid category muted">
                 <div class="span8">
                     <p class='mute'>分类：
+=======
+        <?php if(is_array($post_list)): $i = 0; $__LIST__ = $post_list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$val): $mod = ($i % 2 );++$i;?><div class="row-fluid span12">
+    <div class="row-fluid">
+        <div class="span12 productTitle">
+            <h3 sp="<?php echo ($req["sp"]); ?>"><a href="<?php echo post_url($val['id'],$val['post_key']);?>" target="_blank" <?php if($val['tcolor']): ?>style="color: <?php echo ($val["tcolor"]); ?>;"<?php endif; ?>><?php echo ($val["title"]); ?><span class="badge badge-important">&nbsp;&nbsp;<?php echo ($val["prices"]); ?></span></a></h3>
+        </div>
+        <div class="span3 offset9 dateTime">
+            <?php echo date("m-d H:i",$val['add_time']);?>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span9">
+            <div class="row-fluid">
+                <div class="span8">
+                    <p>分类：
+>>>>>>> fa9bc55116076b4c8d17201ee54f2dfb907ec99f
                         <?php if(is_array($val['cate_list'])): $i = 0; $__LIST__ = $val['cate_list'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$c): $mod = ($i % 2 );++$i;?><a href="<?php echo u('post_cate/index',array('id'=>$c['cate_id']));?>" target="_blank"><?php echo ($c["cate"]["name"]); ?></a>
                             <?php if($i < count($val['cate_list'])): ?>,<?php endif; endforeach; endif; else: echo "" ;endif; ?>
                     </p>
                 </div>
                 <div class="span4">
+<<<<<<< HEAD
                     <p class="text-right"><small>推荐人：<?php echo ($val["uname"]); ?></small></p>
                 </div>
             </div>
             <div class="row-fluid showcontent shortcontent">
+=======
+                    <p class="text-right">推荐人：<?php echo ($val["uname"]); ?></p>
+                </div>
+            </div>
+            <div class="row-fluid">
+>>>>>>> fa9bc55116076b4c8d17201ee54f2dfb907ec99f
                 <?php echo ($val["info"]); ?>
                 <div class="span3 offset9">
                     <a onclick="toggle_content($(this))" class="short_content">展开全文<i class="icon-chevron-down"></i></a>
@@ -177,8 +210,13 @@
             <div class="row-fluid ListRightBox">
                 <div class="row-fluid like">
                     <ul class="like">
+<<<<<<< HEAD
                         <li class="span6 collect"><a href="#" data-id="<?php echo ($val["id"]); ?>" title="收藏本文"><i class='icon-star-empty change'></i> <?php echo ($val["favs"]); ?></a></li>
                         <li class="span6 commentCount"><a href="<?php echo u('post/index',array('id'=>$val['id']));?>#J_messagebox" title="《<?php echo ($val["title"]); ?>》上的评论"><i class='icon-comment change'></i> <?php echo ($val["comments"]); ?></a></li>
+=======
+                        <li class="span6 collect"><a href="#" data-id="<?php echo ($val["id"]); ?>"><?php echo ($val["favs"]); ?></a></li>
+                        <li class="span6 commentCount"><a href="<?php echo u('post/index',array('id'=>$val['id']));?>#J_messagebox"><?php echo ($val["comments"]); ?></a></li>
+>>>>>>> fa9bc55116076b4c8d17201ee54f2dfb907ec99f
                     </ul>
                     
                 </div>
@@ -190,6 +228,7 @@
                     </ul>
                 </div>
                 <div class="row-fluid forward">
+<<<<<<< HEAD
                     <a rel="nofollow" href="go/<?php echo ($val["id"]); ?>" class="border_radius_3" target="_blank">直 达 链 接 <i class="icon-circle-arrow-right change"></i></a>
                 </div>
                 
@@ -216,6 +255,32 @@
             </ul>
         </div>
         <div class="span4 bdshare pull-right">
+=======
+                    <a rel="nofollow" href="go/<?php echo ($val["id"]); ?>" class="border_radius_3" target="_blank">直 达 链 接 &gt;</a>
+                </div>
+                 <div class="row-fluid shop">
+                    <span class="muted">商城：<?php echo ($val["mall"]["title"]); ?></span>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span8">
+            <ul class="inline">
+                <li><p>评价本文<i class="icon-chevron-right"></i> </p></li>
+                <li>
+                    <a class="worth_1" data-id="<?php echo ($val["id"]); ?>" data-type="rate_best" href="javascript:;" title="超值"><?php echo ($val["rate_best"]); ?></a>
+                    <a class="worth_2" data-id="<?php echo ($val["id"]); ?>" data-type="rate_good" href="javascript:;" title="一般值"><?php echo ($val["rate_good"]); ?></a>
+                    <a class="worth_3" data-id="<?php echo ($val["id"]); ?>" data-type="rate_bad" href="javascript:;" title="不值"><?php echo ($val["rate_bad"]); ?></a>
+                </li>
+                <li>
+                    <span id="J_rate_result_<?php echo ($val["id"]); ?>"><?php echo ($val["rate_best"]+$val["rate_good"]+$val["rate_bad"]); ?>位网友中的 <i><?php echo ($val["rate_best"]+$val["rate_good"]); ?></i> 位认为值得买！</span>
+                </li>
+            </ul>
+        </div>
+        <div class="bdshare pull-right">
+>>>>>>> fa9bc55116076b4c8d17201ee54f2dfb907ec99f
             <!-- Baidu Button BEGIN -->
             <div id="bdshare" class="span12 bdshare_t bds_tools get-codes-bdshare" data="{'bdDes':'<?php echo ($val["title"]); ?>','text':'<?php echo ($val["title"]); ?>',pic:'http://<?php echo ($server["HTTP_HOST"]); ?>/data/upload/post/<?php echo ($val["img"]); ?>'}">
                 <p class="muted share_direction" style="width:auto;">分享到：</p>
@@ -228,12 +293,19 @@
             <script type="text/javascript" id="bdshell_js"></script>
             <!-- Baidu Button END -->
         </div>
+<<<<<<< HEAD
         </DIV><!-- /well -->
     </div>
 </div><?php endforeach; endif; else: echo "" ;endif; ?> 
       <div class="row-fluid">
         <div class="pagination pagination-right"><ul><?php echo ($page_bar); ?></ul></div>
         
+=======
+    </div>
+</div><?php endforeach; endif; else: echo "" ;endif; ?> 
+      <div class="span9">
+        <div class="page"><?php echo ($page_bar); ?></div>
+>>>>>>> fa9bc55116076b4c8d17201ee54f2dfb907ec99f
       </div>
     </div>
 </div>
@@ -353,6 +425,7 @@ $(function() {
  <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+<<<<<<< HEAD
 	<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 	<script type="text/javascript" src="__ROOT__/bootstrap/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="__ROOT__/bootstrap/css/cjpyh.css" />
@@ -365,5 +438,9 @@ $(function() {
 		});
 	});
 	</script>
+=======
+   <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+    <script type="text/javascript" src="__ROOT__/bootstrap/js/bootstrap.min.js"></script>
+>>>>>>> fa9bc55116076b4c8d17201ee54f2dfb907ec99f
   </body>
 </html>
