@@ -6,7 +6,7 @@
 ;(function($){
     $.ZhiPHP.exchange = {
         settings: {
-            ec_btn: '.J_ec_btn',
+            ec_btn: '.J_ec_btn'
         },
         init: function(options){
             options && $.extend($.ZhiPHP.exchange.settings, options);
@@ -18,17 +18,15 @@
             var s = $.ZhiPHP.exchange.settings;
             $(s.ec_btn).live('click', function(){
                 if(!$.ZhiPHP.dialog.islogin()) return !1;
-                var id = $(this).attr('data-id'),
-                    num_input = $(this).attr('data-num'),
-                    num = $(num_input).val();
-                $.getJSON(PINER.root + '/?m=exchange&a=ec', {id:id, num:num}, function(result){
+                var id = $(this).attr('data-id');
+                $.getJSON(PINER.root + '/?m=exchange&a=ec', {id:id, num:1}, function(result){
                     if(result.status == 1){
-                        $.ZhiPHP.tip({content:result.msg});
+                        $.ZhiPHP._tip({content:result.msg});
                     }else if(result.status == 2){
                         $.dialog({id:'ec_address', title:result.msg, content:result.data, width:450, padding:'', fixed:true, lock:true});
                         $.ZhiPHP.exchange.daddress_form($('#J_daddress_form'));
                     }else{
-                        $.ZhiPHP.tip({content:result.msg, icon:'error'});
+                        $.ZhiPHP._tip({content:result.msg, status:0});
                     }
                 });
             });

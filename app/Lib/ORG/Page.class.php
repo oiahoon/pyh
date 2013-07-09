@@ -13,7 +13,7 @@
 class Page {
     
     // 分页栏每页显示的页数
-    public $rollPage = 10;
+    public $rollPage = 5;
     // 分页地址
     public $path = '';
     // 页数跳转时要带的参数
@@ -164,7 +164,7 @@ class Page {
         // 分析分页参数
         if($this->url){
             $depr       =   C('URL_PATHINFO_DEPR');
-            $url        =   rtrim(U('/'.$this->url,'',false),$depr).$depr.'__PAGE__';
+            $url        =   rtrim(U('/'.$this->url,'',false),$depr).'&'.$this->varPage.'=__PAGE__';
         }else{
             if($this->parameter && is_string($this->parameter)) {
                 parse_str($this->parameter,$parameter);
@@ -178,18 +178,18 @@ class Page {
             }
             $parameter[$p]  =   '__PAGE__';
             $url            =   U($this->path, $parameter);
-        }
+        }        
         //上下翻页字符串
         $upRow          =   $this->nowPage-1;
         $downRow        =   $this->nowPage+1;
         if ($upRow>0){
-            $upPage     =   "<li><a href='".str_replace('__PAGE__',$upRow,$url)."'>&laquo;</a></li>";
+            $upPage     =   "<a href='".str_replace('__PAGE__',$upRow,$url)."'>".$this->config['prev']."</a>";
         }else{
             $upPage     =   '';
         }
 
         if ($downRow <= $this->totalPages){
-            $downPage   =   "<li><a href='".str_replace('__PAGE__',$downRow,$url)."'>&raquo;</a></li>";
+            $downPage   =   "<a href='".str_replace('__PAGE__',$downRow,$url)."'>".$this->config['next']."</a>";
         }else{
             $downPage   =   '';
         }
@@ -200,13 +200,13 @@ class Page {
             if($this->nowPage - $middle < 1){
                 $theFirst   =   '';
             }else{
-                $theFirst   =   "<li><a href='".str_replace('__PAGE__',1,$url)."' >1</a></li> <li class='disabled'><a>...</a></li>";
+                $theFirst   =   "<a href='".str_replace('__PAGE__',1,$url)."' >1</a> <i>...</i>";
             }
             if($this->nowPage + $middle > $this->totalPages){
                 $theEnd     =   '';
             }else{
                 $theEndRow  =   $this->totalPages;
-                $theEnd     =   "<li class='disabled'><a>...</a></li> <li><a href='".str_replace('__PAGE__',$theEndRow,$url)."' >".$theEndRow."</a></li>";
+                $theEnd     =   "<i>...</i> <a href='".str_replace('__PAGE__',$theEndRow,$url)."' >".$theEndRow."</a>";
             }
         }
 
@@ -227,9 +227,9 @@ class Page {
             $end > $this->totalPages && $end = $this->totalPages;
             for ($page = $start; $page <= $end; $page++) {
                 if ($page != $this->nowPage) {
-                    $linkPage .= "<li><a href='".str_replace('__PAGE__',$page,$url)."'>".$page."</a></li>";
+                    $linkPage .= " <a href='".str_replace('__PAGE__',$page,$url)."'>&nbsp;".$page."&nbsp;</a>";
                 } else {
-                    $linkPage .= "<li class='active'><a href='#'>".$page."</a></li>";
+                    $linkPage .= " <span class='current'>".$page."</span>";
                 }
             }
         }

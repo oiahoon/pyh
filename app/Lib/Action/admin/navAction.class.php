@@ -18,4 +18,15 @@ class navAction extends backendAction {
         );
         $this->assign('big_menu', $big_menu);
     }
+    function _after_insert($id){
+        $this->parse_info($id);
+    }
+    function _after_update($id){
+        $this->parse_info($id);
+    }
+    private function parse_info($id){
+        if($this->_post('homepage','intval')>0){
+            D('nav')->where("id<>$id")->save(array('homepage'=>0));
+        }
+    }
 }

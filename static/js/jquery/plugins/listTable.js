@@ -73,10 +73,10 @@
 		});
 		//修改
 		$('span[data-tdtype="edit"]', $(self)).live('click', function() {
-			var s_val   = $(this).text(),
-			s_name  = $(this).attr('data-field'),
-			s_id    = $(this).attr('data-id'),
-			width   = $(this).width();
+			var s_val   = $(this).text(),            
+    			s_name  = $(this).attr('data-field'),
+    			s_id    = $(this).attr('data-id'),
+    			width   = $(this).width();
 			$('<input type="text" class="lt_input_text" value="'+s_val+'" />').width(width).focusout(function(){
 				$(this).prev('span').show().text($(this).val());
 				if($(this).val() != s_val) {

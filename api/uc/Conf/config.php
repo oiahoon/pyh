@@ -1,5 +1,5 @@
 <?php
-$db_config = include_once (ZhiPHP_PATH . 'data/config/db.php');
+$db_config = include_once (PINPHP_PATH . 'data/config/db.php');
 $uc_config =  array(
     'DEFAULT_MODULE' => 'index',
 );

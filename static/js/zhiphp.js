@@ -114,16 +114,19 @@
 ;(function($){
     //提示信息
     $.ZhiPHP.tip = function(options) {        
+        if(window.top){
+            $=window.top.$;   
+        }        
         var settings = {
             content: '',
             icon: 'success',
-            time: 1000,
+            time: 500,
             close: false,
             zindex: 2999
         };
         if(options) {
             $.extend(settings, options);
-        }
+        }        
         if(settings.close){
             $(".tipbox").hide();
             return;
@@ -137,11 +140,9 @@
         $('.tipbox').css('z-index', parseInt($('.tipbox').css('z-index'))+1).setmiddle().show();
         
         if(settings.time>0){
-            setTimeout(function() {
-                $(".tipbox").fadeOut()
-            }, settings.time);
+            $(".tipbox").fadeOut(settings.time);
         }
-    }
+    };
     //前台模仿smzdm
     $.ZhiPHP._tip=function(options){
         var settings = {

@@ -19,11 +19,20 @@
                             <span>{:L('password')}：</span>
                             <input type="password" name="password" id="J_pass" class="input_text" maxlength="32">
                         </div>
+                        <if condition="C('pin_captcha_status')">
+                        <div class="lg_remember clearfix line">
+                            <span>验证码:</span>                            
+                            <input type="text" name="captcha" id="J_captcha" maxlength="10" class="input_text"/>                             
+                            <img src="{:U('captcha/'.time())}" id="J_captcha_img" class="captcha_img"
+                                alt="{:L('captcha')}" data-url="{:U('captcha/js_rand')}"/> 
+                            <a href="javascript:;" id="J_captcha_change">{:L('change_captcha')}</a>
+                        </div>                                
+                        </if>                         
                         <div class="lg_remember clearfix line">
                             <span></span>
                             <input type="checkbox" value="1" name="remember" class="check" checked="checked"/>
                             <i>{:L('rememberme')}</i>
-                        </div>
+                        </div>               
                         <div class="lg_login line">
                             <span></span>
                             <input type="submit" value="{:L('login')}" class="submit"/>
@@ -37,6 +46,7 @@
                                 </volist>
                             </div>
                         </div>                            
+                        <input type="hidden" name="ret_url" value="{$Think.request.ret_url|urlencode}"/>                          
                     </form>                
                 </div>
             </div>

@@ -2,7 +2,7 @@
 class postAction extends backendAction
 {
     var $list_relation=true;
-    var $spec_chars=array('*','-',',','.','，','。','|','<','>','(',')','《','》','+','/');
+    
     public function _initialize() {
         parent::_initialize();
         $this->_mod = D('post');
@@ -12,7 +12,7 @@ class postAction extends backendAction
     }
 
     public function _before_index() {        
-        $res = $this->mall_mod->field('id,title')->select();
+        $res = D("mall")->field('id,title')->select();
         $mall_list = array();
         foreach ($res as $val) {
             $mall_list[$val['id']] = $val['title'];
@@ -37,11 +37,8 @@ class postAction extends backendAction
         $selected_ids = '';
         if ($cate_id) {
             $id_arr = $this->_cate_mod->get_child_ids($cate_id, true);
-            $cids="0";
-            foreach($id_arr as $val){
-                $cids.=','.$val;
-            }
-            $res=$this->post_cate_re_mod->where("cate_id in($cids)")->select();
+            
+            $res=D("post_cate_re")->where("cate_id in(".implode(',',$id_arr).")")->select();
             $ids="0";
             foreach($res as $val){
                 $ids.=",".$val['post_id'];
@@ -101,13 +98,16 @@ class postAction extends backendAction
             }
         }
         $data['post_time']=strtotime($this->_request('post_time','trim'));
-        if(empty($data['post_key'])){
-            $data['post_key']=$this->py->tourl($data['title']);
+        //if(empty($data['post_key'])){
+//            $data['post_key']=$this->py->tourl($data['title']);
+//        }
+        if(!empty($data['post_key'])){
+            if(D("post")->where(array('post_key'=>trim($data['post_key'])))->count()>0){
+                $data['post_key'].='_'.time();
+            }
+            $data['post_key']=str_replace($this->spec_chars,'',$data['post_key']);            
         }
-        if($this->post_mod->where(array('post_key'=>trim($data['post_key'])))->count()>0){
-            $data['post_key'].='_'.time();
-        }
-        $data['post_key']=str_replace($this->spec_chars,'',$data['post_key']);
+
         return $data;
     }
     protected function _after_insert($id) {
@@ -121,9 +121,9 @@ class postAction extends backendAction
         //tag
         $where=array('post_id'=>$id);
         $tags=$this->update_tag(M("post_tag"),$where,$data['title']);
-        $this->post_tag_mod->where($where)->delete();
+        D("post_tag")->where($where)->delete();
         foreach($tags as $key=>$val){
-            $this->post_tag_mod->add(array(
+            D("post_tag")->add(array(
                 'post_id'=>$id,
                 'tag_id'=>$key,
             ));
@@ -140,7 +140,7 @@ class postAction extends backendAction
                       
         $this->assign('cate_tree',$cate_tree);
                  
-        $this->assign("mall_index",$this->mall_mod->where(array('id'=>$data['mall_id']))->getField("index")); 
+        $this->assign("mall_index",D("mall")->where(array('id'=>$data['mall_id']))->getField("index")); 
         //tag
         $tag_list=D("post_tag")->relation(true)->where($where)->select();
         
@@ -162,9 +162,9 @@ class postAction extends backendAction
         //tag
         $where=array('post_id'=>$data['id']);
         $tags=$this->update_tag(M("post_tag"),$where,$data['title']);
-        $this->post_tag_mod->where($where)->delete();
+        D("post_tag")->where($where)->delete();
         foreach($tags as $key=>$val){
-            $this->post_tag_mod->add(array(
+            D("post_tag")->add(array(
                 'post_id'=>$data['id'],
                 'tag_id'=>$key,
             ));
@@ -188,13 +188,15 @@ class postAction extends backendAction
         }
         $data['post_time']=strtotime($this->_request('post_time','trim'));
         //print_r($data);exit();
-        if(empty($data['post_key'])){
-            $data['post_key']=$this->py->tourl($data['title']);
+//        if(empty($data['post_key'])){
+//            $data['post_key']=$this->py->tourl($data['title']);
+//        }
+        if(!empty($data['post_key'])){
+            if(D("post")->where("post_key='$data[post_key]' and id!=$data[id]")->count()>0){
+                $data['post_key'].='_'.time();
+            }        
+            $data['post_key']=str_replace($this->spec_chars,'',$data['post_key']);            
         }
-        if($this->post_mod->where("post_key='$data[post_key]' and id!=$data[id]")->count()>0){
-            $data['post_key'].='_'.time();
-        }        
-        $data['post_key']=str_replace($this->spec_chars,'',$data['post_key']);
         return $data;
     }
     public function _before_drop($ids){
@@ -213,7 +215,7 @@ class postAction extends backendAction
     }  
     public function ajax_mall_list(){
         $index=$this->_post('index','trim');
-        $res=$this->mall_mod->where(array('index'=>$index))->select();
+        $res=D("mall")->where(array('index'=>$index))->select();
         $data="";
         foreach($res as $key=>$val){
             $data.="<option value='$val[id]'>$val[title]</option>";

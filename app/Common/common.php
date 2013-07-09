@@ -1,4 +1,39 @@
 <?php
+/**
+ * +----------------------------------------------------------
+ * 字符串截取，支持中文和其他编码
+ * +----------------------------------------------------------
+ * @static
+ * @access public
+ * +----------------------------------------------------------
+ * @param string $str 需要转换的字符串
+ * @param string $start 开始位置
+ * @param string $length 截取长度
+ * @param string $charset 编码格式
+ * @param string $suffix 截断显示字符
+ * +----------------------------------------------------------
+ * @return string
+ * +----------------------------------------------------------
+ */
+function msubstr($str, $length, $start = 0, $charset = "utf-8", $suffix = true) {
+    if (function_exists("mb_substr"))
+        $slice = mb_substr($str, $start, $length, $charset);
+    elseif (function_exists('iconv_substr')) {
+        $slice = iconv_substr($str, $start, $length, $charset);
+        if (false === $slice) {
+            $slice = '';
+        }
+    } else {
+        $re['utf-8'] = "/[\x01-\x7f]|[\xc2-\xdf][\x80-\xbf]|[\xe0-\xef][\x80-\xbf]{2}|[\xf0-\xff][\x80-\xbf]{3}/";
+        $re['gb2312'] = "/[\x01-\x7f]|[\xb0-\xf7][\xa0-\xfe]/";
+        $re['gbk'] = "/[\x01-\x7f]|[\x81-\xfe][\x40-\xfe]/";
+        $re['big5'] = "/[\x01-\x7f]|[\x81-\xfe]([\x40-\x7e]|\xa1-\xfe])/";
+        preg_match_all($re[$charset], $str, $match);
+        $slice = join("", array_slice($match[0], $start, $length));
+    }
+    
+    return strlen($str)>$length ? $slice . '...' : $slice;
+}
 function addslashes_deep($value) {
     $value = is_array($value) ? array_map('addslashes_deep', $value) : addslashes($value);
     return $value;
@@ -79,7 +114,14 @@ function fdate($time) {
     }
     return $fdate;
 }
-
+function ftime($time){
+    if($time<0)return '0天';
+    
+    $date=intval($time/(3600*24));
+    $hour=intval(($time-$date*3600*24)/3600)>0?intval(($time-$date*3600*24)/3600):0;
+    $minute=intval(($time-$date*3600*24-$hour*3600)/60)>0?intval(($time-$date*3600*24-$hour*3600)/60):0;
+    return $date.'天'.$hour.'小时'.$minute.'分';
+}
 /**
  * 获取用户头像
  */
@@ -91,7 +133,7 @@ function avatar($uid, $size=40) {
     if (!is_file(C('pin_attach_path') . 'avatar/' . $avatar_file)) {
         $avatar_file = "default_{$size}.jpg";
     }
-    return __ROOT__ . '/' . C('pin_attach_path') . 'avatar/' . $avatar_file;
+    return __ROOT__ .'/' . C('pin_attach_path') . 'avatar/' . $avatar_file;
 }
 
 function avatar_dir($uid) {
@@ -103,16 +145,16 @@ function avatar_dir($uid) {
     return $dir1 . '/' . $dir2 . '/' . $dir3 . '/';
 }
 
-function attach($attach, $type,$flg=false) {
+function attach($attach, $type,$full_url=false) {
     if(empty($attach)){
-        return false;
+        return __ROOT__.'/'.C('pin_attach_path')."no_picture.gif";
     }    
     if (false === strpos($attach, 'http://')) {
         //本地附件
-        if($flg){
-            return C('pin_attach_path') . $type . '/' . $attach;
+        if($full_url){
+            return 'http://'.$_SERVER['HTTP_HOST'].($_SERVER["SERVER_PORT"]==80?'':':'.$_SERVER["SERVER_PORT"]).__ROOT__.'/' .C('pin_attach_path') . $type . '/' . $attach;
         }else{
-            return __ROOT__ . '/' . C('pin_attach_path') . $type . '/' . $attach;    
+            return __ROOT__.'/'.C('pin_attach_path') . $type . '/' . $attach;    
         }        
         //远程附件        
     } else {
@@ -252,9 +294,9 @@ function get_baoliao_type($cid){
     }
 }
 function user_level($level){    
-    $sun_img='<img src="'.__ROOT__.'/static/css/default/images/sun.png'.'"/>';//16
-    $moon_img='<img src="'.__ROOT__.'/static/css/default/images/moon.png'.'"/>';//4
-    $star_img='<img src="'.__ROOT__.'/static/css/default/images/star.png'.'"/>';//1
+    $sun_img='<img src="'.__ROOT__.'/static/images/sun.png'.'"/>';//16
+    $moon_img='<img src="'.__ROOT__.'/static/images/moon.png'.'"/>';//4
+    $star_img='<img src="'.__ROOT__.'/static/images/star.png'.'"/>';//1
     if(empty($level)){
         return $star_img;
     }    
@@ -263,11 +305,11 @@ function user_level($level){
     $star=$level%16%4;
     return str_repeat($sun_img,$sun).str_repeat($moon_img,$moon).str_repeat($star_img,$star);
 }
-function post_url($id,$post_key){    
-    if(empty($post_key)){
-        return U('post/index',array('id'=>$id));
+function post_url($info){    
+    if(empty($info['post_key'])){
+        return U('post/index',array('id'=>$info['id']));
     }else{
-        return U('post/index',array('post_key'=>$post_key));
+        return U('post/index',array('post_key'=>$info['post_key']));
     }
 }
 function parse_uri($url){
@@ -294,10 +336,11 @@ function mall_url($mall_info){
             }
         }
         return trim($url,'&');
+    }elseif($mall_info['url']=='other'){
+        return $mall_info['url_'.$mall_info['url']];    
     }else{
-        return $mall_info['url_'.$mall_info['url']].'&sid='.C('pin_cps_'.$mall_info['url']);    
-    }
-        
+        return $mall_info['url_'.$mall_info['url']].'&sid='.C('pin_cps_'.$mall_info['url']); 
+    }        
 }
 function _exit($str){
     header("Content-Type: text/html; charset=utf-8");
@@ -308,4 +351,54 @@ function filter_data($data){
         $data[$key]=strip_tags($val);
     }
     return $data;
+}
+function get_jky_state($info){
+    if($info['stime']<=time()&&$info['etime']>=time()){
+        return 'underway';
+    }
+    if($info['stime']>time()){
+        return 'notstart';
+    }
+    if($info['etime']<time()){
+        return 'end';
+    }    
+}
+function get_ret_url(){
+    $query_list=explode('&',$_SERVER['QUERY_STRING']);
+    foreach($query_list as $key=>$val){
+        $param=explode('=',$val);
+        if($param[0]=='ret_url'){
+            unset($query_list[$key]);
+        }
+    }
+    $url='http://' . $_SERVER["HTTP_HOST"] . ($_SERVER["SERVER_PORT"] ==80 ? '' : ':' . $_SERVER["SERVER_PORT"]).$_SERVER['SCRIPT_NAME'].'?'.implode('&',$query_list);
+    return urlencode($url);
+}
+function check_url($str){
+    if(empty($str)){
+        return "#";
+    }
+    $info=parse_url(ltrim($str,'.'));    
+    
+    empty($info['scheme'])&&$info['scheme']="http"; 
+    if(empty($info['host'])){
+        $host=$_SERVER['HTTP_HOST'];
+    }else{
+        $host=$info['host'];    
+    }
+    if(isset($info['port'])){
+        $port=':'.$info['port'];
+    }
+    $url=$info['scheme']."://".$host.$port;
+    
+    if(empty($info['host'])){
+        $url.=rtrim(__ROOT__,'/');    
+    }    
+        
+    $url.='/'.ltrim($info['path'],'/');    
+    if(!empty($info['query'])){
+        $url.='?'.$info['query'];    
+    }
+    $url.$info['fragment'];    
+    return $url;
 }

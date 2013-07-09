@@ -159,6 +159,7 @@
         },
         //绑定表单
         bind_form: function(){
+            
             if ($('#J_bind_form')) {
                 $.formValidator.initConfig({formid:'J_bind_form',autotip:true});
                 $('#J_email').formValidator({onshow:' ',onfocus:lang.email_tip, oncorrect: ' '})

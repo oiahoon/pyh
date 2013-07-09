@@ -8,7 +8,7 @@
 <!--内容页开始-->
 <div class="main_content">
 	<!--主部开始-->
-	<div id="main">		
+	<div id="main" class="J_main_page">		
 		<div class="contentbox clearfix">		
 			<div class="contentbox_l fl">			
 				<div class="leftinfo">				
@@ -16,13 +16,13 @@
 						<span>当前位置:</span>
                         <a href="/">首页 </a>&gt;&gt;&nbsp;
                         <volist name="info['cate_list']" id="c" offset="0" length='4'>
-                            <a href="{:u('post_cate/index',array('id'=>$c['cate_id']))}" target="_blank">{$c.cate.name}</a>
+                            <a href="{:u('post_cate/index',array('id'=>$c['cate_id']))}" target="_blank">{$c.cate.name}</a>           
                             <if condition="$i lt 4">,
                             <else/>
                             ……
                             </if>
                             
-                        </volist>                        
+                        </volist>             
                         &nbsp;&gt;&gt;&nbsp;
                         <span class="grey">日志详情</span>
 					</div>
@@ -30,7 +30,7 @@
 						<div class="showitem">							
 							<div class="showitemTitle clearfix">
 								<h3 class="clearfix">{$info.title}<span>&nbsp;&nbsp;{$info.prices}</span></h3>
-								<div class="showitemTime">{:date("m-d H:i",$info['add_time'])}</div>
+								<div class="showitemTime">{:fdate($info['add_time'])}</div>
 							</div>							
 							<div class="showcont clearfix">
 								
@@ -55,12 +55,10 @@
 											<div class="commentCount"><a href="#J_messagebox">{$info.comments}</a></div>
 										</div>
 										<div class="pro_img">
-											<a class="proimg_pic"><img src="./data/upload/post/{$info.img}"/></a>
+											<a class="proimg_pic"><img src="{:attach($info['img'],'post')}"/></a>
 										</div>
 										<div class="zhida" >
-											<!-- 
-											<a rel="nofollow" href="{:U('index/go',array('id'=>$info['id']))}" class="border_radius_3" target="_blank">直 达 链 接</a> -->
-											<a rel="nofollow" href="go/{$info.id}" class="border_radius_3" target="_blank">直 达 链 接</a>
+											<a rel="nofollow" href="{:U('index/go',array('id'=>$info['id']))}" class="border_radius_3" target="_blank">直 达 链 接</a>
 										</div>
 									</div>
 									
@@ -83,7 +81,7 @@
 							<div class="score clearfix">
 						        <div class="score_l fl">
                                     <span class="evaluate_text">评价文本</span>
-                                    <div class="worth fl">
+                                    <div class="worth fl J_worth">
                                         <a class="worth_1" data-id="{$info.id}" data-type="rate_best" href="javascript:;" title="超值">{$info.rate_best}</a>
                                         <a class="worth_2" data-id="{$info.id}" data-type="rate_good" href="javascript:;" title="一般值">{$info.rate_good}</a>
                                         <a class="worth_3" data-id="{$info.id}" data-type="rate_bad" href="javascript:;" title="不值">{$info.rate_bad}</a>
@@ -92,18 +90,13 @@
                                 </div>
 								<div class="score_r fr">
                                     <!-- Baidu Button BEGIN -->
-                                    <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare"  data="<literal>{</literal>'bdDes':'{$info.title}','text':'{$info.title}',pic:'http://{$server.HTTP_HOST}/data/upload/post/{$info.img}'<literal>}</literal>">
+                                    <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare" data="<literal>{</literal>'bdDes':'{$info.title}','text':'{$info.title}',pic:'{:attach($info['img'],'post',true)}'<literal>}</literal>">
                                         <span class="fl" style="display: block;padding-top: 6px;">分享到：</span>
                                         <a class="bds_qzone"></a>
                                         <a class="bds_tsina"></a>
                                         <a class="bds_tqq"></a>
                                         <span class="bds_more"></span>
                                     </div>
-                                    <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=758194" ></script>
-                                    <script type="text/javascript" id="bdshell_js"></script>
-                                    <script type="text/javascript">
-                                        document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
-                                    </script>
                                     <!-- Baidu Button END -->
 								</div>
 							</div>
@@ -119,7 +112,7 @@
 								<ul class="clearfix">
                                     <volist name="like_list" id="val">
                                     <li>
-										<a class="feature_pic" href="{:u('post/index',array('id'=>$val['id']))}" target="_blank"><img src="./data/upload/post/{$val.img}"></a>
+										<a class="feature_pic" href="{:u('post/index',array('id'=>$val['id']))}" target="_blank"><img src="{:attach($val['img'],'post')}"></a>
 										<div class="feature_title"><a href="{:u('post/index',array('id'=>$val['id']))}" title="{$val.title}">{$val.title}</a></div>
 									</li>
                                     </volist>
@@ -177,14 +170,16 @@
 										<textarea class="textareabox" id="J_cmt_content"></textarea>
 										<div class="exitbox clearfix">
 											<div class="exitbox_l fl">
-												登录帐号：
-												<a href="{:u('user/index')}" target="_blank">{$visitor.username}</a>
-												<a href="{:u('user/logout')}" target="_blank">登出</a>
+                                                <div class="fl J_face">
+                                                    <span class="J_face_btn">表情</span>
+                                                </div>
+                                                <div class="fl">
+                                                    登录帐号：
+    												<a href="{:u('user/index')}" target="_blank">{$visitor.username}</a>
+    												<a href="{:u('user/logout')}" target="_blank">登出</a>
+                                                </div>
 											</div>
 											<div class="exitbox_r fr">
-                                                <!--
-                                                <div class="fl"><input type="checkbox" class="checkboxbtn" name="comment_connect" value="1" onclick="sinaconnect()">转发到新浪微博</div>
-                                                -->
 												<input class="submit_btn" id="J_cmt_submit" type="button" value="提交"/>
 											</div>
 										</div>
@@ -210,3 +205,6 @@
 	<!--主部结束-->	
 </div>
 <include file="public:footer" />
+<script type="text/javascript">
+$.ZhiPHP.comment.init();
+</script>

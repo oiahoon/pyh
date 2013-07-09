@@ -9,6 +9,7 @@ return array(
      */
     'app_begin' => array(
         'load_lang', //语言
+        'check_input',
     ),
     'app_end'=>array(
         'check_ipban', //禁止IP  
@@ -49,5 +50,9 @@ return array(
     //收藏
     'favs_end'=>array(
         'alter_score', // 积分
-    ),  
+    ),
+    //签到
+    'qiandao_end' => array(
+        'alter_score',
+    ),
 );

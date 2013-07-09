@@ -1,4 +1,4 @@
-<load href="__ROOT__/static/css/default/css/user.css" />	
+<load href="__ASSETS__/css/user.css" />	
 <div class="menber-left">
   <div class="u">
     <div class="u-face">
@@ -34,11 +34,26 @@
         <a href="{:u('user/baoliao')}">我的爆料</a>
       </dt>
     </dl>
-    <dl>
+  <dl>
       <dt <if condition="MODULE_NAME eq 'user' and ACTION_NAME eq 'score_log'">class="on"</if>>
-        <a href="{:u('user/score_log')}">我的积分</a>
+      <a href="{:u('user/score_log')}">我的积分</a>
       </dt>
+  </dl>
+    <dl>
+          <dt <if condition="MODULE_NAME eq 'user' and ACTION_NAME eq 'score_order'">class="on"</if>>
+          <a href="{:u('user/score_order')}">积分订单</a>
+          </dt>
     </dl>
+    <dl>
+          <dt <if condition="MODULE_NAME eq 'user' and ACTION_NAME eq 'address'">class="on"</if>>
+          <a href="{:u('user/address')}">收货地址</a>
+          </dt>
+    </dl>
+      <dl>
+          <dt <if condition="MODULE_NAME eq 'user' and ACTION_NAME eq 'anhao'">class="on"</if>>
+          <a href="{:u('user/anhao')}">我的九块邮</a>
+          </dt>
+      </dl>
     <dl>
       <dt <if condition="MODULE_NAME eq 'user' and ACTION_NAME eq 'message'">class="on"</if>>
         <a href="{:u('user/message')}">我的信箱</a>

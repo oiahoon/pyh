@@ -35,7 +35,7 @@
                 <th width="60" align="right"><span data-tdtype="order_by" data-field="albums">专辑</span></th>
                 <th width="60" align="right"><span data-tdtype="order_by" data-field="score">积分</span></th>
                 <th width="120"><span data-tdtype="order_by" data-field="add_time">注册时间</span></th>
-                <th width="120"><span data-tdtype="order_by" data-field="last_time">最后登录</span></th>
+                <th width="120"><span data-tdtype="order_by" data-field="last_time">最后登录</span></th>              
                 <th width="100"><span data-tdtype="order_by" data-field="last_ip">最后IP</span></th>
                 <th width="30"><span data-tdtype="order_by" data-field="daren">达人</span></th>
                 <th width="30"><span data-tdtype="order_by" data-field="status">{:L('status')}</span></th>
@@ -57,7 +57,7 @@
                 <td align="right">{$val.shares}</td>
                 <td align="right">{$val.albums}</td>
                 <td align="right">{$val.score}</td>
-                <td align="center">{$val.reg_time|date="Y-m-d H:i",###}</td>
+                <td align="center">{$val.reg_time|date="Y-m-d H:i",###}</td>                
                 <td align="center">{$val.last_time|date="Y-m-d H:i",###}</td>
                 <td align="center">{$val.last_ip}</td>
                 <td align="center"><img data-tdtype="toggle" data-id="{$val.id}" data-field="daren" data-value="{$val.daren}" src="__STATIC__/images/admin/toggle_<if condition="$val.daren eq 0">disabled<else/>enabled</if>.gif" /></td>

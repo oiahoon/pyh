@@ -1,6 +1,6 @@
 <include file="public:header" />
 <!--SEO设置-->
-<div class="pad_lr_10">
+<div class="pad_lr_10 mt10">
     <div class="col_tab">
 
         <ul class="tip_list clearfix ml20">
@@ -15,6 +15,8 @@
             <li>列表页面</li>
             <li>商品详细页</li>
             <li>商城导航</li>
+            <li>九块邮</li>
+            <li>积分商城</li>
             <li>文章页面</li>
         </ul>
     
@@ -102,7 +104,6 @@
                         <td>
                             <ul class="tip_list clearfix">
                                 <li>商品标题 <span class="highlight">{post_title}</span></li>
-                                <!--<li>内容 <span class="highlight">{post_intro}</span></li>-->
                                 <li>商品标签 <span class="highlight">{post_tag}</span></li>
                                 <li>会员名称 <span class="highlight">{user_name}</span></li>
                                 <li>商品Title <span class="highlight">{seo_title}</span></li>
@@ -176,6 +177,107 @@
                     </tr>
                 </table>                
             </div>
+            <!--九块邮-->
+            <div class="content_list pad_10" style="display:none;">
+                <table width="100%" class="table_form">
+                    <thead>
+                        <tr>
+                            <th colspan="2" align="left">列表页</th>
+                        </tr>                        
+                    </thead>
+                    <tr>
+                        <th style="width: 70px;">Title</th>
+                        <td><textarea name="seo_config[jiukuaiyou][title]" cols="80" rows="2">{$seo_config.jiukuaiyou.title}</textarea></td>
+                    </tr>
+                    <tr>
+                        <th>Keywords</th>
+                        <td><textarea name="seo_config[jiukuaiyou][keywords]" cols="80" rows="2">{$seo_config.jiukuaiyou.keywords}</textarea></td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td><textarea name="seo_config[jiukuaiyou][description]" cols="80" rows="3">{$seo_config.jiukuaiyou.description}</textarea></td>
+                    </tr>
+                </table>
+                <table width="100%" class="table_form">
+                    <thead>
+                        <tr>
+                            <th colspan="2" align="left">详细页</th>
+                        </tr>                        
+                    </thead>
+                    <tr>
+                        <td width="80"></td>
+                        <td>
+                            <ul class="tip_list clearfix">
+                                <li>商品名称 <span class="highlight">{jky_title}</span></li>
+                                <li>商品Title <span class="highlight">{seo_title}</span></li>
+                                <li>商品Keywords <span class="highlight">{seo_keywords}</span></li>
+                                <li>商品Description <span class="highlight">{seo_description}</span></li>
+                            </ul>
+                        </td>
+                    </tr>                    
+                    <tr>
+                        <th>Title</th>
+                        <td><textarea name="seo_config[jiukuaiyou_info][title]" cols="80" rows="2">{$seo_config.jiukuaiyou_info.title}</textarea></td>
+                    </tr>
+                    <tr>
+                        <th>Keywords</th>
+                        <td><textarea name="seo_config[jiukuaiyou_info][keywords]" cols="80" rows="2">{$seo_config.jiukuaiyou_info.keywords}</textarea></td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td><textarea name="seo_config[jiukuaiyou_info][description]" cols="80" rows="3">{$seo_config.jiukuaiyou_info.description}</textarea></td>
+                    </tr>
+                </table>                
+            </div>  
+            <!--积分兑换-->
+            <div class="content_list pad_10" style="display:none;">
+                <table width="100%" class="table_form">
+                    <thead>
+                        <tr>
+                            <th colspan="2" align="left">首页</th>
+                        </tr>                        
+                    </thead>
+                    <tr>
+                        <th style="width: 70px;">Title</th>
+                        <td><textarea name="seo_config[exchange][title]" cols="80" rows="2">{$seo_config.exchange.title}</textarea></td>
+                    </tr>
+                    <tr>
+                        <th>Keywords</th>
+                        <td><textarea name="seo_config[exchange][keywords]" cols="80" rows="2">{$seo_config.exchange.keywords}</textarea></td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td><textarea name="seo_config[exchange][description]" cols="80" rows="3">{$seo_config.exchange.description}</textarea></td>
+                    </tr>
+                </table>
+                <table width="100%" class="table_form">
+                    <thead>
+                        <tr>
+                            <th colspan="2" align="left">详细页</th>
+                        </tr>                        
+                    </thead>
+                    <tr>
+                        <td width="80"></td>
+                        <td>
+                            <ul class="tip_list clearfix">
+                                <li>商品名称 <span class="highlight">{exchange_title}</span></li>
+                            </ul>
+                        </td>
+                    </tr>                    
+                    <tr>
+                        <th>Title</th>
+                        <td><textarea name="seo_config[exchange_info][title]" cols="80" rows="2">{$seo_config.exchange_info.title}</textarea></td>
+                    </tr>
+                    <tr>
+                        <th>Keywords</th>
+                        <td><textarea name="seo_config[exchange_info][keywords]" cols="80" rows="2">{$seo_config.exchange_info.keywords}</textarea></td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td><textarea name="seo_config[exchange_info][description]" cols="80" rows="3">{$seo_config.exchange_info.description}</textarea></td>
+                    </tr>
+                </table>                
+            </div>                      
             <div class="content_list pad_10" style="display:none;">
                 <table width="100%" class="table_form">
                     <tr>
@@ -204,10 +306,7 @@
                 </table>
             </div>
         </div>
-        <div class="mt10">
-            <input type="hidden" name="menuid"  value="{$menuid}"/>
-            <input type="submit" class="btn btn_submit" name="do" value="{:L('submit')}"/>
-        </div>
+        <include file="public:_submit" />        
         </form>
     </div>
 </div>

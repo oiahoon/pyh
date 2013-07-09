@@ -8,7 +8,8 @@ class taobao_oauth
     private $_need_request = array('code');
 
     public function __construct($setting) {
-        $this->redirect_uri = U('oauth/callback', array('mod'=>'taobao'), '', '', true);
+        //$this->redirect_uri = U('oauth/callback', array('mod'=>'taobao'), '', '', true);
+		$this->redirect_uri ="http://".$_SERVER["HTTP_HOST"]."/index.php?m=oauth&a=callback&mod=taobao";
         $this->setting = $setting;
     }
     function getAuthorizeURL() {

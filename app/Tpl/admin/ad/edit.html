@@ -85,6 +85,7 @@
 </div>
 <script src="__STATIC__/js/fileuploader.js"></script>
 <script type="text/javascript">
+var id="{$info.id}";
 Calendar.setup({
     inputField : "start_time",
     ifFormat   : "%Y-%m-%d",
@@ -99,11 +100,20 @@ Calendar.setup({
 });
 
 $(function(){
+    var is_change=false;
     $("#type").change(function(){
+        if(!is_change){
+            if(confirm("更改类型将删除旧的广告内容（图片、代码、flsah等等）")){
+                $.post("{:U(MODULE_NAME.'/ajax_edit')}",{field:'content',val:' ',id:id});   
+                is_change=true;
+            }    
+        }
+        
         $(".bill_media").hide();
-        $("#ad_"+$(this).val()).show();
+        $("#ad_"+$(this).val()).show();   
+        $('.bill_media input').val("");
+        $('.bill_media textarea').html("");
     });
-    $("#type").change();
 
     $.formValidator.initConfig({formid:"info_form",autotip:true});
     $("#name").formValidator({onshow:"请填写广告名称",onfocus:"请填写广告名称"}).inputValidator({min:1,onerror:"请填写广告名称"}).defaultPassed();

@@ -54,7 +54,7 @@ class QqTOAuthV2 {
     }
     function getOpenid($access_token) {
         $graph_url = "https://graph.qq.com/oauth2.0/me?access_token=" . $access_token;
-        $str  = file_get_contents($graph_url);
+        $str  = $this->get_url_contents($graph_url);
         if (strpos($str, "callback") !== false) {
             $lpos = strpos($str, "(");
             $rpos = strrpos($str, ")");

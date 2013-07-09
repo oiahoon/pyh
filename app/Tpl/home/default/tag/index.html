@@ -13,7 +13,7 @@
                     <div class="crumbBox clearfix">
         				<span>当前位置:</span>
                         <a href="/">首页 </a>&gt;&gt;&nbsp;                        
-                        <span class="grey">标签"{$info.title}"</span>
+                        <span class="grey">{$page_seo.title}</span>
         			</div>	
 
                     <div class="showinfo">                        
@@ -24,7 +24,7 @@
                         </div>
                         </volist> 
                         <!--产品展示方式开始-->
-                        <div class="product_show" id="J_waterfall" data-uri="__ROOT__/?m={:MODULE_NAME}&a=index&sort={$sort}&p={$p}&id={$id}">        
+                        <div class="product_show" id="J_waterfall" data-uri="__ROOT__/?m={:MODULE_NAME}&a=index&sort={$sort}&p={$p}&id={$id}&uname={$uname}">        
                             <include file="public:ajax_post_list" />
                         </div>
                         <present name="show_load">

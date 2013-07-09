@@ -1,6 +1,6 @@
 <?php
 
-class userAction extends userbaseAction {    
+class userAction extends userbaseAction {
     public function _initialize() {   
         parent::_initialize();                
         $this->_config_seo(array('title'=>'会员中心'));
@@ -14,6 +14,13 @@ class userAction extends userbaseAction {
         if (IS_POST) {
             $username = $this->_post('username', 'trim');
             $password = $this->_post('password', 'trim');
+            $type = $this->_post('type', 'trim', 'reg');
+           
+            $captcha = $this->_post('captcha', 'trim');
+            if (session('captcha') != md5($captcha)&&C('pin_captcha_status')){
+                $this->error(L('captcha_failed'));
+            }
+
             $remember = $this->_post('remember');
             if (empty($username)) {
                 IS_AJAX && $this->ajaxReturn(0, L('please_input').L('password'));
@@ -37,12 +44,13 @@ class userAction extends userbaseAction {
             $tag_arg = array('uid'=>$uid, 'uname'=>$username, 'action'=>'login');
             tag('login_end', $tag_arg);
             //同步登录
-            $synlogin = $passport->synlogin($uid);
+            
+            $synlogin = $passport->synlogin($uid);            
             if (IS_AJAX) {
                 $this->ajaxReturn(1, L('login_successe').$synlogin);
             } else {
                 //跳转到登录前页面（执行同步操作）
-                $ret_url = $this->_post('ret_url', 'trim');
+                $ret_url = $this->_post('ret_url', 'urldecode');                
                 $this->success(L('login_successe').$synlogin, $ret_url);
             }
         } else {
@@ -59,7 +67,6 @@ class userAction extends userbaseAction {
                 $ret_url = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : __APP__;
                 $this->assign('ret_url', $ret_url);
                 $this->assign('synlogout', $synlogout);
-                $this->_config_seo();
                 $this->display();
             }
         }
@@ -74,17 +81,38 @@ class userAction extends userbaseAction {
         $passport = $this->_user_server();
         $synlogout = $passport->synlogout();
         //跳转到退出前页面（执行同步操作）
-        $this->success(L('logout_successe').$synlogout, U('user/index'));
+        $this->success(L('logout_successe').$synlogout, $this->_request('ret_url', 'urldecode',U('index/index')));
     }
 
     /**
      * 用户绑定
      */
     public function binding() {
+        $passport = $this->_user_server();
         $user_bind_info = object_to_array(cookie('user_bind_info'));
-        $this->assign('user_bind_info', $user_bind_info);        
-        $this->_config_seo(array('title'=>'账户绑定'));
-        $this->display();
+        
+        $username=str_replace('%','',urldecode($user_bind_info["pin_user_name"]));
+        
+        if(strlen($username)>=15){            
+            $username=trim(msubstr($username,10),".").rand(0,999);    
+        } 
+        $password=substr(md5($username),0,8);
+        $email=$password."@xx.com";
+        $uid = $passport->register($username, $password, $email,1);        
+        !$uid && $this->error($passport->get_error());
+                
+        M('user_bind')->where("uid=$uid")->delete();
+        M('user_bind')->add(array(
+            'uid' => $uid,
+            'type' => $user_bind_info['type'],
+            'keyid' => $user_bind_info['keyid'],
+            'info' => serialize($user_bind_info['bind_info']),
+        ));                
+        $user_bind_info = NULL;
+        
+        $synlogin = $passport->synlogin($uid);
+        $this->visitor->login($uid);
+        $this->success('登录成功' . $synlogin, u(MODULE_NAME.'/index')); 
     }
 
     /**
@@ -155,7 +183,6 @@ class userAction extends userbaseAction {
             if (!C('pin_reg_status')) {
                 $this->error(C('pin_reg_closed_reason'));
             }
-            $this->_config_seo();
             $this->display();
         }
     }
@@ -190,9 +217,9 @@ class userAction extends userbaseAction {
     */
     public function index() {
         $info = $this->visitor->get();            
-        $this->assign('info', $info);
-        $this->_config_seo();
-        $this->assign('favs_list',$this->post_favs_mod->relation(true)->where(array('uid'=>$this->uid))->order("id desc")->limit(4)->select());
+        $this->assign('info', $info);        
+        $this->assign('favs_list',D("post_favs")->relation(true)->where(array('uid'=>$this->uid))->order("id desc")->limit(4)->select());
+        $this->assign('message_num',D("message")->relation(true)->where(array('to_id'=>$this->uid,'status'=>'0'))->count());
         $this->display(); 
     }
     public function profile(){
@@ -221,7 +248,6 @@ class userAction extends userbaseAction {
         }        
         $info = $this->visitor->get();            
         $this->assign('info', $info);
-        $this->_config_seo();
         $this->display();        
     } 
     /**
@@ -288,7 +314,7 @@ class userAction extends userbaseAction {
             $this->success($msg['info']);
             //$this->assign('msg', $msg);
         }
-        $this->_config_seo();
+        
         $this->display();
     }
 
@@ -314,7 +340,7 @@ class userAction extends userbaseAction {
             }
         }
         $this->assign('oauth_list', $oauth_list);
-        $this->_config_seo();
+        
         $this->display();
     }
 
@@ -324,7 +350,7 @@ class userAction extends userbaseAction {
     public function custom() {
         $cover = $this->visitor->get('cover');
         $this->assign('cover', $cover);
-        $this->_config_seo();
+        
         $this->display();
     }
 
@@ -413,7 +439,7 @@ class userAction extends userbaseAction {
         }
         $address_list = $user_address_mod->where(array('uid'=>$this->visitor->info['id']))->select();
         $this->assign('address_list', $address_list);
-        $this->_config_seo();
+        
         $this->display();
     }
 
@@ -527,7 +553,7 @@ class userAction extends userbaseAction {
         $act=$this->_post('act','trim');
         if($act=='del'){
             if($id>0){
-                $res=$this->post_favs_mod->where(array('id'=>$id,'uid'=>$this->uid))->delete();
+                $res=D("post_favs")->where(array('id'=>$id,'uid'=>$this->uid))->delete();
                if($res){                                  
                     $this->ajaxReturn(1,'操作成功');
                 } else {
@@ -537,9 +563,9 @@ class userAction extends userbaseAction {
         }
         
         $where=array('uid'=>$this->uid);
-        $count=$this->post_favs_mod->where($where)->count();
+        $count=D("post_favs")->where($where)->count();
         $pager=$this->_pager($count,8);
-        $res=$this->post_favs_mod->relation(true)
+        $res=D("post_favs")->relation(true)
             ->limit($pager->firstRow . ',' . $pager->listRows)->order($order)
             ->where($where)->select();
             
@@ -548,40 +574,41 @@ class userAction extends userbaseAction {
         $this->display();
     }
     
-    public function comments(){
-        $where=array('uid'=>$this->uid);
-        $count=$this->post_comment_mod->where($where)->count();
-        $pager=$this->_pager($count,8);
-        $res=$this->post_comment_mod->relation(true)
-            ->limit($pager->firstRow . ',' . $pager->listRows)->order($order)
-            ->where($where)->select();
-            
-        $this->assign('page', $pager->show());                
+    public function comments(){        
+        $mod=new Model();
+        $where=" where uid=".$this->uid;
+        $sql="select *,'post_comment' as m from ".table('post_comment')." $where union select *,'jky_comment' as m from ".table(jky_comment)." $where";
+        $res=$mod->query("select count(id) as total from ($sql) as res");
+        $count=$res[0]['total'];
+
+        import("ORG.Util.Page");        
+        $pager =$this->_pager($res[0]['total'], 8);
+        $res=$mod->query($sql." order by add_time desc "." limit ".$pager->firstRow . ',' .$pager->listRows);
+        
+        foreach($res as $key=>$val){
+            $res[$key]=D($val['m'])->relation(true)->where("id=$val[id]")->find();        
+            $res[$key]['m']=$val['m'];
+        }
+                           
         $this->assign('list',$res);
-                
+        $this->assign('page',$pager->show());
         $this->display();
     }
     public function message(){
         $where=array('to_id'=>$this->uid);
-        $count=$this->message_mod->where($where)->count();
-        $pager=$this->_pager($count,8);
-        $res=$this->message_mod->relation(true)
-            ->limit($pager->firstRow . ',' . $pager->listRows)->order($order)
-            ->where($where)->select();
-            
-        $this->assign('page', $pager->show());                
-        $this->assign('list',$res);
-                
+        $this->_assign_list(D("message"),$where,8,true);
+        
+        D('message')->where($where)->save(array('status'=>1));                
         $this->display();
     }    
     public function favs_add(){
         $id=$this->_get('id','intval');
         $uid=$this->visitor->info['id'];
         
-        if($this->post_favs_mod->where(array('post_id'=>$id,'uid'=>$uid))->find()){
+        if(D("post_favs")->where(array('post_id'=>$id,'uid'=>$uid))->find()){
             $this->ajaxReturn(0,'已经添加了');
         }else{
-            $this->post_favs_mod->add(array(
+            D("post_favs")->add(array(
                 'post_id'=>$id,
                 'uid'=>$uid,
                 'add_time'=>time(),
@@ -592,20 +619,89 @@ class userAction extends userbaseAction {
                 'action'=>'favs');
             tag('favs_end', $tag_arg);         
                    
-            $this->post_mod->where(array('id'=>$id))->setInc('favs');            
-            $this->ajaxReturn(1,'添加成功',$this->post_mod->where(array('id'=>$id))->getField('favs'));            
+            D("post")->where(array('id'=>$id))->setInc('favs');            
+            $this->ajaxReturn(1,'添加成功',D("post")->where(array('id'=>$id))->getField('favs'));            
         }      
     }
     public function baoliao(){
         $type=$this->_get('type','intval',0);
-        $this->_assign_list($this->post_baoliao_mod,"type=$type and uid=".$this->uid);
+        $this->_assign_list(D("post_baoliao"),"type=$type and uid=".$this->uid);
         $this->assign('type',$type);
         $this->display();
     }
+
+    public function anhao() {
+        $where = array('uid'=>$this->uid);
+        $count = M('jky_anhao')->where($where)->count();
+        $pager = $this->_pager($count,8);
+        $res = D('jky_anhao')->relation(true)
+            ->limit($pager->firstRow . ',' . $pager->listRows)->order('id DESC')
+            ->where($where)->select();
+        $this->assign('page', $pager->show());
+        $this->assign('list',$res);
+
+        $this->display();
+    }
+
+    /**
+     * 积分订单
+     */
+    public function score_order() {
+        $map = array();
+        $map['uid'] = $this->uid;
+        $score_order_mod = M('score_order');
+        $pagesize = 20;
+        $count = $score_order_mod->where($map)->count('id');
+        $pager = $this->_pager($count, $pagesize);
+        $order_list = $score_order_mod->field('id,order_sn,item_id,item_name,order_score,status,add_time')->where($map)->limit($pager->firstRow.','.$pager->listRows)->order('id DESC')->select();
+        $this->assign('order_list', $order_list);
+        $this->assign('page_bar', $pager->fshow());
+        $this->_config_seo();
+        $this->display();
+    }
+
     public function score_log(){
-        //print_r(L('js_lang'));exit();
-        $this->_assign_list($this->score_log_mod,"uid=".$this->uid);
+        $this->_assign_list(D("score_log"),"uid=".$this->uid);
         $this->assign('l',L('score_lang'));
         $this->display();
+    }
+
+    public function qiandao() {
+        if ($this->_check_num($this->visitor->info['id'], 'qiandao')) {
+            $tag_arg = array(
+                'uid'=>$this->visitor->info['id'],
+                'uname'=>$this->visitor->info['username'],
+                'action'=>'qiandao'
+            );
+            tag('qiandao_end', $tag_arg);
+            $this->ajaxReturn(1, '签到成功');
+        }
+        $this->ajaxReturn(0, '你已经签到过了');
+    }
+
+    /**
+     * 检查次数限制
+     */
+    private function _check_num($uid, $action){
+        $return = false;
+        $user_stat_mod = D('user_stat');
+        //登录次数限制
+        $max_num = C('pin_score_rule.'.$action.'_nums');
+        //先检查统计信息
+        $stat = $user_stat_mod->field('num,last_time')->where(array('uid'=>$uid, 'action'=>$action))->find();
+        if (!$stat) {
+            $user_stat_mod->create(array('uid'=>$uid, 'action'=>$action));
+            $user_stat_mod->add();
+        }
+        if ($max_num == 0) {
+            $return = true; //为0则不限制
+        } else {
+            if ($stat['last_time'] < todaytime()) {
+                $return = true;
+            } else {
+                $return = $stat['num'] >= $max_num ? false : true;
+            }
+        }
+        return $return;
     }
 }

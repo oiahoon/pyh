@@ -1,6 +1,6 @@
 <!--编辑会员-->
 <div class="dialog_content">
-	<form id="info_form" action="{:u('user/edit')}" method="post">
+	<form id="info_form" action="{:u(MODULE_NAME.'/'.ACTION_NAME)}" method="post">
 	<table width="100%" class="table_form">
 		<tr>
 			<th width="100">会员昵称 :</th>
@@ -12,7 +12,7 @@
             	<input type="text" name="img" id="J_img" class="input-text fl mr10" size="30" value="{$info.img}">
             	<div id="J_upload_img" class="upload_btn"><span>{:L('upload')}</span></div>
                 <img src="{:avatar($info['id'], 32)}" />
-				<notempty name="info['img']"><span class="attachment_icon J_attachment_icon" file-type="image" file-rel="{:avatar($info['id'], 32)}"><img src="__ROOT__/statics/images/filetype/image_s.gif" /></span></notempty>
+				<notempty name="info['img']"><span class="attachment_icon J_attachment_icon" file-type="image" file-rel="{:avatar($info['id'], 32)}"><img src="__STATIC__/images/filetype/image_s.gif" /></span></notempty>
             </td>
 		</tr>
         <tr>

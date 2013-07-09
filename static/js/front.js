@@ -16,7 +16,7 @@
             $.ZhiPHP.ui.return_top();
             $.ZhiPHP.ui.drop_down();
             $.ZhiPHP.ui.decode_img($(document));
-            //$.ZhiPHP.ui.lazyload();
+            $.ZhiPHP.ui.qiandao();
             $.ZhiPHP.ui.captcha();
         },
         lazyload: function() {
@@ -94,6 +94,28 @@
             $('.J_decode_img', context).each(function(){
                 var uri = $(this).attr('data-uri')||"";
                 $(this).attr('src', $.ZhiPHP.util.base64_decode(uri));  
+            });
+        },
+        qiandao: function(){
+            $('.J_qiandao').live('click', function(){
+                $.getJSON(PINER.root + '/?m=user&a=qiandao', function(result){
+                    if(result.status == 0){
+                        $.ZhiPHP._tip({
+                			content:result.msg,
+                			status: 0,
+                			url: [{
+                				url: 'index.php?m=user&a=register',
+                				title: '注册'
+                			},
+                			{
+                				url: 'index.php?m=user&a=login',
+                				title: '登录'
+                			}]
+                		});
+                    }else{
+                        $.ZhiPHP._tip({content:result.msg, status:1});
+                    }
+                });
             });
         }
     },

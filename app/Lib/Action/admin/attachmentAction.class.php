@@ -55,7 +55,7 @@ class attachmentAction extends backendAction
             $root_path .= $dir_name . "/";
             $root_url .= $dir_name . "/";
             if (!file_exists($root_path)) {
-		mkdir($root_path);
+		      mkdir($root_path);
             }
         }
         

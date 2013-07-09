@@ -27,7 +27,20 @@ class indexAction extends Action {
             $this->display();
         }
     }
-
+    public function is_writable($path){
+        $return;
+        $test_str="test";
+        if(is_dir($path)){
+            $return=@file_put_contents($path.'/test.txt',$test_str)>0;
+            @unlink($path.'/test.txt');
+        }
+        if(is_file($path)){
+            $old=file_get_contents($path);
+            $return=@file_put_contents($path,$old.' ')>0;
+            @file_put_contents($path,trim($old));
+        }
+        return $return;
+    }
     /**
      * 环境检测
      */
@@ -37,8 +50,6 @@ class indexAction extends Action {
         //检测文件夹权限
         $check_file = array(
             './data',
-            './data/mail_tpl',
-            './data/msg_tpl',
             './data/static',
             './data/upload',
             './data/config/db.php',
@@ -53,16 +64,16 @@ class indexAction extends Action {
                 $flag = false;
                 continue;
             }
-            if (!is_writable($path_file)) {
-            //if (!$this->is_really_writable($path_file)) {
+                        
+            if (!$this->is_writable($path_file)) {
                 $error[] = $file . L('not_writable');
                 $flag = false;
             }
         }
-        if (!function_exists('curl_getinfo')) {
-            $error[] = L('no_curl');
-            $flag = false;
-        }
+//        if (!function_exists('curl_getinfo')) {
+//            $error[] = L('no_curl');
+//            $flag = false;
+//        }
 
         if (!function_exists('gd_info')) {
             $error[] = L('no_gd');
@@ -149,8 +160,8 @@ class indexAction extends Action {
             $this->assign('db_host', 'localhost');
             $this->assign('db_port', '3306');
             $this->assign('db_user', 'root');
-            $this->assign('db_name', 'ZhiPHP');
-            $this->assign('db_prefix', 'pin_');
+            $this->assign('db_name', 'zhiphp');
+            $this->assign('db_prefix', 'zhi_');
 
             $this->assign('admin_user', 'admin');
             $this->assign('db_pass', '');
@@ -190,9 +201,10 @@ class indexAction extends Action {
         //开始创建数据表
         $this->_show_process(L('create_table_begin'));
         $sqls = $this->_get_sql(APP_PATH . 'Sql_data/create_table.sql');
+                
         foreach ($sqls as $sql) {
             //替换前缀
-            $sql = str_replace('`pin_', '`' . $temp_info['db_prefix'], $sql);
+            $sql = str_replace('`zhi_', '`' . $temp_info['db_prefix'], $sql);            
             //获得表名
             $run = mysql_query($sql, $conn);
             if (substr($sql, 0, 12) == 'CREATE TABLE') {
@@ -209,7 +221,7 @@ class indexAction extends Action {
                 "('" . $temp_info['admin_user'] . "', '" . $admin_pass . "', '" . $temp_info['admin_email'] . "', 1);";
         foreach ($sqls as $sql) {
             //替换前缀
-            $sql = str_replace('`pin_', '`' . $temp_info['db_prefix'], $sql);
+            $sql = str_replace('`zhi_', '`' . $temp_info['db_prefix'], $sql);
             //获得表名
             if (substr($sql, 0, 11) == 'INSERT INTO') {
                 $table_name = $temp_info['db_prefix'] . preg_replace("/INSERT INTO `" . $temp_info['db_prefix'] . "([a-z0-9_]+)` .*/is", "\\1", $sql);
@@ -286,37 +298,5 @@ class indexAction extends Action {
         } else {
             return false;
         }
-    }
-    function is_really_writable($file)
-    {
-        // If we're on a Unix server with safe_mode off we call is_writable
-        if (DIRECTORY_SEPARATOR == '/' AND @ini_get("safe_mode") == FALSE)
-        {
-            return is_writable($file);
-        }
-    
-        // For windows servers and safe_mode "on" installations we'll actually
-        // write a file then read it.  Bah...
-        if (is_dir($file))
-        {
-            $file = rtrim($file, '/').'/'.md5(mt_rand(1,100).mt_rand(1,100));
-    
-            if (($fp = @fopen($file, FOPEN_WRITE_CREATE)) === FALSE)
-            {
-                return FALSE;
-            }
-    
-            fclose($fp);
-            @chmod($file, DIR_WRITE_MODE);
-            @unlink($file);
-            return TRUE;
-        }
-        elseif ( ! is_file($file) OR ($fp = @fopen($file, FOPEN_WRITE_CREATE)) === FALSE)
-        {
-            return FALSE;
-        }
-    
-        fclose($fp);
-        return TRUE;
-    }    
+    } 
 }

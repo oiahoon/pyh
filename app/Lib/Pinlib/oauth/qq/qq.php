@@ -6,7 +6,8 @@ class qq_oauth
 
     public function __construct($setting) {
         //组装回调地址
-        $this->redirect_uri = U('oauth/callback', array('mod'=>'qq'), '', '', true);
+        //$this->redirect_uri = U('oauth/callback', array('mod'=>'qq'), '', '', true);
+		$this->redirect_uri ="http://".$_SERVER["HTTP_HOST"]."/index.php?m=oauth&a=callback&mod=qq";
         $this->setting = $setting;
     }
     /**

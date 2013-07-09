@@ -16,18 +16,27 @@ class loadTag {
     }
 
     public function js($options) {
-        $path = PIN_DATA_PATH . 'static/' . md5($options['href']) . '.js';
-        $statics_url = C('pin_statics_url') ? C('pin_statics_url') : './static';
-        if (!is_file($path)||true) {
+        $path = ZHI_DATA_PATH . 'static/' . md5($options['href']) . '.js';
+        $statics_url = C('pin_statics_url') ? C('pin_statics_url') : 'static';
+        $html = "";
+        if (!is_file($path)||APP_DEBUG) {
             //静态资源地址
             $files = explode(',', $options['href']);
             $content = '';
             foreach ($files as $val) {
                 $val = str_replace('__STATIC__', $statics_url, $val);
-                $content.=file_get_contents($val);
+                if(APP_DEBUG){
+                    $html .= '<script type="text/javascript" src="' .__ROOT__.'/'.$val .'"></script>';  
+                }else{
+                    $content .= file_get_contents(trim("./".$val));
+                }   
             }
-            file_put_contents($path, $this->jm->minify($content));
+            !APP_DEBUG && file_put_contents($path, $this->jm->minify($content));
         }
-        echo ( '<script type="text/javascript" src="' . __ROOT__ . '/data/static/' . md5($options['href']) . '.js?' . PIN_RELEASE . '"></script>');
+        if (APP_DEBUG) {
+            echo $html;
+        } else {
+            echo ('<script type="text/javascript" src="' . __ROOT__ . '/data/static/' . md5($options['href']) .'.js?' . ZHI_RELEASE . '"></script>');
+        }
     }
 }

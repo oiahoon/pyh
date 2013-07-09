@@ -1,36 +1,32 @@
 <!doctype html>
-<html xmlns:wb="http://open.weibo.com/wb">
+<html>
 <head>
+    {:C('pin_head_meta')} 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <load href="__ROOT__/static/css/default/css/base.css" />
-    <load href="__ROOT__/static/css/default/css/style.css" />
-	<load href="__ROOT__/static/js/jquery/jquery.js" />
-    <load href="__ROOT__/static/js/jquery/plugins/jquery.cookie.js" />
-    <load href="__ROOT__/static/js/common.js" />		
-    <title>default {$page_seo.title}</title>    
+    <load href="__STATIC__/js/jquery/jquery.js" />
+    <load href="__ASSETS__/css/base.css" />
+    <load href="__ASSETS__/css/style.css" />
+    <load href="__ASSETS__/js/common.js" />
+    	
+    <load href="__STATIC__/js/jquery/plugins/jquery.cookie.js" />
+    <load href="__STATIC__/js/common.js" />		
+    <title>{$page_seo.title}</title>    
     <meta name="keywords" content="{$page_seo.keywords}" />
-    <meta name="description" content="{$page_seo.description}" />    
-	<script type="text/javascript">	
-    <if condition="$visitor">
-    var IS_LOGIN=true;
-    <else/>
-    var IS_LOGIN=false;
-    </if>    
-    var def={$def};
-	</script>    
+    <meta name="description" content="{$page_seo.description}" />       
+    <script src="__ROOT__/index.php?m={:MODULE_NAME}&a={:ACTION_NAME}&act=loadjs"></script>  
 </head>
 <body>
 <!--头部开始-->
 <div class="header_wrap">
 	<div class="headertopbox">
 		<div class="headertop clearfix">
-			<div class="toplogo fl"><a href="./"><img class="fl" src="./data/upload/misc/{:c('pin_site_logo')}"/></a></div>						
+			<div class="toplogo fl"><a href="__ROOT__/"><img src="__ASSETS__/images/logo.jpg"/></a></div>						
             <if condition="empty($visitor)">
             <div class="login" id="nologin">
                 <a href="{:u('user/register')}" class="regbtn">注册</a>
-				<div class="loginbtn"> <a href="{:u('user/login')}" class="login_btn">登录</a>
+				<div class="loginbtn"> <a href="{:u('user/login',array('ret_url'=>get_ret_url()))}" class="login_btn">登录</a>
 					<ul class="loginsub">
-						<li class="wzdl"><a href="{:u('user/login')}">网站登录</a></li>
+						<li class="wzdl"><a href="{:u('user/login',array('ret_url'=>get_ret_url()))}">网站登录</a></li>
 						<li class="dsfdl">第三方登录</li>
                         <volist name="oauth_list" id="val">
                         <li class="{$val.code}" style="background-image: url('static/images/oauth/{$val.code}/icon.png');"><a href="{:u('oauth/index',array('mod'=>$val['code']))}">{$val.name}</a></li>
@@ -42,7 +38,7 @@
             <div class="login" id="yetlogin">
                 <span>{$visitor.username}欢迎您！</span>|
                 <a href="{:u('user/index')}">个人中心</a>|
-                <a href="{:u('user/logout')}">注销</a>
+                <a href="{:u('user/logout',array('ret_url'=>get_ret_url()))}">注销</a>
             </div>
             </if>
 			<div class="topRightShare">
@@ -72,13 +68,13 @@
 	
 </div>
 <div class="main_content" style="padding-bottom: 0px;">
-<div id="main" style="z-index: 1000;">
+<div id="main" style="z-index:50;">
         <div class="clearfix">
-            <div class="logo"><a href="./">高性价比产品网购推荐，值得您经常来看看</a></div>
+            <div class="logo"><a href="__ROOT__/">高性价比产品网购推荐，值得您经常来看看</a></div>
             <div class="topAd">
             	<div class="not_left_ce">
-    				<span class="not_a1" onmouseout="gstart()" onmouseover="gstop()" style="cursor:pointer;" onclick="goup()"><img src="http://www.smzdm.com/wp-content/themes/smzdm_v4/images/notice_left.png"></span>
-    				<span class="not_a2" onmouseout="gstart()" onmouseover="gstop()" style="cursor:pointer;" onclick="godown()"><img src="http://www.smzdm.com/wp-content/themes/smzdm_v4/images/notice_right.png"></span>
+    				<span class="not_a1" onmouseout="gstart()" onmouseover="gstop()" style="cursor:pointer;" onclick="goup()"><img src="__ASSETS__/images/notice_left.png"></span>
+    				<span class="not_a2" onmouseout="gstart()" onmouseover="gstop()" style="cursor:pointer;" onclick="godown()"><img src="__ASSETS__/images/notice_right.png"></span>
     			</div>
     			<div id="news">
     			     <ul id="topAd" onmouseout="gstart()" onmouseover="gstop()" style="margin-top: 0px;">
@@ -92,20 +88,20 @@
         <div class="navbox">
             <div class="nav">
                 <ul>
-                    <li class="home"><a class="navicon current" href="./">首页</a></li>
+                    <li class="home"><a class="navicon current" href="__ROOT__/">首页</a></li>
                     <li class="tese J_top"><a class="navicon" href="{:u('post_cate/index',array('id'=>2))}">特色推荐</a>
-                    <ul class="sub_menu">
-                    <volist name="tese_cate" id="val">
-                    <li><a href="{:u('post_cate/index',array('id'=>$val['id']))}">{$val.name}</a></li>
-                    </volist>
-                    </ul>
+                        <ul class="sub_menu">
+                            <volist name="tese_cate" id="val">
+                            <li><a href="{:u('post_cate/index',array('id'=>$val['id']))}">{$val.name}</a></li>
+                            </volist>
+                        </ul>
                     </li>
                     <volist name="main_nav_list" id="val">
                         <li class="{$val.alias}"><a class="navicon" href="{$val.link}" <if condition="$val['target'] eq 1">target="_blank"</if>>{$val.name}</a></li>
                     </volist>
                 </ul>
                 <div class="search fl">
-                    <form method="get" id="searchform" action="/">
+                    <form method="get" id="searchform" action="__ROOT__/index.php">
                         <input class="input_l" type="text" name="keyword" id="keyword" value="{$search.keyword}"/>
                         <input type="hidden" name="m" value="index"/>
                         <input type="hidden" name="a" value="index"/>

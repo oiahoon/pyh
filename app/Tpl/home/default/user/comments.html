@@ -34,11 +34,21 @@
                             <tbody>
                                 <volist name="list" id="val">
                                 <tr>
-                                    <td class="cd-tablecell"><div class="panel-item-info"> 
-                                        <a title="{$val.post.title}" target="_blank" href="{:u('post/index',array('id'=>$val['post_id']))}" class="label-merchant-services"> 
-                                            <img alt="商品图片" src="data/upload/post/{$val.post.img}" border="0" height="50px"> </a> </div></td>
+                                    <td class="cd-tablecell">
+                                        <div class="panel-item-info"> 
+                                        <if condition="$val['m'] eq 'post_comment'">
+                                            <a title="{$val.post.title}" target="_blank" href="{:u('post/index',array('id'=>$val['post_id']))}" class="label-merchant-services"> 
+                                                <img alt="{$val.post.title}" src="{:attach($val['post']['img'],'post')}" border="0" height="50px"/> 
+                                            </a> 
+                                        <else/>
+                                            <a title="{$val.item.title}" target="_blank" href="{:u('jiukuaiyou/detail',array('id'=>$val['item_id']))}" class="label-merchant-services"> 
+                                                <img alt="{$val.item.title}" src="{:attach($val['item']['img'],'jiukuaiyou')}" border="0" height="50px"> 
+                                            </a> 
+                                        </if>
+                                        </div>
+                                    </td>
                                     <td class="cd-tablecell" style="padding:0 8px;">{$val.info}</td>
-                                    <td class="cd-tablecell" style="text-align:center;">{:date("m-d H:i:s",$val['add_time'])}</td>
+                                    <td class="cd-tablecell" style="text-align:center;">{:fdate($val['add_time'])}</td>
                                 </tr>
                                 </volist>
                             </tbody>

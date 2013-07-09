@@ -5,7 +5,7 @@
 	<table width="100%" class="table_form">
         <tr>
             <th width="150">{:L('site_name')} :</th>
-            <td><input type="text" name="setting[site_name]" class="input-text" size="50" value="{:C('pin_site_name')}"></td>
+            <td><input type="text" name="setting[site_name]" class="input-text" size="50" value="{:C('pin_site_name')}"/></td>
         </tr>
         <tr>
             <th>{:L('seo_title')} :</th>
@@ -24,6 +24,10 @@
             <td><input type="text" name="setting[site_icp]" class="input-text" size="50" value="{:C('pin_site_icp')}"></td>
         </tr>
         <tr>
+            <th>头部meta信息 :</th>
+            <td><textarea rows="3" cols="50" name="setting[head_meta]">{:C('pin_head_meta')}</textarea>&nbsp;&nbsp;<span class="gray">可用于应用验证网站</span> </td>
+        </tr>
+        <tr>
             <th>{:L('statistics_code')} :</th>
             <td><textarea rows="3" cols="50" name="setting[statistics_code]">{:C('pin_statistics_code')}</textarea></td>
         </tr>
@@ -38,18 +42,8 @@
         	<th>{:L('closed_reason')} :</th>
         	<td><textarea rows="4" cols="50" name="setting[closed_reason]" id="closed_reason">{:C('pin_closed_reason')}</textarea></td>
     	</tr>
-        <tr>
-            <th>网站LOGO--adminn.cn(jpg格式)：</th>
-            <td>
-                <img src="{:attach(C('pin_site_logo'),'misc')}"/>
-                <input name="site_logo" type="file"/>
-            </td>
-        </tr>
-        <tr>
-        	<th></th>
-        	<td><input type="hidden" name="menuid"  value="{$menuid}"/><input type="submit" class="btn btn_submit" value="{:L('submit')}"/></td>
-    	</tr>
 	</table>
+    <include file="public:_submit" />
 	</form>
 </div>
 <include file="public:footer" />

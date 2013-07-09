@@ -5,7 +5,8 @@ class sina_oauth
     private $_need_request = array('code');
 
     public function __construct($setting) {
-        $this->redirect_uri = U('oauth/callback', array('mod'=>'sina'), '', '', true);
+        //$this->redirect_uri = U('oauth/callback', array('mod'=>'sina'), '', '', true);
+		$this->redirect_uri ="http://".$_SERVER["HTTP_HOST"]."/index.php?m=oauth&a=callback&mod=sina";
         $this->setting = $setting;
     }
     public function getAuthorizeURL() {

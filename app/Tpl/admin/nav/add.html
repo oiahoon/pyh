@@ -29,6 +29,13 @@
             </td>
         </tr>
         <tr>
+            <th>{:L('default_homepage')} :</th>
+            <td>
+                <label><input type="radio" name="homepage" class="radio_style" value="1" <if condition="$info['homepage'] eq 1"> checked="checked"</if>>&nbsp;{:L('yes')}&nbsp;&nbsp;&nbsp;</label>
+                <label><input type="radio" name="homepage" class="radio_style" value="0" <if condition="$info['homepage'] eq 0"> checked="checked"</if>>&nbsp;{:L('no')}</label>
+            </td>
+        </tr>        
+        <tr>
             <th>{:L('enabled')} :</th>
             <td>
                 <label><input type="radio" name="enabled" class="radio_style" value="1" checked="checked">&nbsp;{:L('open')}&nbsp;&nbsp;&nbsp;</label>

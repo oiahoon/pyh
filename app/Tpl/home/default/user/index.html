@@ -11,10 +11,10 @@
         <div class="grey-bg w700">
           <div class="p0-15">
             <p></p>
-            <div class="title"> <span class="c-999">登录帐号：</span><b style="color: #5183C0;">{$info.username}</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="c-999">上次登录时间：</span>{:date("Y-m-d H:i:s",$info['last_time'])}</div>
+            <div class="title"> <span class="c-999">登录帐号：</span><b style="color: #5183C0;">{$info.username}</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="c-999">上次登录时间：</span>{:fdate($info['last_time'])}</div>
             <p></p>
             <div class="hr2"></div>
-            <p> 你有 <b style="color: #5183C0;">0</b> 条未读信息。<span class="btn"><a hidefocus="true" class="i" href="{:u('user/message')}">查看</a> </span> </p>            
+            <p> 你有 <b style="color: #5183C0;">{$info.msg_num}</b> 条未读信息。<span class="btn"><a hidefocus="true" class="i" href="{:u('user/message')}">查看</a> </span> </p>            
           </div>
         </div>
         <div class="menber-right-title"> 我的收藏<span><a href="{:u('user/favs')}">更多»</a> </span> </div>
@@ -24,7 +24,7 @@
                 <div class="proview_item_pic"> 
                     <a target="_blank" href="{:u('post/index',array('id'=>$val['post_id']))}" class="pic"> 
                         <span class="img-wrap">
-                            <img src="data/upload/post/{$val.post.img}" border="0"/> 
+                            <img src="{:attach($val['post']['img'],'post')}" border="0"/> 
                         </span>
                         <div class="compare-overlay">
                             <div class="pic-mask"></div>

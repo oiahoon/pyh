@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>111111111111111111111<?php echo L('page_title');?></title>
+<title><?php echo L('page_title');?></title>
 <link rel="stylesheet" type="text/css" href="__TMPL__public/css/install.css" />
 <script type="text/javascript" src="__TMPL__public/js/jquery.js"></script>
 </head>
@@ -12,8 +12,8 @@
 	<div class="logo fl"></div>
     <div class="fr">
     	<ul class="top_nav fr">
-        	<li><a href="http://www.adminn.cn/" target="_blank"><?php echo L('official_bbs');?></a></li>
-            <li><a href="http://www.adminn.cn/" target="_blank"><?php echo L('user_manual');?></a></li>
+        	<li><a href="http://bbs.ZhiPHP.com/" target="_blank"><?php echo L('official_bbs');?></a></li>
+            <li><a href="http://www.ZhiPHP.com/" target="_blank"><?php echo L('user_manual');?></a></li>
         </ul>
         <h2 class="fr"><?php echo L('wellcom_user_ZhiPHP');?></h2>
     </div>
@@ -29,7 +29,6 @@
             <li <?php if($step_curr == 'finish'): ?>class="curr"<?php endif; ?>><span>5</span><h4><?php echo L('step_finish');?></h4></li>
         </ul>
     </div>
-
 <div class="c_main fr">
 <form id="J_install_form" action="<?php echo U('finish_done');?>" method="post">
     <div class="c_main_title"><?php echo L('step_install_desc');?></div>

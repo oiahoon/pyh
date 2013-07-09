@@ -16,8 +16,12 @@ class alter_scoreBehavior extends Behavior {
         $score = C('pin_score_rule.'.$_data['action']); //获取积分变量
         if (intval($score) == 0) return false; //积分为0
                 
-        if ($this->_check_num($_data['uid'], $_data['action'])) {
-            $score_data = array('score'=>array('exp','score+'.$score), 'score_level'=>array('exp', "FLOOR((score+$score)/100)+1"));
+        if ($this->_check_num($_data['uid'], $_data['action'])) {            
+            if ($score >= 0) {
+				$score_data = array('score'=>array('exp','score+'.$score), 'score_level'=>array('exp', 'score_level+'.$score));
+			} else {
+				$score_data = array('score'=>array('exp','score+'.$score));
+			}
             M('user')->where(array('id'=>$_data['uid']))->setField($score_data); //改变用户积分
             //积分日志
             $score_log_mod = D('score_log');

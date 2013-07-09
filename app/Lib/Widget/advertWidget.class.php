@@ -21,7 +21,7 @@ class advertWidget extends Action {
         $ad_list = M('ad')->field('id,type,name,url,content,desc,extimg,extval')->where($map)->order('ordid')->limit($limit)->select();
         foreach ($ad_list as $key=>$val) {
             $ad_list[$key]['html'] = $this->_get_html($val, $board_info);
-        }
+        }        
         $this->assign('board_info', $board_info);
         $this->assign('ad_list', $ad_list);
         $this->display(dirname(__FILE__).'/advert/'.$board_info['tpl'].'.html');
@@ -42,7 +42,7 @@ class advertWidget extends Action {
             case 'flash':
                 $html  = '<a title="'.$ad['name'].'" href="'.U('advert/tgo',array('id'=>$ad['id'])).'" target="_blank">';
                 $html .= '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" '.$size_html.' codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0">';
-                $html .= '<param name="movie" value="'.__ROOT__.'data/upload/advert/'.$ad['content'].'" />';
+                $html .= '<param name="movie" value="'.__ROOT__.'/data/upload/advert/'.$ad['content'].'" />';
                 $html .= '<param name="quality" value="autohigh" />';
                 $html .= '<param name="wmode" value="opaque" />';
                 $html .= '<embed src="'.__ROOT__.'/data/upload/advert/'.$ad['content'].'" quality="autohigh" wmode="opaque" name="flashad" swliveconnect="TRUE" pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" '.$size_html.'></embed>';

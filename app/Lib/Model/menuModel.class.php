@@ -17,7 +17,7 @@ class menuModel extends Model {
         $map['_complex'] = $condition;
         $map['display'] = 1;
         $menus = M("menu")->where($map)->order('ordid')->select();     
-        //print_r(M("menu")->getLastSql());exit();   
+        //print_r(M("menu")->getLastSql());exit();
         return $menus;
     }
     

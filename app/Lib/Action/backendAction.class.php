@@ -1,29 +1,39 @@
 <?php
+
 /**
  * 后台控制器基类
  *
  * @author andery
  */
-class backendAction extends baseAction
-{
+class backendAction extends baseAction {
+
     protected $_name = '';
     protected $menuid = 0;
+    protected $_mod;
+    var $spec_chars = array('*', '-', ',', '.', '，', '。', '|', '<', '>', '(', ')', '《', '》', '+', '/');
+
     public function _initialize() {
-        parent::_initialize();        
+        parent::_initialize();
         $this->_name = $this->getActionName();
+        try {
+            $this->_mod = D($this->_name);
+        } catch (Exception $e) {
+            
+        }
+
         $this->check_priv();
-        $this->menuid = $this->_request('menuid', 'trim', 0);        
+        $this->menuid = $this->_request('menuid', 'trim', 0);
         if ($this->menuid) {
-            $sub_menu = D('menu')->sub_menu($this->menuid, $this->big_menu);                          
+            $sub_menu = D('menu')->sub_menu($this->menuid, $this->big_menu);
             $selected = '';
-            foreach ($sub_menu as $key=>$val) {
+            foreach ($sub_menu as $key => $val) {
                 $sub_menu[$key]['class'] = '';
                 if (MODULE_NAME == $val['module_name'] && ACTION_NAME == $val['action_name'] && strpos(__SELF__, $val['data'])) {
                     $sub_menu[$key]['class'] = $selected = 'on';
                 }
             }
             if (empty($selected)) {
-                foreach ($sub_menu as $key=>$val) {
+                foreach ($sub_menu as $key => $val) {
                     if (MODULE_NAME == $val['module_name'] && ACTION_NAME == $val['action_name']) {
                         $sub_menu[$key]['class'] = 'on';
                         break;
@@ -58,14 +68,14 @@ class backendAction extends baseAction
             if (method_exists($this, '_before_insert')) {
                 $data = $this->_before_insert($data);
             }
-            if( $mod->add($data) ){
-                if( method_exists($this, '_after_insert')){
+            if ($mod->add($data)) {
+                if (method_exists($this, '_after_insert')) {
                     $id = $mod->getLastInsID();
                     $this->_after_insert($id);
                 }
                 //print_r($mod->getLastSql());exit();
                 IS_AJAX && $this->ajaxReturn(1, L('operation_success'), '', 'add');
-                $this->success(L('operation_success'));
+                $this->success(L('operation_success'), U(MODULE_NAME . '/index'));
             } else {
                 IS_AJAX && $this->ajaxReturn(0, L('operation_failure'));
                 $this->error(L('operation_failure'));
@@ -84,8 +94,7 @@ class backendAction extends baseAction
     /**
      * 修改
      */
-    public function edit()
-    {
+    public function edit() {
         $mod = D($this->_name);
         $pk = $mod->getPk();
         if (IS_POST) {
@@ -96,25 +105,25 @@ class backendAction extends baseAction
             if (method_exists($this, '_before_update')) {
                 $data = $this->_before_update($data);
             }
-            if (false !== $mod->save($data)) {                
-                if( method_exists($this, '_after_update')){
+            if (false !== $mod->save($data)) {
+                if (method_exists($this, '_after_update')) {
                     $id = $data['id'];
                     $this->_after_update($id);
                 }
                 IS_AJAX && $this->ajaxReturn(1, L('operation_success'), '', 'edit');
-                $this->success(L('operation_success'));
+                $this->success(L('operation_success'), U(MODULE_NAME . '/index'));
             } else {
                 IS_AJAX && $this->ajaxReturn(0, L('operation_failure'));
                 $this->error(L('operation_failure'));
             }
-        } else {            
+        } else {
             $id = $this->_get($pk, 'intval');
             $info = $mod->find($id);
             $this->assign('info', $info);
             $this->assign('open_validator', true);
             if (method_exists($this, '_after_edit')) {
                 $this->_after_edit($info);
-            }            
+            }
             if (IS_AJAX) {
                 $response = $this->fetch();
                 $this->ajaxReturn(1, '', $response);
@@ -127,31 +136,29 @@ class backendAction extends baseAction
     /**
      * ajax修改单个字段值
      */
-    public function ajax_edit()
-    {
+    public function ajax_edit() {
         //AJAX修改数据
         $mod = D($this->_name);
         $pk = $mod->getPk();
-        $id = $this->_get($pk, 'intval');
-        $field = $this->_get('field', 'trim');
-        $val = $this->_get('val', 'trim');
+        $id = $this->_request($pk, 'intval');
+        $field = $this->_request('field', 'trim');
+        $val = $this->_request('val', 'trim');
         //允许异步修改的字段列表  放模型里面去 TODO
-        $mod->where(array($pk=>$id))->setField($field, $val);
+        $mod->where(array($pk => $id))->setField($field, $val);
         $this->ajaxReturn(1);
     }
 
     /**
      * 删除
      */
-    public function delete()
-    {        
+    public function delete() {
         $mod = D($this->_name);
         $pk = $mod->getPk();
-        $ids = trim($this->_request($pk), ',');        
-        if ($ids) {            
+        $ids = trim($this->_request($pk), ',');
+        if ($ids) {
             if (method_exists($this, '_before_drop')) {
                 $this->_before_drop(explode(',', $ids));
-            }            
+            }
             if (false !== $mod->delete($ids)) {
                 IS_AJAX && $this->ajaxReturn(1, L('operation_success'));
                 $this->success(L('operation_success'));
@@ -193,8 +200,7 @@ class backendAction extends baseAction
      * @param string $field_list 显示字段
      * @param intval $pagesize 每页数据行数
      */
-    protected function _list($model, $map = array(), $sort_by='', $order_by='', $field_list='*', $pagesize=20)
-    {
+    protected function _list($model, $map = array(), $sort_by = '', $order_by = '', $field_list = '*', $pagesize = 20) {
         //排序
         $mod_pk = $model->getPk();
         if ($this->_request("sort", 'trim')) {
@@ -223,17 +229,17 @@ class backendAction extends baseAction
         }
         $select = $model->field($field_list)->where($map)->order($sort . ' ' . $order);
         $this->list_relation && $select->relation(true);
-        
+
         if ($pagesize) {
-            $select->limit($pager->firstRow.','.$pager->listRows);
+            $select->limit($pager->firstRow . ',' . $pager->listRows);
             $page = $pager->show();
             $this->assign("page", $page);
         }
         $list = $select->select();
         //print_r($select->getLastSql());exit();  
         //print_r($list);exit();   
-        $p = $this->_get('p','intval',1);
-        $this->assign('p',$p);                 
+        $p = $this->_get('p', 'intval', 1);
+        $this->assign('p', $p);
         $this->assign('list', $list);
         $this->assign('list_table', true);
     }
@@ -243,24 +249,24 @@ class backendAction extends baseAction
             return true;
         }
         $adm_sess = session('admin');
-        if ( (!$adm_sess) && !in_array(ACTION_NAME, array('login','verify_code')) ) {
+        if ((!$adm_sess) && !in_array(ACTION_NAME, array('login', 'verify_code'))) {
             $this->redirect('index/login');
         }
-        if($adm_sess['role_id'] == 1) {
+        if ($adm_sess['role_id'] == 1) {
             return true;
         }
         if (in_array(MODULE_NAME, explode(',', 'index'))) {
             return true;
         }
         $menu_mod = M('menu');
-        $menu_id = $menu_mod->where(array('module_name'=>MODULE_NAME, 'action_name'=>ACTION_NAME))->getField('id');
+        $menu_id = $menu_mod->where(array('module_name' => MODULE_NAME, 'action_name' => ACTION_NAME))->getField('id');
         $priv_mod = D('admin_auth');
-        $r = $priv_mod->where(array('menu_id'=>$menu_id, 'role_id'=>$adm_sess['role_id']))->count();
+        $r = $priv_mod->where(array('menu_id' => $menu_id, 'role_id' => $adm_sess['role_id']))->count();
         if (!$r) {
-            $this->error(L('_VALID_ACCESS_'),";");
+            $this->error(L('_VALID_ACCESS_'), ";");
         }
     }
-    
+
     protected function update_config($new_config, $config_file = '') {
         !is_file($config_file) && $config_file = CONF_PATH . 'home/config.php';
         if (is_writable($config_file)) {
@@ -273,4 +279,15 @@ class backendAction extends baseAction
             return false;
         }
     }
+
+    public function ajax_getchilds() {
+        $id = $this->_get('id', 'intval');
+        $return = $this->_mod->field('id,name')->where(array('pid' => $id))->select();
+        if ($return) {
+            $this->ajaxReturn(1, L('operation_success'), $return);
+        } else {
+            $this->ajaxReturn(0, L('operation_failure'));
+        }
+    }
+
 }

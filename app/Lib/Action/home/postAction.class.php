@@ -11,20 +11,20 @@ class postAction extends frontendAction {
         }
         $where['post_time'] = array('elt',time());
         $where['status'] = 1;        
-        $res=$this->post_mod->relation(true)->where($where)->find();
+        $res=D("post")->relation(true)->where($where)->find();
         if($res){               
-            $res['cate_list']=$this->post_cate_re_mod->relation(true)->where(array('post_id'=>$res['id']))->select();
+            $res['cate_list']=D("post_cate_re")->relation(true)->where(array('post_id'=>$res['id']))->select();
             $this->assign('info',$res);         
-            $tag_list=$this->post_tag_mod->relation(true)->where("post_id=$res[id]")->select();
+            $tag_list=D("post_tag")->relation(true)->where("post_id=$res[id]")->select();
             
             $this->assign('tag_list',$tag_list);            
-            $this->assign('prev_post',$this->post_mod->where("id>$res[id] and status=1 and post_time<=".time())->order("id asc")->find());            
-            $this->assign('next_post',$this->post_mod->where("id<$res[id] and status=1 and post_time<=".time())->order("id desc")->find());
+            $this->assign('prev_post',D("post")->where("id>$res[id] and status=1 and post_time<=".time())->order("id asc")->find());            
+            $this->assign('next_post',D("post")->where("id<$res[id] and status=1 and post_time<=".time())->order("id desc")->find());
             $where="id in(select post_id from ".table('post_tag')." where 
                 tag_id in(select tag_id from ".table('post_tag')." where post_id=$res[id]) 
                 and post_id!=$res[id])";
            
-            $this->assign('like_list',$this->post_mod->where($where)->limit(4)->select());
+            $this->assign('like_list',D("post")->where($where)->limit(4)->select());
             $post_tag='';
             foreach($tag_list as $val){
                 $post_tag.=$val['tag']['name'];
@@ -47,8 +47,8 @@ class postAction extends frontendAction {
         $id=$this->_post('id','intval');
         if(in_array($type,array('rate_best','rate_good','rate_bad'))){
             $where=array('id'=>$id);
-            $this->post_mod->where($where)->setInc($type);
-            $res=$this->post_mod->where($where)->find();
+            D("post")->where($where)->setInc($type);
+            $res=D("post")->where($where)->find();
             $this->ajaxReturn(1,'',array(
                 'total'=>$res['rate_best']+$res['rate_good']+$res['rate_bad'],
                 'valid'=>$res['rate_best']+$res['rate_good']
@@ -83,13 +83,18 @@ class postAction extends frontendAction {
         $data['add_time']=time();
         $data['pid']=$this->_post('pid','intval');
         //验证商品        
-        $item = $this->post_mod->field('id,uid,uname')->where(array('id' => $data['post_id'], 'status' => '1'))->find();
+        $item = D("post")->field('id,uid,uname')->where(array('id' => $data['post_id'], 'status' => '1'))->find();
         !$item && $this->ajaxReturn(0, L('invalid_item'));
-        //写入评论
-        if (false === $this->post_comment_mod->create($data)) {
-            $this->ajaxReturn(0, $this->post_comment_mod->getError());
+        /*
+        if(D('post_comment')->where("post_id=$data[post_id] and uid=$data[uid] and add_time>".(time()-10*60))->count()>0){
+            $this->ajaxReturn(0,'已提交过了，请10分钟后再评论');
         }
-        $comment_id = $this->post_comment_mod->add(filter_data($data));
+        */
+        //写入评论
+        if (false === D("post_comment")->create($data)) {
+            $this->ajaxReturn(0, D("post_comment")->getError());
+        }
+        $comment_id = D("post_comment")->add(filter_data($data));
         if ($comment_id) {
             $tag_arg = array('uid'=>$this->visitor->info['id'], 
                 'uname'=>$this->visitor->info['username'], 
@@ -98,7 +103,7 @@ class postAction extends frontendAction {
                         
             $to_id=$this->_post('to_id','intval');
             if($to_id>0){
-                $this->message_mod->add(array(
+                D("message")->add(array(
                     'ftid'=>$data['uid'],
                     'from_id'=>$data['uid'],
                     'from_name'=>$data['uname'],
@@ -117,12 +122,12 @@ class postAction extends frontendAction {
                     'add_time' => time(),
                     'digg'=>0,
                     'burn'=>0,
-                    'quote'=>$this->post_comment_mod->where(array('id'=>$data['pid']))->find(),
-                    'user'=>$this->user_mod->where(array('id'=>$data['uid']))->find(),
+                    'quote'=>D("post_comment")->where(array('id'=>$data['pid']))->find(),
+                    'user'=>D("user")->where(array('id'=>$data['uid']))->find(),
                 )
             ));
             $resp['html'] = $this->fetch('ajax_comment_list');
-            $resp['total']=$this->post_comment_mod->where(array('post_id' => $data['post_id']))->count('id');  
+            $resp['total']=D("post_comment")->where(array('post_id' => $data['post_id']))->count('id');  
                                  
             $this->ajaxReturn(1, L('comment_success'), $resp);
         } else {
@@ -134,19 +139,19 @@ class postAction extends frontendAction {
             $id = $this->_get('id', 'intval');    
         }        
         !$id && $this->ajaxReturn(0, L('invalid_item'));        
-        $post = $this->post_mod->where(array('id' => $id, 'status' => '1'))->count('id');
+        $post = D("post")->where(array('id' => $id, 'status' => '1'))->count('id');
         !$post && $this->ajaxReturn(0, L('invalid_item'));        
         $pagesize = 8;
         $map = array('post_id' => $id);
-        $count = $this->post_comment_mod->where($map)->count('id');
-        $pager = $this->_pager($count, $pagesize);
+        $count = D("post_comment")->where($map)->count('id');
+        $pager = $this->_pager($count, $pagesize,__ROOT__."/index.php?m=post&a=comment_list&id=$id");
         $pager->path = 'comment_list';
-        $cmt_list = $this->post_comment_mod->relation(true)
+        $cmt_list = D("post_comment")->relation(true)
             ->where($map)->order('id DESC')
             ->limit($pager->firstRow . ',' . $pager->listRows)->select();
         $floor=$count-$pager->firstRow;            
         foreach($cmt_list as $key=>$val){
-            $cmt_list[$key]['quote']=$this->post_comment_mod->where(array('id'=>$val['pid']))->find();
+            $cmt_list[$key]['quote']=D("post_comment")->where(array('id'=>$val['pid']))->find();
             $cmt_list[$key]['floor']=$floor;
             $floor--;
         }
@@ -167,18 +172,16 @@ class postAction extends frontendAction {
         $type=$this->_get('type','trim');
         
         if(in_array($type,array('digg','burn'))){        
-            $this->post_comment_mod->where(array('id'=>$id))->setInc($type);
-            $this->ajaxReturn(1,'',$this->post_comment_mod->where(array('id'=>$id))->getField($type));    
+            D("post_comment")->where(array('id'=>$id))->setInc($type);
+            $this->ajaxReturn(1,'',D("post_comment")->where(array('id'=>$id))->getField($type));    
         }
     }
     public function submit(){
         if(!$this->visitor->is_login){
             header("Location:".u('user/login'));
-            //header("Location:./login.html");
-            //print_r("Location:".u('user/login'));exit();  
-        }  //$this->redirect('user/login');
+        }  
         if(IS_POST){
-            $data=$this->post_baoliao_mod->create();
+            $data=D("post_baoliao")->create();
             $type=intval($data['type']); 
                
             if($type==1){
@@ -187,9 +190,11 @@ class postAction extends frontendAction {
             elseif($type==2){
                 $data['title']='改进建议';
             }            
-            $data['info']=htmlentities($this->_post("info_$data[type]",'trim'));
+            
+            $data['info']=$this->_post("info_".$data['type'],'trim');
+
             $data['uid']=$this->visitor->info['id'];
-            $this->post_baoliao_mod->add(filter_data($data));   
+            D("post_baoliao")->add(filter_data($data));   
              
             $tag_arg = array('uid'=>$this->visitor->info['id'], 
                 'uname'=>$this->visitor->info['username'], 

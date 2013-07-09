@@ -20,6 +20,11 @@
             </td>
         </tr>
         <tr>
+            <td>签到 :</td>
+            <td><input type="text" name="score_rule[qiandao]" class="input-text" size="10" value="{:C('pin_score_rule.qiandao')}"></td>
+            <td><input type="text" name="score_rule[qiandao_nums]" class="input-text" size="10" value="{:C('pin_score_rule.qiandao_nums')}"></td>
+        </tr>
+        <tr>
             <td>登录 :</td>
             <td><input type="text" name="score_rule[login]" class="input-text" size="10" value="{:C('pin_score_rule.login')}"></td>
             <td><input type="text" name="score_rule[login_nums]" class="input-text" size="10" value="{:C('pin_score_rule.login_nums')}"></td>
@@ -39,11 +44,10 @@
             <td><input type="text" name="score_rule[favs]" class="input-text" size="10" value="{:C('pin_score_rule.favs')}"></td>
             <td><input type="text" name="score_rule[favs_nums]" class="input-text" size="10" value="{:C('pin_score_rule.favs_nums')}"/></td>
         </tr>       
-        <tr>
-            <td colspan="3"><input type="submit" value="{:L('submit')}" id="dosubmit" name="dosubmit" class="btn btn_submit" /></td>
-        </tr>
+        
     </tbody>
     </table>
+    <include file="public:_submit" />
 </form>
 </div>
 <include file="public:footer" />

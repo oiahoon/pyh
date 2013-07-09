@@ -31,8 +31,7 @@
                     </tr>
 		            <tr>
 						<th>商城logo:</th>
-						<td>
-                        <notempty name="info['img']"><span class="attachment_icon J_attachment_icon" file-type="image" file-rel="{$img_dir}{$info.img}"><img src="{$img_dir}{$info.img}" width="100" height="100" /></span><br /></notempty>
+						<td>                        
                         <input type="file" name="img" class="input-text"  style="width:200px;" />
                         </td>
 		 			</tr>
@@ -55,6 +54,12 @@
                         <th>网站CPS:</th>
                         <td>
                         <input type="text" name="cps" class="input-text" size="60" value="{$info.cps}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>返利比:</th>
+                        <td>
+                            <input type="text" name="rebates" class="input-text" size="10" value="{$info.rebates}"/>
                         </td>
                     </tr>
                     <tr>
@@ -102,11 +107,8 @@
 			</div>
         </div>
 	</div>
-    <div class="btn_wrap_fixed">
-        <div class="mt10"><input type="submit" value="{:L('submit')}" id="dosubmit" name="dosubmit" class="btn btn_submit" style="margin:0 0 0px 100px;"/></div>      
-    </div>      
+    <include file="public:_submit" />      
 </div>
-<input type="hidden" name="menuid"  value="{$menuid}"/>
 <input type="hidden" name="id" id="id" value="{$info.id}" />
 </form>
 <include file="public:footer" />

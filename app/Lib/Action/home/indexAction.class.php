@@ -15,17 +15,16 @@ class indexAction extends frontendAction {
             'keyword'=>$keyword
         ));
         $where['post_time'] = array('elt',time());
-        $where['status'] = 1;                  
-        $this->_waterfall($this->post_mod,$where,'post_time desc');        
+        $where['status'] = 1; 
+        $this->_waterfall(D("post"),$where,'post_time desc');        
     }
-    //地址跳转出口 
-    public function go(){
+    public function go(){        
         $id=$this->_get('id','intval');
-        $url=trim($this->post_mod->where("id=$id")->getField("url"));        
+        $url=trim(D("post")->where("id=$id")->getField("url"));        
         if(!empty($url)){
             header("Location:$url");
         }else{
-            $this->error("未提供商品直达链接",U("index/index"));
+            $this->error("为提供商品直达链接",U("index/index"));
         }
-    }    
+    }        
 }

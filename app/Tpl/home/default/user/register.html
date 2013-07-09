@@ -2,7 +2,7 @@
 <!--内容页开始-->
 <div class="main_content">
     <!--主部开始-->
-    <div id="main">
+    <div id="main" class="J_main_page">
         <div class="contentbox clearfix">
             <div class="contentbox_l fl">
                 <div class="leftinfo">
@@ -17,7 +17,6 @@
                     		<li>收藏您喜欢的文章和内容；</li>
                     		<li>积累积分兑换商家优惠券；</li>
                     		<li>爆料并获取金币奖励，兑换礼品；</li>
-                    		<li class="iconNone">……</li>	
                     	</ul>
                     <div class="clear"></div>
                     </div>                    
@@ -53,6 +52,11 @@
                         <input class="box fl" name="agreement" type="checkbox" checked="checked">
                         {:L('i_agree')}
                             《<a href="javascript:;" id="J_protocol_btn">{:C('pin_site_name')}{:L('user_protocol')}</a>》
+                            <div style="display: none;" id="J_protocol">
+                                <textarea style="width: 500px;height: 300px;">
+                                    {:C("pin_reg_protocol")}
+                                </textarea>
+                            </div>
                     </div>
                     <div class="ipt_sub line">
                         <span></span>

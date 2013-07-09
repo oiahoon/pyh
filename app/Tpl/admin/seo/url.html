@@ -8,7 +8,7 @@
             <td>
                 <select name="url_model">
                     <option value="0" <if condition="$config['URL_MODEL'] eq 0">selected="selected"</if>> {:L('url_model_0')} </option>
-                    <option value="1" <if condition="$config['URL_MODEL'] eq 1">selected="selected"</if>> {:L('url_model_1')} </option>
+                    <!--<option value="1" <if condition="$config['URL_MODEL'] eq 1">selected="selected"</if>> {:L('url_model_1')} </option>-->
                     <option value="2" <if condition="$config['URL_MODEL'] eq 2">selected="selected"</if>> {:L('url_model_2')} </option>
                 </select>
             </td>
@@ -21,11 +21,8 @@
             <th>{:L('url_depr')} :</th>
             <td><input type="text" name="url_depr" class="input-text" size="4" value="{$config.URL_PATHINFO_DEPR}"></td>
         </tr>
-        <tr>
-        	<th></th>
-        	<td><input type="hidden" name="menuid"  value="{$menuid}"/><input type="submit" class="btn btn_submit" name="do" value="{:L('submit')}"/></td>
-    	</tr>
 	</table>
+    <include file="public:_submit" />
 	</form>
 </div>
 <include file="public:footer" />

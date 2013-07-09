@@ -34,7 +34,7 @@ class mallAction extends backendAction {
     }
     
     protected function _before_insert($data) {                
-        //�ϴ�ͼƬ
+        //上传图片
         if (!empty($_FILES['img']['name'])) {
             $art_add_time = date('ym/d');
             $result = $this->_upload($_FILES['img'], 'mall/' . $art_add_time);
@@ -50,12 +50,12 @@ class mallAction extends backendAction {
     protected function _before_update($data) {
         if (!empty($_FILES['img']['name'])) {
             $art_add_time = date('ym/d');
-            //ɾ��ԭͼ
-            $old_img = $this->mall_mod->where(array('id'=>$data['id']))->getField('img');
+            //删除原图
+            $old_img = D("mall")->where(array('id'=>$data['id']))->getField('img');
             $old_img = $this->img_dir. $old_img;
             is_file($old_img) && @unlink($old_img);
             
-            //�ϴ���ͼ
+            //上传新图
             $result = $this->_upload($_FILES['img'], 'mall/' . $art_add_time);
             if ($result['error']) {
                 $this->error($result['info']);
@@ -76,7 +76,7 @@ class mallAction extends backendAction {
         }        
     }      
     protected function _get_cate_list(){
-        $res=$this->mall_cate_mod->where("status=1")->order("ordid")->select();
+        $res=D("mall_cate")->where("status=1")->order("ordid")->select();
         $list=array();
         foreach($res as $key=>$val){
             $list[$val['id']]=$val['title'];

@@ -15,7 +15,7 @@
     			</div>	
 				
 				<div class="businesinfo clearfix">
-					<a class="businessinfo_logo fl" href="{:mall_url($info)}" target="_blank"><img src="/data/upload/mall/{$info.img}"/></a>
+					<a class="businessinfo_logo fl" href="{:mall_url($info)}" target="_blank"><img src="{:attach($info['img'],'mall')}"/></a>
 					<div class="businessinfo_text fr">
 						<h3>{$info.title}</h3>
 						<p><span class="businessinfo_icon">商城地址：</span><em class="businessinfo_textinfo"><a class="blue" href="{:mall_url($info)}" target="_blank">{$info.domain}</a></em>
@@ -41,7 +41,7 @@
                                 </div>
                             </div>
 							<div class="pro_img">
-								<a href="{:u('post/index',array('id'=>$val['id']))}" class="proimg_pic" target="_blank"><img src="data/upload/post/{$val.img}"/></a>
+								<a href="{:u('post/index',array('id'=>$val['id']))}" class="proimg_pic" target="_blank"><img src="{:attach($val['img'],'post')}"/></a>
 							</div>
 							<div class="zhida" >
 								<a href="{:u('post/index',array('id'=>$val['id']))}" target="_blank">{$val.title}</a>
@@ -53,7 +53,6 @@
 			</div>
 		</div>
 	</div>
-    </div>
 	<!--主部结束-->	
 </div>	
 <!--内容页开始-->

@@ -32,7 +32,11 @@ class oauth {
      * 登录回调
      */
     public function callbackLogin($request_args) {
-        $user = $this->_om->getUserInfo($request_args);        
+		try{
+            $user = $this->_om->getUserInfo($request_args);    
+        }catch(Exception $e){
+            exit("第三方登录权限有问题");
+        }     
         $bind_user = $this->_checkBind($this->_type, $user['keyid']);
         if ($bind_user) {
             //已经绑定过则更新绑定信息 自动登录

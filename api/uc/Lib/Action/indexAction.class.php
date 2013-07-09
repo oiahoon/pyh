@@ -28,23 +28,25 @@ class indexAction extends Action {
 
     public function _initialize() {
         $integrate_config = M('setting')->where(array('name'=>'integrate_config'))->getField('data');
-        $conf = unserialize($integrate_config);
-        eval($conf['uc_config']);
+        $conf =unserialize($integrate_config);        
+        eval($conf["uc_config"]);
+        
         include_once APP_PATH . 'uc_client/client.php';
-        include_once ZhiPHP_PATH . 'app/Lib/Model/userModel.class.php';
+        include_once PINPHP_PATH . 'app/Lib/Model/userModel.class.php';
         $this->_user_mod = D('user');
     }
 
     public function index() {
-        $get = $post = array();
+        $get = $post = array();                
         $code = @$_GET['code'];
         parse_str(uc_authcode($code, 'DECODE', UC_KEY), $get);
         if(get_magic_quotes_gpc()) {
             $get = uc_stripslashes($get);
-        }
+        }        
+        
         $timestamp = time();
         if($timestamp - $get['time'] > 3600) {
-            exit('Authracation has expiried');
+            exit('Authentication has expiried');
         }
         if(empty($get)) {
             exit('Invalid Request');
@@ -72,6 +74,7 @@ class indexAction extends Action {
      * 删除用户
      */
     public function deleteuser($get, $post) {
+        //file_put_contents('/debug.log',__FILE__.":".__LINE__."\r\n".var_export($get,true)."\r\n",FILE_APPEND); 
         if (!API_DELETEUSER) {
             return API_RETURN_FORBIDDEN;
         }
@@ -105,7 +108,7 @@ class indexAction extends Action {
     }
     
     /**
-     * 同步登录 
+     * 同步登陆 
      */
     public function synlogin($get, $post) {
         if(!API_SYNLOGIN) {
@@ -127,7 +130,7 @@ class indexAction extends Action {
             $user_info = array('id' => $user_id, 'username' => $username);
         }
 
-        //登录
+        //登陆
         $this->_api_visitor()->assign_info($user_info);
 
         // 更新用户信息
@@ -189,7 +192,7 @@ class indexAction extends Action {
      * 访问者
      */
     private function _api_visitor() {
-        include_once (ZhiPHP_PATH . 'app/Lib/Pinlib/user_visitor.class.php');
+        include_once (PINPHP_PATH . 'app/Lib/Pinlib/user_visitor.class.php');
         return new user_visitor();
     }
 }

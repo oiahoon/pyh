@@ -8,6 +8,7 @@
         //登录
         islogin: function(){
             return "" == PINER.uid ? ($.ZhiPHP.dialog.login(), !1) : !0;
+            //return def.is_login;
         },
         login: function(){
             $.getJSON(PINER.root + '/?m=user&a=login', function(result){

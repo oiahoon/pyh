@@ -57,7 +57,7 @@
                 <td align="center">{$val.add_time|date='Y-m-d H:i:s',###}</td>  
                 <if condition="$type eq 2">
 				<td align="center">
-				    <if condition="$val['status'] eq 3"><span class="strike gray">已删(接受者)</span><elseif condition="$val['status'] eq 2" /><span class="strike gray">已删(发送者)</span><elseif condition="$val['status'] eq 1">已读<else/><span class="red">未读</span></if>
+				    <if condition="$val['status'] eq 3"><span class="strike gray">已删(接受者)</span><elseif condition="$val['status'] eq 2" /><span class="strike gray">已删(发送者)</span><elseif condition="$val['status'] eq 1" />已读<else /><span class="red">未读</span></if>
 				</td>
 				</if>
                 <td align="center"><a href="javascript:void(0);" class="J_confirmurl" data-uri="{:u('message/delete', array('id'=>$val['id']))}" data-acttype="ajax" data-msg="{:sprintf(L('confirm_delete_one'),$val['form_name'])}">{:L('delete')}</a></td>

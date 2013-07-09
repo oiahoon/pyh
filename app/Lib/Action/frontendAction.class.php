@@ -9,41 +9,73 @@ class frontendAction extends baseAction {
     protected $visitor = null;
     protected $uid;
     public function _initialize() {
-        parent::_initialize();
-        //print_r($_SESSION);exit();
+        parent::_initialize();                    
         //网站状态
         if (!C('pin_site_status')) {
             header('Content-Type:text/html; charset=utf-8');
             exit(C('pin_closed_reason'));
         }
+                
+        $homepage=D("nav")->where("homepage=1")->find();  
+        if(!empty($homepage)){
+            if($_SERVER['REQUEST_URI']==__ROOT__.'/'&&ltrim($homepage['link'],'.')!='/'){                
+                 header("Location:".check_url($homepage['link']));
+            }
+            $homepage['link']=check_url($homepage['link']);            
+        }else{
+            $homepage['link']=check_url('/');
+        }       
+        $this->assign('homepage',$homepage);
         //初始化访问者
         $this->_init_visitor();
         //第三方登录模块
         $this->_assign_oauth();
         //网站导航选中
         $this->assign('nav_curr', '');
-        $this->assign('recommend_cate',$this->post_cate_mod->where("pid=1 and status=1")->select());
-        $this->assign('tese_cate',$this->post_cate_mod->where("pid=2 and status=1")->select());
-        $this->assign('main_nav_list',$this->nav_mod->where("type='main' and status=1")->order('ordid')->select());
-        $this->assign('bottom_nav_list',$this->nav_mod->where("type='bottom' and status=1")->order('ordid')->select());
-        $this->assign('new_post_list',$this->post_mod->where("status=1")->limit("9")->order("id desc")->select());
-        $this->assign('flink_list',$this->flink_mod->where("status=1")->order("ordid desc")->select());
-        $help_list=$this->article_cate_mod->where("pid=1 and status=1")->select();
+        $this->assign('recommend_cate',D("post_cate")->where("pid=1 and status=1")->select());
+        $this->assign('tese_cate',D("post_cate")->where("pid=2 and status=1")->select());
+        $this->assign('main_nav_list',D("nav")->where("type='main' and status=1 and homepage=0")->order('ordid')->select());
+        $this->assign('bottom_nav_list',D("nav")->where("type='bottom' and status=1")->order('ordid')->select());
+        $this->assign('new_post_list',D("post")->where("status=1")->limit("9")->order("id desc")->select());
+        $this->assign('jky_item_list',D('jky_item')->where("`status`=1")->limit("3")->order("`id` desc")->select());
+        $this->assign('flink_list',D("flink")->where("status=1")->order("ordid desc")->select());
+        $help_list=D("article_cate")->where("pid=1 and status=1")->select();
         foreach($help_list as $key=>$val){
-            $help_list[$key]['articles']=$this->article_mod->where("cate_id=$val[id]")->select();
+            $help_list[$key]['articles']=D("article")->where("cate_id=$val[id]")->select();
         }        
         $this->assign('help_list',$help_list);
-        $this->assign('gonggao_list',$this->article_mod->where('cate_id=13 and status=1')->order("ordid desc")->select());
-        $this->uid=$this->visitor->info['id'];     
-        $this->assign('def',json_encode(array('m'=>MODULE_NAME,'a'=>ACTION_NAME)));   
-        $this->assign('req',$_REQUEST);
+        $this->assign('gonggao_list',D("article")->where('cate_id=13 and status=1')->order("ordid desc")->select());
+        $this->uid=intval($this->visitor->info['id']);      
+        $this->assign('req',$_REQUEST);  
+        $this->assign('server',$_SERVER);      
+        $this->_assign_common();
+        $def=array(
+            'is_login'=>$this->uid>0,
+            'm'=>MODULE_NAME,
+            'a'=>ACTION_NAME,
+            'url_prefix'=>__ROOT__.'/',
+            'site_name'=>C('pin_site_name'),            
+        );  
+        $this->assign('def',$def);
+        if($_REQUEST['act']=='loadjs'){
+            header("content-type:text/javascript");            
+            echo "var def=".json_encode($def).';';            
+            exit();                         
+        }   
+    }
+    protected function _assign_common(){
+
+        $this->assign("quick_mall_list",D("mall")->where("status=1")->order("ordid desc")->limit("10")->select());
+        $this->assign("all_post_cate_list",D("post_cate")->where("status=1 and pid<2")->order("ordid desc")->select()); 
+        $about_content=msubstr(strip_tags(D("article_page")->where("cate_id=2")->getField("info")),350);
+        $this->assign("about_content",$about_content);
     }
     
     /**
     * 初始化访问者
     */
     private function _init_visitor() {
-        $this->visitor = new user_visitor();                
+        $this->visitor = new user_visitor();                 
         $this->assign('visitor', $this->visitor->info);
     }
 
@@ -86,6 +118,7 @@ class frontendAction extends baseAction {
         if($page_seo['title']!=C('pin_site_title')){
             //$page_seo['title'].="_".C('pin_site_name');
         }
+        //print_r($page_seo);
         $this->assign('page_seo', $page_seo);
     }
 
@@ -100,45 +133,46 @@ class frontendAction extends baseAction {
     /**
      * 前台分页统一
      */
-    protected function _pager($count, $pagesize) {
-        $pager = new Page($count, $pagesize);
+    protected function _pager($count, $pagesize,$url="") {
+        $pager = new Page($count, $pagesize,$parameter,$url);
         $pager->rollPage = 5;
-        $pager->setConfig('prev', '&laquo;');
-        $pager->setConfig('next', '&raquo;');
+        $pager->url=$url;
         $pager->setConfig('theme', '%upPage% %first% %linkPage% %end% %downPage%');
         return $pager;
     }
     protected function _parse_post($list){
         foreach($list as $key=>$val){
-            $list[$key]['cate_list']=$this->post_cate_re_mod->relation(true)->where(array('post_id'=>$val['id']))->select();                        
+            $list[$key]['cate_list']=D("post_cate_re")->relation(true)->where(array('post_id'=>$val['id']))->select();           
+            $list[$key]['tag_list']=D("tag")->where("id in(select tag_id from ".table("post_tag")." where post_id=$val[id])")->select();                      
         }        
         return $list;
     }    
     /*
      * 商品瀑布流
      * */
-    protected function _waterfall($mod,$where='',$order = "",$pagesize=5) {        
+    protected function _waterfall($mod,$where='',$order = "",$pagesize=5,$s_list_rows='') {
         import("ORG.Util.Page");    
 
         $p = !empty($_GET['p']) ? intval($_GET['p']) : 1;
         $sp = !empty($_GET['sp']) ? intval($_GET['sp']) : 1;
         $sp > C('pin_wall_spage_max') && exit;
 
-        $list_rows = C('pin_wall_spage_max') * C('pin_wall_spage_size');
-        $s_list_rows = C('pin_wall_spage_size');
+        !$s_list_rows && $s_list_rows =C('pin_wall_spage_size');
+        $list_rows = C('pin_wall_spage_max') * $s_list_rows;
+            
         $show_sp = 0;
-        
         $count=$mod->where($where)->count();
         $count > $s_list_rows && $show_sp = 1;
         $pager = new Page($count, $list_rows);
-        $pager->setConfig('theme','%first% %upPage% %linkPage% %downPage% %end%');
-        
+        $pager->setConfig('theme','%upPage% %first% %linkPage% %end% %downPage%');
         $first_row = $pager->firstRow + $s_list_rows * ($sp - 1);
         $items_list = $mod->relation(true)->where($where)
                 ->limit($first_row . ',' . $s_list_rows)->order($order)
                 ->select();
+        
         //print_r($mod->getLastSql());exit();
-        $this->assign('page', $pager->show());
+        //file_put_contents("./data/debug.log",$_SERVER["REQUEST_URI"]."\r\n".print_r($mod->getLastSql(),true)."\r\n",FILE_APPEND);
+
         $this->assign('p', $p);
         $this->assign('show_sp', $show_sp);
         $this->assign('sp', $sp);
@@ -154,11 +188,10 @@ class frontendAction extends baseAction {
         $this->assign('show_load', 1);
         //总数大于单页数才显示分页
         $this->assign('page_bar', $pager->fshow());        
-        //print_r($items_list);exit();
+        //print_r($items_list);exit();     
         $this->assign($mod->getModelName().'_list', $items_list);
         if (IS_AJAX&& $sp >=2) {
-            $resp = $this->fetch('public:ajax_'.$mod->getModelName().'_list');
-            //print_r();
+            $resp = $this->fetch('public:ajax_'.$mod->getModelName().'_list');            
             $data = array(
                 'isfull' => 1,
                 'html' => $resp
@@ -172,8 +205,8 @@ class frontendAction extends baseAction {
     /**
      * 瀑布显示
      */
-    public function waterfall($where = array(), $order = 'id DESC', $field = '', $page_max = '', $target = '') {
-        $spage_size = C('pin_wall_spage_size'); //每次加载个数
+    public function waterfall($where = array(), $order = 'id DESC', $field = '', $page_max = '', $target = '', $spage_size = '') {
+        $spage_size = $spage_size ? $spage_size : C('pin_wall_spage_size'); //每次加载个数
         $spage_max = C('pin_wall_spage_max'); //每页加载次数
         $page_size = $spage_size * $spage_max; //每页显示个数
         
@@ -242,26 +275,30 @@ class frontendAction extends baseAction {
         $this->ajaxReturn(1, '', $data);
     }
     protected function _assign_hot_list(){
-        $hot_list=$this->post_mod->where("is_hot=1 and status=1 and post_time<=".time())->order("ordid")->limit("0,8")->select();
+        $hot_list=D("post")->where("is_hot=1 and status=1 and post_time<=".time())->order("ordid")->limit("0,8")->select();
         $this->assign('hot_list',$hot_list);        
     }
     protected function _assign_recommend_list(){
-        $recommend_list=$this->post_mod->where("is_recommend=1 and status=1 and post_time<=".time())->order("ordid")->limit("0,8")->select();
+        $recommend_list=D("post")->where("is_recommend=1 and status=1 and post_time<=".time())->order("ordid")->limit("0,8")->select();
         $this->assign('recommend_list',$recommend_list);        
     }
-    protected function _assign_list($mod, $where, $page_size = 15, $relation = false) {
+    protected function _assign_list($mod, $where, $page_size = 15, $relation = false,$order="id desc",$callback="_parse_assign_list") {
         import("ORG.Util.Page");
         $count = $mod->where($where)->count();
 
         $pager =$this->_pager($count, $page_size);
-        $select = $mod->where($where)->order('id desc')->limit($pager->firstRow . ',' .
+        $select = $mod->where($where)->order($order)->limit($pager->firstRow . ',' .
                 $pager->listRows);
         if ($relation) {
             $select = $select->relation($relation);
         }
-        $list = $select->select();        
+        $list = $select->select();         
+        if (method_exists($this, $callback)) {
+            $list = $this->$callback($list);
+        }     
+        //print_r($mod->getLastSql());exit();       
         $this->assign('list', $list);
-        $this->assign('page', $pager->show());
+        $this->assign('page', $pager->fshow());
         return $list;
-    }    
+    }   
 }

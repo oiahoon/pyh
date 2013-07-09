@@ -2,8 +2,10 @@
 <div class="showitem J_item">
     <div class="showcont clearfix">
         <div class="showitemTitle clearfix">
-            <h3 class="fl" sp="{$req.sp}"><a href="{:post_url($val['id'],$val['post_key'])}" target="_blank" <if condition="$val['tcolor']">style="color: {$val.tcolor};"</if>>{$val.title}<span>&nbsp;&nbsp;{$val.prices}</span></a></h3>
-            <div class="showitemTime">{:date("m-d H:i",$val['add_time'])}</div>
+            <h3 class="fl">
+                <a href="{:post_url($val)}" target="_blank" <if condition="$val['tcolor']">style="color: {$val.tcolor};"</if>>{$val.title}<span>&nbsp;&nbsp;{$val.prices}</span></a>
+            </h3>
+            <div class="showitemTime">{:fdate($val['post_time'])}</div>
         </div>
         <div style="width: 684px;height: 100%;">
             <div class="showcont_l fl">
@@ -15,7 +17,7 @@
                             <if condition="$i lt count($val['cate_list'])">,</if>
                             </volist>
                         </span>
-                        <span class="fr">推荐人：{$val.uname}</span>
+                        <span class="fr">推荐人：<a href="{:U('tag/index',array('uname'=>$val['uname']))}" target="_blank">{$val.uname}</a></span>
                     </div>
                 </div>
             </div>
@@ -28,11 +30,10 @@
                         </div>
                     </div>
                     <div class="pro_img">
-                        <a href="{:u('post/index',array('id'=>$val['id']))}" class="proimg_pic"><img src="./data/upload/post/{$val.img}"/></a>
+                        <a href="{:u('post/index',array('id'=>$val['id']))}" class="proimg_pic"><img src="{:attach($val['img'],'post')}"/></a>
                     </div>
                     <div class="zhida" >
-                        <!-- <a rel="nofollow" href="{:u('index/go',array('id'=>$val['id']))}" class="border_radius_3" target="_blank">直 达 链 接</a> -->
-                        <a rel="nofollow" href="go/{$val.id}" class="border_radius_3" target="_blank">直 达 链 接</a>
+                        <a rel="nofollow" href="{:u('index/go',array('id'=>$val['id']))}" class="border_radius_3" target="_blank">直 达 链 接</a>
                     </div>
                 </div>
                 <div class="mall"><span>商城:{$val.mall.title}</span></div>
@@ -48,7 +49,7 @@
     <div class="score clearfix">
         <div class="score_l fl">
             <span class="evaluate_text">评价文本</span>
-            <div class="worth fl">
+            <div class="worth fl J_worth">
                 <a class="worth_1" data-id="{$val.id}" data-type="rate_best" href="javascript:;" title="超值">{$val.rate_best}</a>
                 <a class="worth_2" data-id="{$val.id}" data-type="rate_good" href="javascript:;" title="一般值">{$val.rate_good}</a>
                 <a class="worth_3" data-id="{$val.id}" data-type="rate_bad" href="javascript:;" title="不值">{$val.rate_bad}</a>
@@ -57,15 +58,13 @@
         </div>
         <div class="score_r fr">
             <!-- Baidu Button BEGIN -->
-            <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare" data="<literal>{</literal>'bdDes':'{$val.title}','text':'{$val.title}',pic:'http://{$server.HTTP_HOST}/data/upload/post/{$val.img}'<literal>}</literal>">
+            <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare" data="<literal>{</literal>'bdDes':'{$val.title}','text':'{$val.title}',pic:'{:attach($val['img'],'post',true)}'<literal>}</literal>">
                 <span class="fl" style="display: block;padding-top: 6px;">分享到：</span>
                 <a class="bds_qzone"></a>
                 <a class="bds_tsina"></a>
                 <a class="bds_tqq"></a>
                 <span class="bds_more"></span>
             </div>
-            <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=758194" ></script>
-            <script type="text/javascript" id="bdshell_js"></script>
             <!-- Baidu Button END -->
         </div>
     </div>

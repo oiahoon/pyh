@@ -10,28 +10,33 @@ class user_visitor {
     public $info = null;
 
     public function __construct() {
-        if (session('user_info')) {
+        $where="";
+        
+        if ($user_info=session('user_info')) {
             //已经登录
-            $this->info = session('user_info');
-            $this->is_login = true;
+            $where="id=$user_info[id]";
         } elseif ($user_info = (array)cookie('user_info')) {
-            $user_info = M('user')->field('id,username')->where(array('id'=>$user_info['id'], 'password'=>$user_info['password']))->find();
+            $where="id=$user_info[id] and password='$user_info[password]'";
+        } else {
+            $this->is_login = false;
+        }
+        
+        if(!empty($where)){
+            $user_info = M('user')->field('id,username,password,score')->where($where)->find();
             if ($user_info) {
                 //记住登录状态
                 $this->assign_info($user_info);
                 $this->is_login = true;
             }
-        } else {
-            $this->is_login = false;
         }
     }
 
     /**
      * 登录会话
      */
-    public function assign_info($user_info) {
+    function assign_info($user_info) {
         session('user_info', $user_info);
-        $this->info = $user_info;
+        $this->info =$this->parse_info($user_info);
     }
 
     /**
@@ -61,8 +66,8 @@ class user_visitor {
                     $info = M('user')->where(array('id' => $this->info['id']))->getField($key);
                 }
             }
-        }
-        return $info;
+        }                
+        return $this->parse_info($info);
     }
 
     /**
@@ -72,13 +77,16 @@ class user_visitor {
         $user_mod = M('user');
         //更新用户信息
         $user_mod->where(array('id' => $uid))->save(array('last_time' => time(), 'last_ip' => get_client_ip()));
-        $user_info = $user_mod->field('id,username,password')->find($uid);
+        $user_info = $user_mod->field('id,username,password,score')->find($uid);
         //保持状态
         //var_dump($user_info);exit();
         $this->assign_info($user_info);
         $this->remember($user_info, $remember);
     }
-
+    private function parse_info($info){
+        $info['msg_num']=D('message')->where("to_id=$info[id] and status=0")->count();
+        return $info;
+    }
     /**
      * 退出
      */

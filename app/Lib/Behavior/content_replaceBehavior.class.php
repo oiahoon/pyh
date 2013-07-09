@@ -21,6 +21,7 @@ class content_replaceBehavior extends Behavior {
         }
         //附件地址
         $replace['__UPLOAD__'] = __ROOT__.'/data/upload';
+        $replace['__ASSETS__'] = __ROOT__."/app/Tpl/home/".C("DEFAULT_THEME")."/public";
         $content = str_replace(array_keys($replace),array_values($replace),$content);
         return $content;
     }

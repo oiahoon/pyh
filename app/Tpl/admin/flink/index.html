@@ -53,8 +53,8 @@
                 <td align="center">{$val.id}</td>
                 <td align="center">
                 <if condition="$val['img']">
-                    <span class="" file-type="image" file-rel="{$img_dir}{$val.img}">
-    				<img src="{$img_dir}{$val.img}" style="width:26px; height:26px;" />
+                    <span class="" file-type="image" file-rel="{:attach($val['img'],MODULE_NAME)}">
+    				<img src="{:attach($val['img'],MODULE_NAME)}" style="width:26px; height:26px;" />
     				</span>
                 </if>
 				</td>

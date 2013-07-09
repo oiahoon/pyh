@@ -6,9 +6,9 @@
 
     $Id: client.php 1079 2011-04-02 07:29:36Z zhengqingpeng $
 */
-
+define('UC_API',true);
 if(!defined('UC_API')) {
-    exit('Access denied');
+    exit('Access denied'.__FILE__.__LINE__);
 }
 
 error_reporting(0);
@@ -88,7 +88,7 @@ function uc_api_input($data) {
     return $s;
 }
 
-function uc_api_mysql($model, $action, $args=array()) {
+function uc_api_mysql($model, $action, $args=array()) {    
     global $uc_controls;
     if(empty($uc_controls[$model])) {
         include_once UC_ROOT.'./lib/db.class.php';
@@ -99,6 +99,7 @@ function uc_api_mysql($model, $action, $args=array()) {
     if($action{0} != '_') {
         $args = uc_addslashes($args, 1, TRUE);
         $action = 'on'.$action;
+              
         $uc_controls[$model]->input = $args;
         return $uc_controls[$model]->$action($args);
     } else {
@@ -297,7 +298,7 @@ function uc_friend_ls($uid, $page = 1, $pagesize = 10, $totalnum = 10, $directio
     return UC_CONNECT == 'mysql' ? $return : uc_unserialize($return);
 }
 
-function uc_user_register($username, $password, $email, $questionid = '', $answer = '', $regip = '') {
+function uc_user_register($username, $password, $email, $questionid = '', $answer = '', $regip = '') {    
     return call_user_func(UC_API_FUNC, 'user', 'register', array('username'=>$username, 'password'=>$password, 'email'=>$email, 'questionid'=>$questionid, 'answer'=>$answer, 'regip' => $regip));
 }
 
@@ -309,13 +310,15 @@ function uc_user_login($username, $password, $isuid = 0, $checkques = 0, $questi
 
 function uc_user_synlogin($uid) {
     $uid = intval($uid);
-    if(@include UC_ROOT.'./data/cache/apps.php') {
+    if(@include UC_ROOT.'./data/cache/apps.php') {  
+        //file_put_contents('/debug.log',__FILE__.":".__LINE__."\r\n".var_export($_CACHE['apps'],true)."\r\n",FILE_APPEND); 
         if(count($_CACHE['apps']) > 1) {
             $return = uc_api_post('user', 'synlogin', array('uid'=>$uid));
         } else {
             $return = '';
         }
     }
+    //file_put_contents('/debug.log',__FILE__.":".__LINE__."\r\n".var_export($return,true)."\r\n",FILE_APPEND);
     return $return;
 }
 

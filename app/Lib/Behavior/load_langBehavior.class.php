@@ -7,7 +7,7 @@ class load_langBehavior extends Behavior {
         'DEFAULT_LANG' => 'zh-cn', // 当前语言包
     );
 
-    public function run(&$params){
+    public function run(&$params){        
         $lang = $group_lang = $module_lang = array();
         $lang_dir = LANG_PATH . C('DEFAULT_LANG');
         // 读取项目公共语言包

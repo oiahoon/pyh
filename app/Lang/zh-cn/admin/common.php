@@ -581,4 +581,5 @@ return array(
     'score_submit'=>'爆料',
     'score_comment'=>'评论',
     'score_favs'=>'收藏',
+    'default_homepage'=>'默认首页',
 );

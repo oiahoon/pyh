@@ -1,0 +1,88 @@
+<include file="public:header" />
+<div class="pad_lr_10" >       
+    <form name="searchform" method="get" >
+    <table width="100%" cellspacing="0" class="search_form">
+        <tbody>
+            <tr>
+            <td>
+            <div class="explain_col">
+                <input type="hidden" name="g" value="{:GROUP_NAME}" />
+                <input type="hidden" name="m" value="{:MODULE_NAME}" />
+                <input type="hidden" name="a" value="{:ACTION_NAME}" />
+                <input type="hidden" name="menuid" value="{$menuid}" />
+                &nbsp;&nbsp;九块邮类型：
+                {:html_select('cate_id[0]',$type_list,$search['cate_id[0]'])}
+                商品类型：
+                {:html_select('cate_id[1]',$cate_list,$search['cate_id[1]'])}
+                关键字 :
+                <input name="keyword" type="text" class="input-text" size="25" value="{$search.keyword}" />
+                <input type="submit" name="search" class="btn" value="搜索" />
+            </div>
+            </td>
+            </tr>
+        </tbody>
+    </table>
+    </form>
+    <div class="J_tablelist table_list" data-acturi="{:U(MODULE_NAME.'/ajax_edit')}"> 
+    <table width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th width=25><input type="checkbox" id="checkall_t" class="J_checkall"></th>
+                <th><span tdtype="order_by" fieldname="id">ID</span></th>
+                <th align="center"><span>产品名称</span></th>
+                <th align="center">产品图片</th>
+                <th align="left"><span data-tdtype="order_by" data-field="name">产品链接</span></th>                
+                <th><span>开始时间</span></th>
+                <th><span>结束时间</span></th>
+                <th><span>市场价格</span></th>
+                <th><span>价格</span></th>
+                <th><span>星语推荐</span></th>
+                <th>推荐</th>
+                <th>独享</th>
+                <th align="left"><span data-tdtype="order_by" data-field="ordid">排序</span></th>
+                <th width="40"><span data-tdtype="order_by" data-field="status">{:L('status')}</span></th>
+                <th width="80">{:L('operations_manage')}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <volist name="list" id="val" >
+            <tr>
+                <td align="center">{$p*20-20+$i}</td>
+                <td align="center"><input type="checkbox" class="J_checkitem" value="{$val.id}"/></td>
+                <td align="center">{$val.id}</td>
+                <td align="center"><span>{$val.title}</span></td>
+                <td align="center">
+                <span class="" file-type="image" file-rel="{:attach($val['img'],'jiukuaiyou')}">
+                    <img src="{:attach($val['img'],'jiukuaiyou')}" style="width:26px; height:26px;" />
+                </span>
+                </td>
+                <td align="left"><span data-tdtype="edit" data-field="url" data-id="{$val.id}" class="tdedit">{$val.url}</span></td>                
+                <td><span>{$val.stime|date="Y-m-d",###}</span></td>
+                <td><span>{$val.etime|date="Y-m-d",###}</span></td>
+                <td><span>{$val.mprice}</span></td>
+                <td><span>{$val.price}</span></td>
+                <td><span>{:msubstr(strip_tags($val['intro']),50)}</span></td>
+                <td align="center"><img data-tdtype="toggle" data-id="{$val.id}" data-field="is_recommend" data-value="{$val.is_recommend}" src="__STATIC__/images/admin/toggle_<if condition="$val.is_recommend eq 0">disabled<else/>enabled</if>.gif" /></td>
+                <td align="center"><img data-tdtype="toggle" data-id="{$val.id}" data-field="is_duxiang" data-value="{$val.is_duxiang}" src="__STATIC__/images/admin/toggle_<if condition="$val.is_duxiang eq 0">disabled<else/>enabled</if>.gif" /></td>
+                <td align="left"><span data-tdtype="edit" data-field="ordid" data-id="{$val.id}" class="tdedit">{$val.ordid}</span></td>
+                <td align="center"><img data-tdtype="toggle" data-id="{$val.id}" data-field="status" data-value="{$val.status}" src="__STATIC__/images/admin/toggle_<if condition="$val.status eq 0">disabled<else/>enabled</if>.gif" /></td>
+                <td align="center">
+                    <a href="{:U(MODULE_NAME.'/edit', array('id'=>$val['id']))}" >{:L('edit')}</a> | 
+                    <a href="javascript:;" class="J_confirmurl" data-acttype="ajax" data-uri="{:U(MODULE_NAME.'/delete', array('id'=>$val['id']))}" data-msg="{:sprintf(L('confirm_delete_one'),$val['name'])}">{:L('delete')}</a>
+                    </td>
+            </tr>
+            </volist>
+        </tbody>
+    </table>
+    </div>
+    <div class="btn_wrap_fixed">
+        <label><input type="checkbox" name="checkall" class="J_checkall">{:L('select_all')}/{:L('cancel')}</label>
+        <input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="{:U(MODULE_NAME.'/delete')}" data-name="id" data-msg="{:L('confirm_delete')}" value="{:L('delete')}" />
+        <div id="pages">{$page}</div>
+    </div>
+</div>
+<include file="public:footer" />
+
+</body>
+</html>

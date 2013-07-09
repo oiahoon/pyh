@@ -15,11 +15,8 @@
             <th>{:L('attr_allow_size')} :</th>
             <td><input type="text" name="setting[attr_allow_size]" class="input-text" value="{:C('pin_attr_allow_size')}"></td>
         </tr>
-        <tr>
-        	<th></th>
-        	<td><input type="hidden" name="menuid"  value="{$menuid}"/><input type="submit" class="btn btn_submit" name="do" value="{:L('submit')}"/></td>
-    	</tr>
 	</table>
+    <include file="public:_submit" />
 	</form>
 </div>
 <include file="public:footer" />

@@ -42,7 +42,7 @@ class adAction extends backendAction {
         );
         $this->assign('big_menu', $big_menu);
 
-        $res = $this->_adboard_mod->field('id,name')->select();
+        $res = $this->_adboard_mod->field('id,name')->order("id desc")->select();
         $board_list = array();
         foreach ($res as $val) {
             $board_list[$val['id']] = $val['name'];
@@ -52,7 +52,7 @@ class adAction extends backendAction {
     }
 
     public function _before_add() {
-        $result = $this->_adboard_mod->where(array('status'=>1))->select();
+        $result = $this->_adboard_mod->where(array('status'=>1))->order("id desc")->select();
         $adboard_types = $this->_adboard_mod->get_tpl_list();
         $adboards = array();
         foreach ($result as $val) {
