@@ -200,23 +200,25 @@ function toggle_content($this) {
 	if (is_short) {
 		$this.removeClass('short_content').addClass('long_content').text('向上收起');
 		$old_height = $showtext_body.height();
-		$showtext_body.css({
-			'overflow': 'visible',
-			'height': 'auto'
-		});
+		$showtext_body.removeAttr('style').removeClass('show_hidden').addClass('show_all');
+		// $showtext_body.css({
+		// 	'overflow': 'visible',
+		// 	'height': 'auto'
+		// });
 		$new_height = $showtext_body.height();
 		$('img', $showtext_body).show();
-		$showtext_body.removeClass('showcont_l');
-		$showtext_body.removeClass('fl');
+		//$showtext_body.removeClass('showcont_l');
+		//$showtext_body.removeClass('fl');
 	} else {
 		$this.removeClass('long_content').addClass('short_content').text('展开全文');
-		$showtext_body.css({
-			'overflow': 'hidden',
-			'height': '169px'
-		});
+		$showtext_body.animate({height:'200px'}).removeClass('show_all').addClass('show_hidden');
+		// $showtext_body.css({
+		// 	'overflow': 'hidden',
+		// 	'height': '200px'
+		// });
 		$('img', $showtext_body).hide();
-		$showtext_body.addClass('showcont_l');
-		$showtext_body.addClass('fl');
+		//$showtext_body.addClass('showcont_l');
+		//$showtext_body.addClass('fl');
 		
 		console.log('log');
 	}

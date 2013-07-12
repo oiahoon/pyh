@@ -17,8 +17,8 @@
                         <if condition="empty($search['keyword'])">
                             <include file="public:hot_activity" />
                             <volist name="recommend_list" id="val">
-                            <div class="leftNotice">
-                                <h3><a href="{:u('post/index',array('id'=>$val['id']))}" target="_blank">{$val.title}</a><span>{$val.prices}</span></h3>
+                            <div class="leftNotice alert alert-info">
+                                <h3><a href="{:u('post/index',array('id'=>$val['id']))}" target="_blank">{$val.title}</a><span class="badge badge-important">{$val.prices}</span></h3>
                             </div>
                             </volist>                        
                         </if>

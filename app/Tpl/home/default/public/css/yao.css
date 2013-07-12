@@ -1,0 +1,121 @@
+a {
+    color: #333;
+}
+a:hover {
+    color: #242424;
+}
+.hotactivity_yao {
+    position: relative;
+    width: 682px;
+    margin: 15px auto 25px;
+    padding: 14px 0 7px;
+    box-shadow: #F2F2F2 2px 3px 3px;
+}
+.hotactivity_yao ul li {
+    float: left;
+    width: 30%;
+    height: 25px;
+    padding-left: 18px;
+    background: url(../images/blackDot.png) no-repeat 8px 11px;
+    line-height: 25px;
+    font-size: 12px;
+    font-family: Arial, 'SimSun ';
+    overflow: hidden;
+}
+.hotactivity_yao ul li.hotTitle {
+    position: absolute;
+    left: 10px;
+    top: -13px;
+    width: 184px;
+    height: 25px;
+    padding-left: 0;
+    background: none;
+    line-height: 25px;
+    color: #444;
+    font-family: 'Microsoft YaHei', 'SimSun';
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+.nav-top {
+    height: 40px;
+}
+.nav-top-logo {
+    display: block;
+    float: left;
+}
+.nav-top li ul {
+    float: left;
+    width: 100px;
+    height: 100px;
+    padding: 16px 0 0 18px;
+}
+.nav-top li ul li a{
+    display: block;
+    width: 92px;
+    height: 36px;
+    padding-left: 12px;
+    color: #333;
+    font-family: 'Microsoft YaHei', 'SimSun';
+    font-size: 13px;
+}
+.price {
+    color: #fff;
+    font-size: 14px;
+    line-height: 16px;
+}
+.sub_menu {
+    -webkit-border-radius: 0 0 6px 6px;
+    -moz-border-radius: 0 0 6px 6px;
+    border-radius: 0 0 6px 6px;
+}
+.extends {
+    padding-top:20px;
+}
+.leftNotice {
+    padding: 0 12px;
+    margin: 0 auto 10px;
+}
+.leftNotice h3 {
+    line-height: 26px;
+    font-size: 16px;
+}
+.leftNotice h3 span {
+    color: #fff;
+}
+.showitemTime {
+    position: relative;
+    top: -44px;
+    right:0;
+}
+.showtext_head {
+    font-size: 12px;
+}
+ul.category {
+    margin:0;
+    height: 20px;
+}
+ul.category li a {
+    padding: 0 2px;
+}
+.showtext_body p.showtext_info, .showtext_body {
+    min-height: 200px;
+    height: 200px;
+    overflow: hidden;
+    line-height: 24px;
+}
+
+.show_hidden {
+    overflow: 'hidden';
+    height: '200px'
+}
+.show_all {
+    overflow: 'visible';
+    height: auto;
+}
+.showcont_r {
+    margin-top: -13px;
+}
+.short_content .long_content {
+    font-size: 12px;
+}
