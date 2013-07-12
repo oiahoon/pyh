@@ -2074,7 +2074,7 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99A0A0, endColo
 #rig_ht {
 	float: right;
 	width: 200px;
-	margin-right: 9px;
+	margin-right: 7px;
 }
 #item_body {
 	position: relative;
@@ -2091,7 +2091,7 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99A0A0, endColo
 	position: absolute;
 	left: 0;
 	top: 30px;
-	width: 100px;
+	width: 95px;
 	border: #CCC solid 1px;
 	background-color: #FFF;
 	font-size: 14px;

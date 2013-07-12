@@ -30,7 +30,7 @@
                             状态
                             </if>
                             <div class="content">
-                                <ul>
+                                <ul style="margin:0">
                                 <li><a href="{:U(MODULE_NAME.'/'.ACTION_NAME,array('state'=>'all','c2'=>$c2,'c1'=>$c1))}">全部</a></li>
                                 <li><a href="{:U(MODULE_NAME.'/'.ACTION_NAME,array('state'=>'underway','c2'=>$c2,'c1'=>$c1))}">进行中</a></li>
                                 <li><a href="{:U(MODULE_NAME.'/'.ACTION_NAME,array('state'=>'end','c2'=>$c2,'c1'=>$c1))}">抢光了</a></li>
@@ -48,7 +48,7 @@
                 </div>   
                 
                 <div class="showinfo clearfix" id="item_body">
-                    <ul class="clearfix">
+                    <ul class="clearfix" style="margin:0;">
                         <volist name="list" id="item">
                             <div class="jky_item tag_{$item.state}">
                                 <h3>
