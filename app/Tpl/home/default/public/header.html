@@ -18,9 +18,91 @@
     <meta name="keywords" content="{$page_seo.keywords}" />
     <meta name="description" content="{$page_seo.description}" />       
     <script src="__ROOT__/index.php?m={:MODULE_NAME}&a={:ACTION_NAME}&act=loadjs"></script>  
+    <style type="text/css">
+        .nav-top {
+            height: 40px;
+        }
+        .nav-top-logo {
+            display: block;
+            float: left;
+        }
+        .nav-top li ul {
+            float: left;
+            width: 100px;
+            height: 100px;
+            padding: 16px 0 0 18px;
+        }
+        .nav-top li ul li a{
+            display: block;
+            width: 92px;
+            height: 36px;
+            padding-left: 12px;
+            color: #333;
+            font-family: 'Microsoft YaHei', 'SimSun';
+            font-size: 13px;
+        }
+        .price {
+            color: #fff;
+            font-size: 14px;
+            line-height: 16px;
+        }
+        .sub_menu {
+            -webkit-border-radius: 0 0 6px 6px;
+            -moz-border-radius: 0 0 6px 6px;
+            border-radius: 0 0 6px 6px;
+        }
+
+    </style>
+
 </head>
 <body>
-<!--头部开始-->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid headertop">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="nav-top-logo" href="__ROOT__/"><img src="__ASSETS__/images/logo.jpg"/></a>
+          <div class="nav-collapse collapse">
+            
+            <if condition="empty($visitor)">
+            <ul class="nav nav-top">
+
+               <li>
+                <div class="login" id="nologin">
+                    <a href="{:u('user/register')}" class="regbtn">注册</a>
+                    <div class="loginbtn"> <a href="{:u('user/login',array('ret_url'=>get_ret_url()))}" class="login_btn">登录</a>
+                        <ul class="loginsub">
+                            <li><a href="{:u('user/login',array('ret_url'=>get_ret_url()))}">网站登录</a></li>
+                            <volist name="oauth_list" id="val">
+                            <li><a href="{:u('oauth/index',array('mod'=>$val['code']))}">{$val.name}</a></li>
+                            </volist>
+                        </ul>
+                    </div>
+                </div>
+              </li>
+
+            </ul>
+            <else/>
+                <p class="navbar-text pull-right">
+                  <span>欢迎您！</span><a href="#" class="navbar-link">{$visitor.username}</a>
+                  <a href="{:u('user/index')}">个人中心</a>
+                  <a href="{:u('user/logout',array('ret_url'=>get_ret_url()))}">注销</a>
+                </p>
+            </if>
+            <ul class="nav nav-top pull-right">
+                <li><a href="{:u('mall/index')}" target="_blank">商家导航</a></li>
+                <li><a href="{:u('post/submit')}" target="_blank">我要爆料</a></li>
+            </ul> 
+
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+<!--头部开始--><!-- nav bar
 <div class="header_wrap">
 	<div class="headertopbox">
 		<div class="headertop clearfix">
@@ -56,6 +138,7 @@
 			</div>			
 		</div>
 	</div>	
+    
 	<!--推荐类别开始-->
 	<div class="sidebox">
 		<div class="side_head"><h3><a href="{:u('post_cate/index',array('id'=>1))}">推荐类别</a></h3></div>
@@ -91,10 +174,10 @@
         </div>
         <div class="navbox">
             <div class="nav">
-                <ul>
+                <ul class="nav" style="margin-bottom: -20px;">
                     <li class="home"><a class="navicon current" href="__ROOT__/">首页</a></li>
                     <li class="tese J_top"><a class="navicon" href="{:u('post_cate/index',array('id'=>2))}">特色推荐</a>
-                        <ul class="sub_menu">
+                        <ul class="sub_menu" style="margin:0;">
                             <volist name="tese_cate" id="val">
                             <li><a href="{:u('post_cate/index',array('id'=>$val['id']))}">{$val.name}</a></li>
                             </volist>

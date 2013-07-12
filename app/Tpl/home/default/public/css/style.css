@@ -148,7 +148,7 @@ _top:expression(document.compatMode && document.compatMode== 'CSS1Compat ' ?docu
 	background: url(../images/sidebox_top.png) no-repeat;
 }
 .side_head h3 {
-	padding-top: 133px;
+	padding-top: 120px;
 	text-align: center;
 }
 .side_head h3 a, .businessesnav ul li a {
@@ -317,7 +317,7 @@ _top:expression(document.compatMode && document.compatMode== 'CSS1Compat ' ?docu
 	width: 124px;
 	padding: 0;
 }
-.nav ul li a {
+.nav ul.nav li a {
 	display: block;
 	width: 92px;
 	height: 36px;
@@ -530,7 +530,7 @@ _top:expression(document.compatMode && document.compatMode== 'CSS1Compat ' ?docu
 }
 .hotactivity ul li {
 	float: left;
-	width: 152px;
+	width: 30%;
 	height: 25px;
 	padding-left: 18px;
 	background: url(../images/blackDot.png) no-repeat 8px 11px;
@@ -556,8 +556,9 @@ _top:expression(document.compatMode && document.compatMode== 'CSS1Compat ' ?docu
 }
 .leftNotice {
 	position: relative;
+	font-size: 16px;
 	margin: 0 auto 20px;
-	padding: 15px 10px;
+	padding: 0 10px;
 	border: 1px solid #F9E7B6;
 	background-color: #FFFDEF;
 	box-shadow: #F2F2F2 2px 3px 3px;

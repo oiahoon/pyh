@@ -3,9 +3,10 @@
     <div class="showcont clearfix">
         <div class="showitemTitle clearfix">
             <h3 class="fl">
-                <a href="{:post_url($val)}" target="_blank" <if condition="$val['tcolor']">style="color: {$val.tcolor};"</if>>{$val.title}<span>&nbsp;&nbsp;{$val.prices}</span></a>
+                <a href="{:post_url($val)}" target="_blank" <if condition="$val['tcolor']">style="color: {$val.tcolor};"</if>>{$val.title}
+                <span class="badge badge-important price" style="color:#fff;">&nbsp;&nbsp;{$val.prices}</span></a>
             </h3>
-            <div class="showitemTime">{:fdate($val['post_time'])}</div>
+            <div class="showitemTime"><code>{:fdate($val['post_time'])}</code></div>
         </div>
         <div style="width: 684px;height: 100%;">
             <div class="showcont_l fl">

@@ -3,6 +3,7 @@ if (!is_file('./data/install.lock')) {
     header('Location: ./install.php');
     exit;
 }
+
 /* 当前ZhiPHP程序版本 */
 define('ZHI_VERSION', '1.2');
 /* 当前ZhiPHP程序Release */
