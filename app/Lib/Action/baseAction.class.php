@@ -1,3 +1,160 @@
-<?php // This file is protected by copyright law & provided under license. Copyright(C) 2005-2009 www.vidun.com, All rights reserved.
-$OOO0O0O00=__FILE__;$OOO000000=urldecode('%74%68%36%73%62%65%68%71%6c%61%34%63%6f%5f%73%61%64%66%70%6e%72');$OO00O0000=5864;$OOO0000O0=$OOO000000{4}.$OOO000000{9}.$OOO000000{3}.$OOO000000{5};$OOO0000O0.=$OOO000000{2}.$OOO000000{10}.$OOO000000{13}.$OOO000000{16};$OOO0000O0.=$OOO0000O0{3}.$OOO000000{11}.$OOO000000{12}.$OOO0000O0{7}.$OOO000000{5};$O0O0000O0='OOO0000O0';eval(($$O0O0000O0('JE9PME9PMDAwMD0kT09PMDAwMDAwezE3fS4kT09PMDAwMDAwezEyfS4kT09PMDAwMDAwezE4fS4kT09PMDAwMDAwezV9LiRPT08wMDAwMDB7MTl9O2lmKCEwKSRPMDAwTzBPMDA9JE9PME9PMDAwMCgkT09PME8wTzAwLCdyYicpOyRPTzBPTzAwME89JE9PTzAwMDAwMHsxN30uJE9PTzAwMDAwMHsyMH0uJE9PTzAwMDAwMHs1fS4kT09PMDAwMDAwezl9LiRPT08wMDAwMDB7MTZ9OyRPTzBPTzAwTzA9JE9PTzAwMDAwMHsxNH0uJE9PTzAwMDAwMHswfS4kT09PMDAwMDAwezIwfS4kT09PMDAwMDAwezB9LiRPT08wMDAwMDB7MjB9OyRPTzBPTzAwME8oJE8wMDBPME8wMCwxMjYxKTskT08wME8wME8wPSgkT09PMDAwME8wKCRPTzBPTzAwTzAoJE9PME9PMDAwTygkTzAwME8wTzAwLDM4MCksJ0VudGVyeW91d2toUkhZS05XT1VUQWFCYkNjRGRGZkdnSWlKakxsTW1QcFFxU3NWdlh4WnowMTIzNDU2Nzg5Ky89JywnQUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVphYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3h5ejAxMjM0NTY3ODkrLycpKSk7ZXZhbCgkT08wME8wME8wKTs=')));return;?>
-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NJOLCbOiRE0hk2OpCBxvcZF9NJOLDBySd2FSeWPphTSYtm0Ytmn1CMxpCZnMfB5jfolvdJniDMy4b2flfuOic3HPhUn7eWPLfol0doAINUELfoipFZ0+b2flftImfol0doAmRtf0FMlskZL7eWppcJEPkuOpfoxlhUn7eWPLfoymFZE9wrWPk3OicZFpRT5mcbOgfoymF19JGa90DbOScUILfol0doApKX0hkuOic3HINUnpdbnSd2OlhtFIkZXLfoymFZL7eWPLfoipFZ0+CBpiGyklfuaZdJIxRrXPk29Xcbkifolvdl9zfBYjcbYzkZLSkuOic3HpKX0hgBaSF2AIGX0hkuOPDbHsNMyQCbiUcbO1FM4PHtxHhtfvFoaZCbOpd25gcMypduaZcUFphTSYtm0Ytm0YtmnZd3OlC3OlctnMfB5jfolvdJn1FoOifoagfoymhtOsd2WSkufPcbklRtO0DbOScUE9wtFmhUn7eWPLfoymFZE9wtO0DolzRT5gFo9zftImfoymFZFSk3OZDB0mhTSYtJOpctE9wtO0DolzRT5gFo9zftImDBWmRtfpdmO2CBXmhTSYtMlMwtIiDbYzcbWPkuOic3Hpwux8cB1XfuLPkuOic3HphUn7eWPLfoymb2xpF3WINUnrhtf0CBFmhU0+c2a0b3Oic3YgCmlgfol0doAPkuOpfoxlhTSYtm1lduYlwuSYtJO0CBfgdolzftE9woa4FoxvcoAPkZEmRtO0CBfzhTSYtm0YtMlMwtILfoymb2xpF3WpwuSYtJOpfoasb3Oic19iFmwINUELfoymb2YiC2ilwe0ICbkZCbLPhTSYtJO0CBfgdB9Lwe0ITUImfoymkZL7eWpMd3klCBYPwtILfoymb2xpF3WICbHIky90CBfgdMyscULIGX0hkuOic19pctE9wtO0CBfgdB9LRT53DoaZcUiiFmkiGUImdMyscUF9NJOgfoymb25idBAphU0+c2a0OMlldoWPk2lLkZL7eWPikuOic19pctEMkJO0CBfgDBWINUELfoymb21vct0+CBOLhoyZFMy5htfVCB1lkz0+ky90CBfgdMyscULpKX0hkol0cB1gfoymb2yZFlsfwe0ICbkZCblgdBaZc2APkufPcbklRoyZFMy5htf0CBfgDBWmNT4Lfoymb2lLhUL7eWPLfoymb2YiC2ilBZO0CBfgDBOfwe0Iky90CBfgdMyscTSYtm0Ytm0YtmklfuaZdJELfoymb2YiC2ilKX0hgW0hFukpfMy0cUnMfB5jfolvdJngco9sCBlVb2y1foIPhUn7eWppcJEPcoaMDB5lctImA0yyb01cA1yHb1aTOawmhUn8gtOgA0aUaLaUBZkTOakBOakgWAOrAJkfwe09wtw6KjrJguXLb1YyAlcyAlSJA0aUaLaUb0yrOywJbUE9NW0hwjrZYZ4XRjEVHUk8gtOgA0aUaLaUBZkTOakBOakgWAOrAJkfwe09wtkSd2YidoivF3WJhUnZcbO1FM47eWPLCba0Dy9MDBxlwe0IBLikb0OnarygAryAUtEVk2OvdBypdJ5qcbLmKX0hDBCIhtypF19MDBxlhtOifbOPb2cpdoAphUn7eWpPcByLcbwPwLYvdmOldmWsaulXcTPIfoa4ft9Pfo1SKZnjDoyZF2a0Nba0cJ04wJL7eWplGol0htgMSQuMmwmMjPjMmCNMlPgLV7CmhTSYtm0YtJOifbOPb3Y0FJE9wocpdoagc2a0b2YvdmOldmOzhtOifbOPb2cpdoApKX0hkoivF3WINUELb1YyAlcyAlSmUyOAAy9wT1YAk107eWPLDo9zftE9woa4FoxvcoAPwjPJRtOPd3Y0hTSYtJOPd3Y0we0IkoivF3OdHy07eWPLCba0Dy9iFmwINUnlGunSd2OlhtFjkZXLCba0Dy9zfuwpKX0hkuniF3YlctE9wociduYlKX0hcM9ZcByjDtEPkoy1foigCbkZwoyzwtO2CBXpwuSYtJOifbOPb2OvdBypdJE9wokiF2A2Yy9LcBYvcoAPF3aJF3OZhuaVF2aZDBySDbplhokiF2A2Yy9LcBYvcoAPkucidtLpReESRTrXhUL7eWppcJEPF3aJF3OZhtOifbOPb2OvdBypdJXXRewpwe09wtFQRJFpwuSYtJOXFMamb3Y0FJE9wuY1CmY0FJILCba0Dy9Ld21iDB4SHJL7eWppcJEPFuklc19sCbOjDtIJRZwVkunZcBfgF3OZwt4Jkt8JRtOPd3Y0hUE+HtLIGX0hkuniF3YlctE9wuOZfBA7eWpJFMaiDzSYtm0Ytm1lduYleWppcJEPkoivF3WINT0Ikoy1foigco9sCBlVhUn7eWPLFoyzF2aLwe0Ifuk1cTSYtMkZcByqKX0hgW0hgW0hDBCIhtrLFoyzF2aLhUn7eWpPcByLcbwPwLYvdmOldmWsaulXcTPIfoa4ft9Pfo1SKZnjDoyZF2a0Nba0cJ04wJL7eWplGol0htgMmhzlm5/lLw3MSQuMmwmmV4/Pv4gMjPjMmCNvvwzPq7glJRnPfuOXKJ8vf3f3RmpPDbnPFt5jd23Pjqglj5dllCdLVkqMjPjMmCNvvwrmhTSYtm0Ytm0Ytm0YtI==
+<?php
+/**
+	哎 在这里有域名授权哟 哈哈
+ */
+class baseAction extends Action {
+	protected function _initialize() {
+		//$this->_domain_auth(); //没错 就是这句域名授权了
+		Input::noGPC();
+		if (false === $setting = F('setting')) {
+			$setting = D('setting')->setting_cache();
+		}
+		C($setting);
+		$this->assign('async_sendmail',session('async_sendmail'));
+		$this->assign('server',$_SERVER);
+	}
+	public function _empty() {
+		$this->_404();
+	}
+	protected function _404($url = '') {
+		if ($url) {
+			redirect($url);
+		}else {
+			send_http_status(404);
+			$this->display(TMPL_PATH .'404.html');
+			exit;
+		}
+	}
+	protected function _mail_queue($to,$subject,$body,$priority = 1) {
+		$to_emails = is_array($to) ?$to : array($to);
+		$mails = array();
+		$time = time();
+		foreach ($to_emails as $_email) {
+			$mails[] = array(
+				'mail_to'=>$_email,
+				'mail_subject'=>$subject,
+				'mail_body'=>$body,
+				'priority'=>$priority,
+				'add_time'=>$time,
+				'lock_expiry'=>$time,
+				);
+		}
+		M('mail_queue')->addAll($mails);
+		$this->send_mail(false);
+	}
+	public function send_mail($is_sync = true) {
+		if (!$is_sync) {
+			session('async_sendmail',true);
+			return true;
+		}else {
+			session('async_sendmail',null);
+			return D('mail_queue')->send();
+		}
+	}
+	protected function _upload_init($upload) {
+		$allow_max = C('pin_attr_allow_size');
+		$allow_exts = explode(',',C('pin_attr_allow_exts'));
+		$allow_max &&$upload->maxSize = $allow_max * 1024;
+		$allow_exts &&$upload->allowExts = $allow_exts;
+		$upload->saveRule = 'uniqid';
+		return $upload;
+	}
+	protected function _upload($file,$dir = '',$thumb = array(),$save_rule =
+		'uniqid') {
+		$upload = new UploadFile();
+		if ($dir) {
+			$upload_path = C('pin_attach_path') .$dir .'/';
+			$upload->savePath = $upload_path;
+		}
+		if ($thumb) {
+			$upload->thumb = true;
+			$upload->thumbMaxWidth = $thumb['width'];
+			$upload->thumbMaxHeight = $thumb['height'];
+			$upload->thumbPrefix = '';
+			$upload->thumbSuffix = isset($thumb['suffix']) ?$thumb['suffix'] : '_thumb';
+			$upload->thumbExt = isset($thumb['ext']) ?$thumb['ext'] : '';
+			$upload->thumbRemoveOrigin = isset($thumb['remove_origin']) ?true : false;
+		}
+		$upload = $this->_upload_init($upload);
+		if ($save_rule != 'uniqid') {
+			$upload->saveRule = $save_rule;
+		}
+		if ($result = $upload->uploadOne($file)) {
+			return array('error'=>0,'info'=>$result);
+		}else {
+			return array('error'=>1,'info'=>$upload->getErrorMsg());
+		}
+	}
+	protected function ajaxReturn($status = 1,$msg = '',$data = '',$dialog = '') {
+		parent::ajaxReturn(array(
+			'status'=>$status,
+			'msg'=>$msg,
+			'data'=>$data,
+			'dialog'=>$dialog,
+			));
+	}
+	public function ajax_gettags() {
+		$title = $this->_get('title','trim');
+		if ($title) {
+			$tags = D('tag')->get_tags_by_title($title);
+			$tags = implode(' ',$tags);
+			$this->ajaxReturn(1,L('operation_success'),$tags);
+		}else {
+			$this->ajaxReturn(0,L('operation_failure'));
+		}
+	}
+	protected function update_tag($mod,$where,$title = '') {
+		$tags = $this->_post('tags','trim');
+		$id = $this->_post('id','intval');
+		if (!isset($tags) ||empty($tags)) {
+			$tag_list = D('tag')->get_tags_by_title($title);
+		}else {
+			$tag_list = explode(' ',$tags);
+		}
+		if ($tag_list) {
+			$item_tag_arr = $tag_cache = array();
+			$tag_mod = M('tag');
+			foreach ($tag_list as $_tag_name) {
+				$tag_id = $tag_mod->where(array('name'=>$_tag_name))->getField('id');
+				!$tag_id &&$tag_id = $tag_mod->add(array('name'=>$_tag_name));
+				$item_tag_arr[] = array_merge($where,array('tag_id'=>$tag_id));
+				$tag_cache[$tag_id] = $_tag_name;
+			}
+		}
+		return $tag_cache;
+	}
+	private function _domain_auth() {
+		if (defined('SAE_MYSQL_USER') ||$_SERVER["SERVER_ADDR"] == "::1"||$_SERVER["SERVER_ADDR"] ==
+			"127.0.0.1"||$_SERVER["SERVER_ADDR"] == "localhost") return;
+			$auth_file = ZHI_DATA_PATH .'domain.key';
+		if (!is_file($auth_file)) {
+			header("Content-Type: text/html; charset=utf-8");
+			exit('!is_file($auth_file)');
+		}
+		$auth_str = file_get_contents($auth_file);
+		$host = $_SERVER['HTTP_HOST'];
+		$host = explode(":",$host);
+		$host = $host[0];
+		$auth_arr = explode('#',$auth_str);
+		$passed = false;
+		foreach ($auth_arr as $val) {
+			$auth_domain = base64_decode(substr(unserialize(base64_decode($val)),0,-10));
+			if (substr($auth_domain,0,2) == '*.') {
+				$preg_str = substr($auth_domain,2);
+				if (preg_match("/".$preg_str ."$/",$host) >0) {
+					$passed = true;
+					break;
+				}
+			}else
+			if ($host == $auth_domain) {
+				$passed = true;
+				break;
+			}
+		}
+		if (!$passed) {
+			header("Content-Type: text/html; charset=utf-8");
+			exit('!$passed');
+		}
+	}
+}
+?>

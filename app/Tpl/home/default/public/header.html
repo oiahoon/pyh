@@ -49,14 +49,14 @@
                         </ul>
                     </div>
                 </div>
-              </li>
-
+                </li>
+                <li class="divider"></li>
             </ul>
             <else/>
                 <p class="navbar-text pull-right">
                   <span>欢迎您！</span><a href="#" class="navbar-link">{$visitor.username}</a>
-                  <a href="{:u('user/index')}">个人中心</a>
-                  <a href="{:u('user/logout',array('ret_url'=>get_ret_url()))}">注销</a>
+                  <a  class="navbar-link" href="{:u('user/index')}">个人中心</a>
+                  <a  class="navbar-link" href="{:u('user/logout',array('ret_url'=>get_ret_url()))}">注销</a>
                 </p>
             </if>
             <ul class="nav nav-top pull-right">

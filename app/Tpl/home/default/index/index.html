@@ -11,7 +11,7 @@
                 <div class="leftinfo">
                     {:R('advert/index', array(1), 'Widget')}
                     <if condition="$search['keyword']">
-                        <div class="clearfix crumbBox">当前位置:<a href="/">首页</a>>><strong>"{$search.keyword}"</strong>的搜索结果</div>
+                        <div class="clearfix crumbBox">当前位置:　<a href="__ROOT__/">首页</a> <i class="icon-chevron-right"></i> <strong>"{$search.keyword}"</strong>的搜索结果</div>
                     </if>
                     <div class="showinfo">
                         <if condition="empty($search['keyword'])">

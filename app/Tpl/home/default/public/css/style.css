@@ -357,7 +357,7 @@ _top:expression(document.compatMode && document.compatMode== 'CSS1Compat ' ?docu
 	background-position: -18px -68px;
 }
 .nav ul li.tese a.navicon:hover {
-//background-position:-100px -68px;
+	background-position:-100px -68px;
 }
 .nav ul li.find a.navicon:hover {
 	background-position: -224px -68px;

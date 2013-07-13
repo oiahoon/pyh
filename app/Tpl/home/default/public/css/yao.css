@@ -1,9 +1,37 @@
+body {
+    font-size: 12px;
+    font-family: Arial,"SimSun";
+    color: #555;
+}
 a {
     color: #333;
 }
 a:hover {
     color: #242424;
 }
+.logo a:hover {
+    text-decoration: none;
+}
+.nav ul li.mall a.navicon {
+    background-position: -596px -16px;
+}
+.nav ul li.jiukuaiyou a.navicon {
+    background-position: -472px -16px;
+}
+.nav ul li.exchange a.navicon {
+    background-position: -100px -16px;
+}
+
+.nav ul li.mall a.navicon:hover {
+    background-position: -596px -120px;
+}
+.nav ul li.jiukuaiyou a.navicon:hover {
+    background-position: -472px -120px;
+}
+.nav ul li.exchange a.navicon:hover {
+    background-position: -100px -120px;
+}
+
 .hotactivity_yao {
     position: relative;
     width: 682px;
@@ -99,8 +127,8 @@ ul.category li a {
     padding: 0 2px;
 }
 .showtext_body p.showtext_info, .showtext_body {
-    min-height: 200px;
-    height: 200px;
+    min-height: 186px;
+    height: 186px;
     overflow: hidden;
     line-height: 24px;
 }

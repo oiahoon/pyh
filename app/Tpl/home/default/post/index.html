@@ -13,8 +13,8 @@
 			<div class="contentbox_l fl">			
 				<div class="leftinfo">				
 					<div class="crumbBox clearfix">
-						<span>当前位置:</span>
-                        <a href="/">首页 </a>&gt;&gt;&nbsp;
+						<span>当前位置:　</span>
+                        <a href="__ROOT__/">首页 </a> <i class="icon-chevron-right"></i> 
                         <volist name="info['cate_list']" id="c" offset="0" length='4'>
                             <a href="{:u('post_cate/index',array('id'=>$c['cate_id']))}" target="_blank">{$c.cate.name}</a>           
                             <if condition="$i lt 4">,

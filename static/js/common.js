@@ -211,7 +211,7 @@ function toggle_content($this) {
 		//$showtext_body.removeClass('fl');
 	} else {
 		$this.removeClass('long_content').addClass('short_content').text('展开全文');
-		$showtext_body.animate({height:'200px'}).removeClass('show_all').addClass('show_hidden');
+		$showtext_body.animate({height:'186px'}).removeClass('show_all').addClass('show_hidden');
 		// $showtext_body.css({
 		// 	'overflow': 'hidden',
 		// 	'height': '200px'
