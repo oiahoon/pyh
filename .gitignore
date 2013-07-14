@@ -220,5 +220,5 @@ pip-log.txt
 */cache/*
 */cache/!index.html
 
-data/db.php
+data/config/db.php
 data/runtime/
