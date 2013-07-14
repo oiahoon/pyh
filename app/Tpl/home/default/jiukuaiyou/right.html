@@ -12,7 +12,7 @@
         <a class="fl side_l" href="{:U('user/register')}" target="_blank"></a>
         <div class="fr side_r">
             <div class="clearfix title2">推荐登录方式</div>
-            <ul>
+            <ul style="margin:0;">
                 <volist name="oauth_list" id="val">
                     <li class="{$val.code}">
                         <a href="{:u('oauth/index',array('mod'=>$val['code']))}" style="background-image: url('static/images/oauth/{$val.code}/icon.png');"></a>

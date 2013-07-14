@@ -9,6 +9,29 @@ a {
 a:hover {
     color: #242424;
 }
+.navbar-yao .navbar-inner {
+    background-color: #555;
+    border-color:#555;
+    background-image: -webkit-linear-gradient(top,#555,#444);
+    background-image: -o-linear-gradient(top,#555,#444);
+}
+.nav-top-logo {
+    margin-top: 7px;
+}
+.navbar .nav>li>a {
+    font-size: 17px;
+}
+.navbar-inverse .nav>li>a.logo_link {
+    color: #C2C5BA;
+    font-size: 21px;
+    font-weight: 900;
+    margin: 0 0;
+    padding: 7px 0 0 3px;
+    display: block;
+}
+.navbar-inverse .nav>li>a.logo_link:hover {
+    color: #C2C5BA;
+}
 .logo a:hover {
     text-decoration: none;
 }
