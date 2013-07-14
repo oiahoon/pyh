@@ -4,7 +4,7 @@
  */
 class baseAction extends Action {
 	protected function _initialize() {
-		//$this->_domain_auth(); //没错 就是这句域名授权了
+		$this->_domain_auth(); //没错 就是这句域名授权了
 		Input::noGPC();
 		if (false === $setting = F('setting')) {
 			$setting = D('setting')->setting_cache();
@@ -125,7 +125,7 @@ class baseAction extends Action {
 	}
 	private function _domain_auth() {
 		if (defined('SAE_MYSQL_USER') ||$_SERVER["SERVER_ADDR"] == "::1"||$_SERVER["SERVER_ADDR"] ==
-			"127.0.0.1"||$_SERVER["SERVER_ADDR"] == "localhost") return;
+		  	"127.0.0.1"||$_SERVER["SERVER_ADDR"] == "localhost") return;
 			$auth_file = ZHI_DATA_PATH .'domain.key';
 		if (!is_file($auth_file)) {
 			header("Content-Type: text/html; charset=utf-8");
@@ -138,6 +138,11 @@ class baseAction extends Action {
 		$auth_arr = explode('#',$auth_str);
 		$passed = false;
 		foreach ($auth_arr as $val) {
+			// $host = "*.finle.cn";
+			// $k = base64_encode($host)."abcdefghij";echo $k."=><br/>\r\n";
+			// $k = serialize($k);echo $k."=><br/>\r\n";
+			// $k = base64_encode( $k ) ;echo $k."=><br/>\r\n";
+			// $val = $k;die;
 			$auth_domain = base64_decode(substr(unserialize(base64_decode($val)),0,-10));
 			if (substr($auth_domain,0,2) == '*.') {
 				$preg_str = substr($auth_domain,2);
