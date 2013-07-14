@@ -19,7 +19,7 @@ a:hover {
     margin-top: 7px;
 }
 .navbar .nav>li>a {
-    font-size: 17px;
+    font-size: 13px;
 }
 .navbar-inverse .nav>li>a.logo_link {
     color: #C2C5BA;
@@ -169,4 +169,24 @@ ul.category li a {
 }
 .short_content .long_content {
     font-size: 12px;
+}
+div.J_fixed > dl > dd {
+    margin-left: 0;
+    margin-right: -5px;
+}
+
+.jky_buy_img {
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    text-decoration: none;
+    width: 220px;
+    overflow: hidden;
+}
+.jky_item .buy_mask {
+    margin-left: 3px;
+}
+.begin_time {
+    margin-left: 6px;
 }
