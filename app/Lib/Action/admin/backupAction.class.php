@@ -21,7 +21,6 @@ class backupAction extends backendAction
     {
         if (IS_POST || isset($_GET['dosubmit']))
         {
-            //print_r($_REQUEST);exit();
             if (isset($_GET['type']) && $_GET['type'] == 'url')
             {
                 $sizelimit = isset($_GET['sizelimit']) && abs(intval($_GET['sizelimit'])) ? abs(intval
@@ -323,10 +322,9 @@ class backupAction extends backendAction
             return - 1;
         }
         $cycle_time = ceil(($total - $pos) / $this->offset); //每次取offset条数。获得需要取的次数
-        for ($i = 0; $i < $cycle_time; $i++)
-        {
-            $data = $this->_database_mod->query("SELECT * FROM $table LIMIT " . ($this->
-                offset * $i + $pos) . ', ' . $this->offset);
+        for ($i = 0; $i < $cycle_time; $i++){
+            
+            $data = $this->_database_mod->query("SELECT * FROM $table LIMIT " .($this->offset * $i + $pos) . ', ' . $this->offset);
             $data_count = count($data);
             $fields = array_keys($data[0]);
             $start_sql = "INSERT INTO $table ( `" . implode("`, `", $fields) . "` ) VALUES ";
@@ -349,10 +347,8 @@ class backupAction extends backendAction
         return - 1;
     }
 
-    public function dump_escape_string($str)
-    {
-        return addslashes($str);
-        //return $this->_database_mod->escape_string($str);
+    public function dump_escape_string($str){
+        return str_replace(array("\r","\n"),array('\r','\n'),addslashes($str));
     }
 
     /**

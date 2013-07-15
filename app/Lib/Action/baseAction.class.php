@@ -4,7 +4,7 @@
  */
 class baseAction extends Action {
 	protected function _initialize() {
-		$this->_domain_auth(); //没错 就是这句域名授权了
+		//$this->_domain_auth(); //没错 就是这句域名授权了
 		Input::noGPC();
 		if (false === $setting = F('setting')) {
 			$setting = D('setting')->setting_cache();
