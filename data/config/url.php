@@ -60,5 +60,9 @@ return array (
     '/^message-(\d+).html$/' => 'user/message?p=:1',
     '/^(\w+).html$/' => 'post/index?post_key=:1',
     '/^ad-(\d+).html$/' => 'advert/tgo?id=:1',
+    /* 九块邮友好链接地址 */
+    '/^jiukuaiyou\/(\w+).html$/' => 'jiukuaiyou/detail?post_key=:1',
+    /* 导航海淘 */
+    '/^haitao$/' => 'post_cate/index?id=4',
   ),
 );

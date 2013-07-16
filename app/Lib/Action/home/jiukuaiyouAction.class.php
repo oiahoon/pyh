@@ -59,8 +59,14 @@ class jiukuaiyouAction extends frontendAction {
     }
     public function detail() {
         $id=$this->_get('id','intval',0);
-        
-        $info = D("jky_item")->where("id=$id")->relation(true)->find();
+        $post_key=$this->_get('post_key','trim');
+        if(empty($id)){
+            $where=array('post_key'=>$post_key);
+        }else{
+            $where=array('id'=>$id);
+        }
+
+        $info = D("jky_item")->where($where)->relation(true)->find();
         $info['state'] = get_jky_state($info);
         $info['join_number']=D('jky_anhao')->where("item_id=".$id)->count();
         $info['join_user_list']=D('jky_anhao')->where("item_id=".$id)->limit("5")->order("id desc")->select();
