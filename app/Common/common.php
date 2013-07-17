@@ -417,9 +417,9 @@ function U2($url='',$vars='',$suffix=true,$redirect=false,$domain=true){
                 $post_key = $vars['post_key'];
             }
             elseif ($vars['id']){
-                $item = D('jky_item')->where("`id`=".$vars['id'])->field("`post_key`")->select()[0];
-                if(!empty($item['post_key'])) {
-                    $post_key =  $item['post_key'];
+                $item = D('jky_item')->where("`id`=".$vars['id'])->field("`post_key`")->select();
+                if(!empty($item[0]['post_key'])) {
+                    $post_key =  $item[0]['post_key'];
                 }
             } 
             if($post_key) return 'jiukuaiyou/'._key_url ($post_key);   
@@ -429,9 +429,9 @@ function U2($url='',$vars='',$suffix=true,$redirect=false,$domain=true){
                 $post_key = $vars['post_key'];
             }
             elseif ($vars['id']){
-                $item = D('post')->where("`id`=".$vars['id'])->field("`post_key`")->select()[0];
-                if(!empty($item['post_key'])) {
-                    $post_key =  $item['post_key'];
+                $item = D('post')->where("`id`=".$vars['id'])->field("`post_key`")->select();
+                if(!empty($item[0]['post_key'])) {
+                    $post_key =  $item[0]['post_key'];
                 }
             } 
             if($post_key) {
