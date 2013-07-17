@@ -402,3 +402,59 @@ function check_url($str){
     $url.$info['fragment'];    
     return $url;
 }
+
+
+
+function U2($url='',$vars='',$suffix=true,$redirect=false,$domain=true){
+    switch ($url){
+        case 'jiukuaiyou/index':
+            if($vars['p']) {
+                return 'jiukuaiyou-'.$vars['p'].".html";
+            }
+        break;
+        case 'jiukuaiyou/detail':
+            if($vars['post_key']) {
+                $post_key = $vars['post_key'];
+            }
+            elseif ($vars['id']){
+                $item = D('jky_item')->where("`id`=".$vars['id'])->field("`post_key`")->select()[0];
+                if(!empty($item['post_key'])) {
+                    $post_key =  $item['post_key'];
+                }
+            } 
+            if($post_key) return 'jiukuaiyou/'._key_url ($post_key);   
+        break;
+        case 'post/index':
+            if(!empty($vars['post_key'])) {
+                $post_key = $vars['post_key'];
+            }
+            elseif ($vars['id']){
+                $item = D('post')->where("`id`=".$vars['id'])->field("`post_key`")->select()[0];
+                if(!empty($item['post_key'])) {
+                    $post_key =  $item['post_key'];
+                }
+            } 
+            if($post_key) {
+                return _key_url ($post_key);
+            }   
+        break;
+        case 'post_cate/index':
+            if ($vars['id']){
+                $url = 'cate-' .$vars['id'];
+                if($vars['p']) $url .= '-'.$vars['p'];
+                $url .=  '.html';
+                return $url;
+            }
+        break;
+        case 'index/index':
+            if ($vars['p']){
+                return 'index-' .$vars['p'].'.html';
+            }
+        break;
+    }
+    return U($url,$vars,$suffix,$redirect,$domain);
+}
+
+function _key_url($post_key){
+    return $post_key.'.html';
+}

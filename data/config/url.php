@@ -58,11 +58,10 @@ return array (
     '/^score_order-(\d+).html$/' => 'user/score_order?p=:1',
     '/^message.html$/' => 'user/message',
     '/^message-(\d+).html$/' => 'user/message?p=:1',
-    '/^(\w+).html$/' => 'post/index?post_key=:1',
+    '/^(\w+).html$/' => 'post/index?post_key=:1', //一般商品的key链接
     '/^ad-(\d+).html$/' => 'advert/tgo?id=:1',
-    /* 九块邮友好链接地址 */
-    '/^jiukuaiyou\/(\w+).html$/' => 'jiukuaiyou/detail?post_key=:1',
-    /* 导航海淘 */
+    /* 新增路由 */
+    '/^jiukuaiyou\/(\w+).html$/' => 'jiukuaiyou/detail?post_key=:1', //九块邮的key链接
     '/^haitao$/' => 'post_cate/index?id=4',
   ),
 );

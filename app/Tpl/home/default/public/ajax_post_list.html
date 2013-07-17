@@ -3,7 +3,7 @@
     <div class="showcont clearfix">
         <div class="showitemTitle clearfix">
             <h3 class="fl">
-                <a href="{:post_url($val)}" target="_blank" <if condition="$val['tcolor']">style="color: {$val.tcolor};"</if> title="{$val.title}">{$val.title}
+                <a href="{:U2('post/index',$val)}" target="_blank" <if condition="$val['tcolor']">style="color: {$val.tcolor};"</if> title="{$val.title}">{$val.title}
                 <span class="badge badge-important price" style="color:#fff;">&nbsp;&nbsp;{$val.prices}</span></a>
             </h3>
             
@@ -15,7 +15,7 @@
                         <span class="fl">分类：</span>
                             <ul class="nav nav-pills category">
                             <volist name="val['cate_list']" id="c">
-                            <li><a href="{:u('post_cate/index',array('id'=>$c['cate_id']))}" target="_blank">{$c.cate.name}</a></li>
+                            <li><a href="{:u2('post_cate/index',array('id'=>$c['cate_id']))}" target="_blank">{$c.cate.name}</a></li>
                             <!--<if condition="$i lt count($val['cate_list'])">,</if>-->
                             </volist>
                        
@@ -29,11 +29,11 @@
                     <div class="like">
                         <div class="collect"><a class="J_favs" data-id="{$val.id}">{$val.favs}</a></div>
                         <div class="commentCount">
-                            <a href="{:u('post/index',array('id'=>$val['id']))}#J_messagebox">{$val.comments}</a>
+                            <a href="{:U2('post/index',array('id'=>$val['id']))}#J_messagebox">{$val.comments}</a>
                         </div>
                     </div>
                     <div class="pro_img">
-                        <a href="{:u('post/index',array('id'=>$val['id']))}" class="proimg_pic"><img src="{:attach($val['img'],'post')}"/></a>
+                        <a href="{:U2('post/index',array('id'=>$val['id']))}" class="proimg_pic"><img src="{:attach($val['img'],'post')}"/></a>
                     </div>
                     <div class="zhida" >
                         <a rel="nofollow" href="{:u('index/go',array('id'=>$val['id']))}" class="border_radius_3" target="_blank">直 达 链 接</a>

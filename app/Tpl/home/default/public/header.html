@@ -41,12 +41,12 @@
             <ul class="nav nav-top">
                <li>
                 <div class="login" id="nologin">
-                    <a href="{:u('user/register')}" class="regbtn">注册</a>
-                    <div class="loginbtn"> <a href="{:u('user/login',array('ret_url'=>get_ret_url()))}" class="login_btn">登录</a>
+                    <a href="{:U2('user/register')}" class="regbtn">注册</a>
+                    <div class="loginbtn"> <a href="{:U2('user/login',array('ret_url'=>get_ret_url()))}" class="login_btn">登录</a>
                         <ul class="loginsub">
-                            <li><a href="{:u('user/login',array('ret_url'=>get_ret_url()))}">网站登录</a></li>
+                            <li><a href="{:U2('user/login',array('ret_url'=>get_ret_url()))}">网站登录</a></li>
                             <volist name="oauth_list" id="val">
-                            <li><a href="{:u('oauth/index',array('mod'=>$val['code']))}">{$val.name}</a></li>
+                            <li><a href="{:U2('oauth/index',array('mod'=>$val['code']))}">{$val.name}</a></li>
                             </volist>
                         </ul>
                     </div>
@@ -57,13 +57,13 @@
             <else/>
                 <p class="navbar-text pull-right">
                   <span>欢迎您！</span><a href="#" class="navbar-link">{$visitor.username}</a>
-                  <a  class="navbar-link" href="{:u('user/index')}">个人中心</a>
-                  <a  class="navbar-link" href="{:u('user/logout',array('ret_url'=>get_ret_url()))}">注销</a>
+                  <a  class="navbar-link" href="{:U2('user/index')}">个人中心</a>
+                  <a  class="navbar-link" href="{:U2('user/logout',array('ret_url'=>get_ret_url()))}">注销</a>
                 </p>
             </if>
             <ul class="nav nav-top pull-right">
-                <li><a href="{:u('mall/index')}" target="_blank">商家导航</a></li>
-                <li><a href="{:u('post/submit')}" target="_blank">我要爆料</a></li>
+                <li><a href="{:U2('mall/index')}" target="_blank">商家导航</a></li>
+                <li><a href="{:U2('post/submit')}" target="_blank">我要爆料</a></li>
             </ul> 
 
           </div><!--/.nav-collapse -->
@@ -78,13 +78,13 @@
 			<div class="toplogo fl"><a href="__ROOT__/"><img src="__ASSETS__/images/logo.jpg"/></a></div>						
             <if condition="empty($visitor)">
             <div class="login" id="nologin">
-                <a href="{:u('user/register')}" class="regbtn">注册</a>
-				<div class="loginbtn"> <a href="{:u('user/login',array('ret_url'=>get_ret_url()))}" class="login_btn">登录</a>
+                <a href="{:U2('user/register')}" class="regbtn">注册</a>
+				<div class="loginbtn"> <a href="{:U2('user/login',array('ret_url'=>get_ret_url()))}" class="login_btn">登录</a>
 					<ul class="loginsub">
-						<li class="wzdl"><a href="{:u('user/login',array('ret_url'=>get_ret_url()))}">网站登录</a></li>
+						<li class="wzdl"><a href="{:U2('user/login',array('ret_url'=>get_ret_url()))}">网站登录</a></li>
 						<li class="dsfdl">第三方登录</li>
                         <volist name="oauth_list" id="val">
-                        <li class="{$val.code}" style="background-image: url('static/images/oauth/{$val.code}/icon.png');"><a href="{:u('oauth/index',array('mod'=>$val['code']))}">{$val.name}</a></li>
+                        <li class="{$val.code}" style="background-image: url('static/images/oauth/{$val.code}/icon.png');"><a href="{:U2('oauth/index',array('mod'=>$val['code']))}">{$val.name}</a></li>
                         </volist>
 					</ul>
 				</div>
@@ -92,8 +92,8 @@
             <else/>
             <div class="login" id="yetlogin">
                 <span>{$visitor.username}欢迎您！</span>|
-                <a href="{:u('user/index')}">个人中心</a>|
-                <a href="{:u('user/logout',array('ret_url'=>get_ret_url()))}">注销</a>
+                <a href="{:U2('user/index')}">个人中心</a>|
+                <a href="{:U2('user/logout',array('ret_url'=>get_ret_url()))}">注销</a>
             </div>
             </if>
 			<div class="topRightShare">
@@ -101,8 +101,8 @@
             </div>			
 			<div class="menutop"> 
             	<ul>
-					<li><a href="{:u('mall/index')}" target="_blank">商家导航</a>|</li>
-					<li><a href="{:u('post/submit')}" target="_blank">我要爆料</a></li>
+					<li><a href="{:U2('mall/index')}" target="_blank">商家导航</a>|</li>
+					<li><a href="{:U2('post/submit')}" target="_blank">我要爆料</a></li>
 				</ul> 
 			</div>			
 		</div>
@@ -110,11 +110,11 @@
     
 	<!--推荐类别开始-->
 	<div class="sidebox">
-		<div class="side_head"><h3><a href="{:u('post_cate/index',array('id'=>1))}">推荐类别</a></h3></div>
+		<div class="side_head"><h3><a href="{:U2('post_cate/index',array('id'=>1))}">推荐类别</a></h3></div>
 		<div class="side_body">
 			<ul>
                 <volist name="recommend_cate" id="val">
-                    <li class="sub{$i}"><a href="{:u('post_cate/index',array('id'=>$val['id']))}">{$val.name}</a></li>
+                    <li class="sub{$i}"><a href="{:U2('post_cate/index',array('id'=>$val['id']))}">{$val.name}</a></li>
                 </volist>
 			</ul>
 		</div>
@@ -135,7 +135,7 @@
     			<div id="news">
     			     <ul id="topAd" onmouseout="gstart()" onmouseover="gstop()" style="margin-top: 0px;">
                         <volist name="gonggao_list" id="val">
-                        <li><a href="{:u('article/index',array('id'=>$val['id']))}" target="_blank">{$val.title}</a></li>
+                        <li><a href="{:U2('article/index',array('id'=>$val['id']))}" target="_blank">{$val.title}</a></li>
                         </volist>
                     </ul>
     			</div>
@@ -145,10 +145,10 @@
             <div class="nav">
                 <ul class="nav" style="margin-bottom: -20px;">
                     <li class="home"><a class="navicon current" href="__ROOT__/">首页</a></li>
-                    <li class="tese J_top"><a class="navicon" href="{:u('post_cate/index',array('id'=>2))}">特色推荐</a>
+                    <li class="tese J_top"><a class="navicon" href="{:U2('post_cate/index',array('id'=>2))}">特色推荐</a>
                         <ul class="sub_menu" style="margin:0;">
                             <volist name="tese_cate" id="val">
-                            <li><a href="{:u('post_cate/index',array('id'=>$val['id']))}">{$val.name}</a></li>
+                            <li><a href="{:U2('post_cate/index',array('id'=>$val['id']))}">{$val.name}</a></li>
                             </volist>
                         </ul>
                     </li>

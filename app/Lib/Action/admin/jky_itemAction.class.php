@@ -116,7 +116,7 @@ class jky_itemAction extends backendAction
         if(empty($data['post_key'])){
             $data['post_key']=$this->py->tourl($data['title']);
         }
-        if(D("post")->where(array('post_key'=>trim($data['post_key'])))->count()>0){
+        if(D("jky_item")->where(array('post_key'=>trim($data['post_key'])))->count()>0){
             $data['post_key'].='_'.time();
         }
         $data['post_key']=str_replace($this->spec_chars,'',$data['post_key']);
@@ -194,7 +194,7 @@ class jky_itemAction extends backendAction
         if(empty($data['post_key'])){
             $data['post_key']=$this->py->tourl($data['title']);
         }
-        if(D("post")->where("post_key='$data[post_key]' and id!=$data[id]")->count()>0){
+        if(D("jky_item")->where("post_key='$data[post_key]' and id!=$data[id]")->count()>0){
             $data['post_key'].='_'.time();
         }        
         $data['post_key']=str_replace($this->spec_chars,'',$data['post_key']);
