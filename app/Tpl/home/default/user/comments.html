@@ -37,11 +37,11 @@
                                     <td class="cd-tablecell">
                                         <div class="panel-item-info"> 
                                         <if condition="$val['m'] eq 'post_comment'">
-                                            <a title="{$val.post.title}" target="_blank" href="{:u('post/index',array('id'=>$val['post_id']))}" class="label-merchant-services"> 
+                                            <a title="{$val.post.title}" target="_blank" href="{:u2('post/index',array('id'=>$val['post_id']))}" class="label-merchant-services"> 
                                                 <img alt="{$val.post.title}" src="{:attach($val['post']['img'],'post')}" border="0" height="50px"/> 
                                             </a> 
                                         <else/>
-                                            <a title="{$val.item.title}" target="_blank" href="{:u('jiukuaiyou/detail',array('id'=>$val['item_id']))}" class="label-merchant-services"> 
+                                            <a title="{$val.item.title}" target="_blank" href="{:u2('jiukuaiyou/detail',array('id'=>$val['item_id']))}" class="label-merchant-services"> 
                                                 <img alt="{$val.item.title}" src="{:attach($val['item']['img'],'jiukuaiyou')}" border="0" height="50px"> 
                                             </a> 
                                         </if>

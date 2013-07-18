@@ -29,9 +29,9 @@
     <div class="list">
         <volist name="recommend_list" id="item">
             <div class="item clearfix">            
-                <a href="{:U(MODULE_NAME.'/detail',array('id'=>$item['id']))}" class="fl thumb" target="_blank"><img src="{:attach($item['img'],MODULE_NAME)}"/></a>
+                <a href="{:U2(MODULE_NAME.'/detail',array('id'=>$item['id']))}" class="fl thumb" target="_blank"><img src="{:attach($item['img'],MODULE_NAME)}"/></a>
                 <div class="fr">
-                    <a class="item_title uline" href="{:U(MODULE_NAME.'/detail',array('id'=>$item['id']))}">{$item.title}</a>:
+                    <a class="item_title uline" href="{:U2(MODULE_NAME.'/detail',array('id'=>$item['id']))}">{$item.title}</a>:
                     <div class="mprice">￥{$item.mprice}</div>
                     <div class="price"><em>￥</em><strong>{$item.price}</strong></div>
                 </div>        
@@ -44,7 +44,7 @@
     <div class="list">
         <volist name="new_cmt_list" id="item">
             <div class="item clearfix">            
-                <a href="{:U(MODULE_NAME.'/detail',array('id'=>$item['item_id']))}" class="fl" target="_blank"><img src="{:attach($item['item']['img'],MODULE_NAME)}"/></a>
+                <a href="{:U2(MODULE_NAME.'/detail',array('id'=>$item['item_id']))}" class="fl" target="_blank"><img src="{:attach($item['item']['img'],MODULE_NAME)}"/></a>
                 <div class="fr">
                     <a class="uname">{$item.uname}</a>:
                     {:msubstr($item['info'],20)}

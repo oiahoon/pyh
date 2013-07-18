@@ -20,7 +20,7 @@
                     <volist name="list" id="val"> 
                         <div class="proview_item J_fav_item" id="J_fav_item_{$val.id}">
                             <div class="proview_item_pic"> 
-                                <a target="_blank" href="{:u('post/index',array('id'=>$val['post_id']))}" class="pic"> 
+                                <a target="_blank" href="{:u2('post/index',array('id'=>$val['post_id']))}" class="pic"> 
                                     <span class="img-wrap">
                                         <img src="{:attach($val['post']['img'],'post')}" border="0"/> 
                                     </span>
@@ -34,7 +34,7 @@
                                 </div>
                             </div>
                             <div class="proview_item_title"> 
-                                <a title="{$val.post.title}" target="_blank" href="{:u('post/index',array('id'=>$val['post_id']))}" class="LS_history">{$val.post.title}<span class="key">&nbsp;&nbsp;&nbsp;{$val.post.prices}</span> </a> </div>
+                                <a title="{$val.post.title}" target="_blank" href="{:u2('post/index',array('id'=>$val['post_id']))}" class="LS_history">{$val.post.title}<span class="key">&nbsp;&nbsp;&nbsp;{$val.post.prices}</span> </a> </div>
                         </div>
                     </volist>
                 </empty>                   

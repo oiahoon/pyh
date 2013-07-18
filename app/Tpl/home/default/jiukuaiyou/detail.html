@@ -84,9 +84,9 @@
                         <ul class="shijiu_list">
                             <volist name="like_list" id="item"> <li 
                                 <if condition="$i%4 eq 0">class="no_mr"</if>
-                                > <a target="_blank" href="{:U(MODULE_NAME.'/detail',array('id'=>$id))}" class="pic"> <img src="{:attach($item['img'],MODULE_NAME)}" style="display: inline;"/> </a>
-                                <p class="title_name"> <a target="_blank" href="{:U(MODULE_NAME.'/detail',array('id'=>$id))}">{$item.title}</a></p>
-                                <p class="detail"> <span class="price">￥{$item.price}</span> <a class="go_action" target="_blank" href="{:U(MODULE_NAME.'/detail',array('id'=>$id))}">去抢购&gt;&gt;</a></p>
+                                > <a target="_blank" href="{:U2(MODULE_NAME.'/detail',array('id'=>$id))}" class="pic"> <img src="{:attach($item['img'],MODULE_NAME)}" style="display: inline;"/> </a>
+                                <p class="title_name"> <a target="_blank" href="{:U2(MODULE_NAME.'/detail',array('id'=>$id))}">{$item.title}</a></p>
+                                <p class="detail"> <span class="price">￥{$item.price}</span> <a class="go_action" target="_blank" href="{:U2(MODULE_NAME.'/detail',array('id'=>$id))}">去抢购&gt;&gt;</a></p>
                                 </li>
                             </volist>
                         </ul>

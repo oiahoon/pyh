@@ -18,7 +18,7 @@
                             <include file="public:hot_activity" />
                             <volist name="recommend_list" id="val">
                             <div class="leftNotice alert alert-info">
-                                <h3><a href="{:u('post/index',array('id'=>$val['id']))}" target="_blank">{$val.title}</a><span class="badge badge-important">{$val.prices}</span></h3>
+                                <h3><a href="{:U2('post/index',array('id'=>$val['id']))}" target="_blank">{$val.title}</a><span class="badge badge-important">{$val.prices}</span></h3>
                             </div>
                             </volist>                        
                         </if>

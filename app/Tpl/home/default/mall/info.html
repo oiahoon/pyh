@@ -37,14 +37,14 @@
                             <div class="like">
                                 <div class="ilike">
                                     <a class="J_favs" data-id="{$val.id}">{$val.favs}</a>
-                                    <a class="ilike_icon2" target="_blank" href="{:u('post/index',array('id'=>$val['id']))}#J_messagebox">{$val.comments}</a>
+                                    <a class="ilike_icon2" target="_blank" href="{:u2('post/index',array('id'=>$val['id']))}#J_messagebox">{$val.comments}</a>
                                 </div>
                             </div>
 							<div class="pro_img">
-								<a href="{:u('post/index',array('id'=>$val['id']))}" class="proimg_pic" target="_blank"><img src="{:attach($val['img'],'post')}"/></a>
+								<a href="{:u2('post/index',array('id'=>$val['id']))}" class="proimg_pic" target="_blank"><img src="{:attach($val['img'],'post')}"/></a>
 							</div>
 							<div class="zhida" >
-								<a href="{:u('post/index',array('id'=>$val['id']))}" target="_blank">{$val.title}</a>
+								<a href="{:u2('post/index',array('id'=>$val['id']))}" target="_blank">{$val.title}</a>
 							</div>
 						</div>
 					</div>                    
