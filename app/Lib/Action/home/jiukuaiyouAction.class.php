@@ -54,7 +54,7 @@ class jiukuaiyouAction extends frontendAction {
         $this->assign('type', $type);
         $this->assign('sort',$sort);
         $this->assign('state',$state);
-        $this->_assign_list(D('jky_item'),$where,24,false,$order);
+        $this->_assign_list(D('jky_item'),$where,24,true,$order);
         $this->display();   
     }
     public function detail() {

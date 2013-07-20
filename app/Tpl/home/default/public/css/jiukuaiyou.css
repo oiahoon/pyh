@@ -185,13 +185,13 @@
     background-color: #F8F8F8;
     border: 1px solid #e5e5e5;
     border-bottom: none;
-    border-radius: 3px 3px;
+    border-radius: 3px 3px 0 0;
     display: inline-block;
     height: 32px;
     font: normal 16px/32px "微软雅黑";    
 }
 .jky_cate .level_1 a{
-    border-radius: 3px 3px;
+    border-radius: 3px 3px 0 0;
     height: 31px;
     line-height: 31px;
     margin-top: -1px;
@@ -202,7 +202,8 @@
 }
 .jky_cate .level_1 a:hover {
 	text-decoration: none;
-	background: #fedecf repeat scroll;
+	background: #08c repeat scroll;
+    color: #fff;
 }
 .jky_cate .level_1 a.hover{
     border-bottom: 1px solid #cb290a;
@@ -219,6 +220,7 @@
     left: 44%;
     z-index: 10;
 }
+/*
 .jky_cate .level_2{
     height: 45px;    
     line-height: 45px;
@@ -250,6 +252,7 @@
     background: url('../images/jky_leve2_hover.jpg') no-repeat center center transparent;
     color: #fff; 
 }
+*/
 /*
 .page span,.page a{
     background: #fff;
@@ -483,6 +486,7 @@
     float: left;
     width: 162px;
     margin-right: 14px;
+    margin-left: 2px;
 }
 .jiu_shi .shijiu_list li .pic {
     padding: 6px;

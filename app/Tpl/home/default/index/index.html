@@ -11,7 +11,8 @@
                 <div class="leftinfo">
                     {:R('advert/index', array(1), 'Widget')}
                     <if condition="$search['keyword']">
-                        <div class="clearfix crumbBox">当前位置:　<a href="__ROOT__/">首页</a> <i class="icon-chevron-right"></i> <strong>"{$search.keyword}"</strong>的搜索结果</div>
+                        <div class="clearfix crumbBox">当前位置:　<a href="__ROOT__/">首页</a>
+                            &nbsp;&raquo;&nbsp;<strong>"{$search.keyword}"</strong>的搜索结果</div>
                     </if>
                     <div class="showinfo">
                         <if condition="empty($search['keyword'])">
@@ -31,7 +32,7 @@
                         </present>
                         <present name="page_bar">
                         <div id="J_wall_page" class="wall_page" <present name="show_page">style="display:block;"</present>>
-                            <div class="page">{$page_bar}</div>
+                            <div class="pagination pagination-centered"><ul>{$page}</ul></div>
                         </div>
                         </present>
                     </div>

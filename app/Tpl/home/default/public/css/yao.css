@@ -82,7 +82,12 @@ a:hover {
     padding-left: 0;
     background: none;
     line-height: 25px;
-    color: #444;
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.5);
+    background-color: #555;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
     font-family: 'Microsoft YaHei', 'SimSun';
     font-size: 18px;
     font-weight: bold;
@@ -189,4 +194,52 @@ div.J_fixed > dl > dd {
 }
 .begin_time {
     margin-left: 6px;
+}
+
+.shijiu_list a.thumbnail:hover, a.thumbnail:focus {
+    border-color: #08c;
+    -webkit-box-shadow: 0 0px 22px rgba(0,105,214,0.25);
+    -moz-box-shadow: 0 0px 22px rgba(0,105,214,0.25);
+    box-shadow: 0 0px 22px rgba(0,105,214,0.25);
+}
+ul.shijiu_list {
+    margin: 0 0 10px 10px;
+}
+.jky_item:hover{
+    box-shadow: 0px 0px 13px rgba(90, 90, 90, 1);
+    border: 1px solid #818181;
+}
+.jky_item h3 {
+    line-height: 18px;
+    height: 35px;
+    margin: 0 0 2px;
+    font-size: 12px;
+}
+.jky_cate .level_2 .nav {
+    height: 47px;
+    margin-bottom: 0;
+}
+.jky_cate .level_2{
+    height: 45px;    
+    line-height: 45px;
+    background: white;
+    border: 1px solid #EAEAEA;
+    padding: 0px 15px;
+    font-size: 14px;
+    position: absolute;
+    top: 43px;  
+    width: 730px;  
+}
+.jky_cate .level_2 a{
+    line-height: 24px;
+    text-align: center;
+    width: 44px;      
+    float: left;
+}
+.jky_cate .level_2 a.hover{
+    font-weight: bold;  
+    text-shadow: 0 0 0 transparent, 1px 1px 1px #2B2B2B;    
+}
+.pointsgood-head ul{
+    margin: 0;
 }

@@ -14,7 +14,7 @@
 				<div class="leftinfo">				
 					<div class="crumbBox clearfix">
 						<span>当前位置:　</span>
-                        <a href="__ROOT__/">首页 </a> <i class="icon-chevron-right"></i> 
+                        <a href="__ROOT__/">首页 </a>&nbsp;&raquo;&nbsp;
                         <volist name="info['cate_list']" id="c" offset="0" length='4'>
                             <a href="{:U2('post_cate/index',array('id'=>$c['cate_id']))}" target="_blank">{$c.cate.name}</a>           
                             <if condition="$i lt 4">,
@@ -23,7 +23,7 @@
                             </if>
                             
                         </volist>             
-                        &nbsp;&gt;&gt;&nbsp;
+                        &nbsp;&raquo;&nbsp;
                         <span class="grey">日志详情</span>
 					</div>
 					<div class="showinfo">						

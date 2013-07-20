@@ -298,7 +298,7 @@ class frontendAction extends baseAction {
         }     
         //print_r($mod->getLastSql());exit();       
         $this->assign('list', $list);
-        $this->assign('page', $pager->fshow());
+        $this->assign('page', $pager->yshow());
         return $list;
     }   
 }

@@ -18,10 +18,10 @@
                         <a href="{:U2(MODULE_NAME.'/index',array('c1'=>$v['id'],'c2'=>$c2))}" <if condition="$c1 eq $v['id']">class="hover"</if>>{$v.name}<i></i></a>
                         </volist>
                     </div>
-                       <div id="rig_ht" class="level_1 clearfix">
+                       <div id="rig_ht" class="level_1 clearfix" style="margin-right:8px;">
                         <div class="fl">
                             <a href="{:U2(MODULE_NAME.'/'.ACTION_NAME,array('state'=>'notstart','c2'=>$c2,'c1'=>$c1))}"
-                            style="background-color:#ff7a0f;color:#ffffff;position: static;">明日预告</a>
+                            style="background-color:#08c;color:#ffffff;position: static;">明日预告</a>
                         </div>
                         <div id="click_show" class="fl">
                             <if condition="$text neq ''">
@@ -38,12 +38,15 @@
                             </div>
                         </div>
                       </div>
+
                     <div class="level_2">
-                        <span class="fl">筛选:</span>
-                        <a href="{:U2(MODULE_NAME.'/'.ACTION_NAME,array('c1'=>$c1,'c2'=>0))}" <if condition="$c2 eq 0"> class="hover"</if>>所有</a>
+                        <ul class="nav nav-pills">
+                            <li class="disabled"><a class="fl">筛选:</a></li>
+                        <li  <if condition="$c2 eq 0"> class="active"</if>><a href="{:U2(MODULE_NAME.'/'.ACTION_NAME,array('c1'=>$c1,'c2'=>0))}" <if condition="$c2 eq 0"> class="hover"</if>>所有</a></li>
                         <volist name="cat_list" id="v">
-                        <a href="{:U2(MODULE_NAME.'/'.ACTION_NAME,array('c1'=>$c1,'c2'=>$v['id']))}" <if condition="$c2 eq $v['id']"> class="hover"</if>>{$v.name}</a>
-                        </volist>                
+                        <li  <if condition="$c2 eq $v['id']"> class="active"</if>><a href="{:U2(MODULE_NAME.'/'.ACTION_NAME,array('c1'=>$c1,'c2'=>$v['id']))}" <if condition="$c2 eq $v['id']"> class="hover"</if>>{$v.name}</a></li>
+                        </volist>      
+                        </ul>          
                     </div>                                  
                 </div>   
                 
@@ -76,14 +79,14 @@
                                             <span>.{$item["price"]*100-intval($item['price'])*100}</span>
                                         </span>
                                         <span class="oldprice_1">￥{$item.mprice}</span>
-                                        <b class="btn"></b>
+                                        
                                     </a>
                                 </div>
                             </div>
                         </volist>
                     </ul>
                 </div>
-                <div class="page tc clearfix">{$page}</div>
+                <div class="pagination pagination-large pagination-centered"><ul>{$page}</ul></div>
             </div>
             <div class="contentbox_r fr mt10">
                 <include file="right" />
