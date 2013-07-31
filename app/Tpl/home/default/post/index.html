@@ -29,8 +29,9 @@
 					<div class="showinfo">						
 						<div class="showitem">							
 							<div class="showitemTitle clearfix">
-								<h3 class="clearfix">{$info.title}<span>&nbsp;&nbsp;{$info.prices}</span></h3>
-								<div class="showitemTime">{:fdate($info['add_time'])}</div>
+								<h3 class="clearfix">{$info.title}
+									<span class="badge badge-important price" style="color:#fff;">&nbsp;&nbsp;{$info.prices}</span></h3>
+								<div class="showitemTime" style="top:0;"><i class=" icon-time"></i><code>{:fdate($info['add_time'])}</code></div>
 							</div>							
 							<div class="showcont clearfix">
 								
@@ -38,13 +39,14 @@
 								
 									<div class="showtext">
 										<div class="showtext_head clearfix">
-											<span class="fl">分类：
+											<span class="fl">分类：</span>
+												<ul class="nav nav-pills category">
                                                 <volist name="info['cate_list']" id="c">
-                                                <a href="{:U2('post_cate/index',array('id'=>$c['cate_id']))}" target="_blank">{$c.cate.name}</a>
-                                                <if condition="$i lt count($info['cate_list'])">,</if>
+                                                <li><a href="{:U2('post_cate/index',array('id'=>$c['cate_id']))}" target="_blank">{$c.cate.name}</a></li>
                                                 </volist>
-                                            </span>
-											<span class="fr">推荐人：{$info.uname}</span>
+                                            	
+											<span class="fr muted">推荐人：{$info.uname}</span>
+											</ul>
 										</div>
 									</div>
 								</div>								
@@ -68,14 +70,13 @@
 										{$info.info}
 								</div>
 							</div>
-							<div class="product_tag"><span>标签：
-                            <volist name="tag_list" id="val">
-                                <a class="blue" href="{:U2('tag/index',array('id'=>$val['tag_id']))}" target="_blank">{$val.tag.name}</a>
-                                <if condition="$i lt count($tag_list)">
-                                ,
-                                </if>
-                            </volist>
-                            </span>
+							<div class="product_tag"><span>标签：</span>
+								<ul class="nav nav-pills category">
+	                            <volist name="tag_list" id="val">
+	                                <li><a class="blue" href="{:U2('tag/index',array('id'=>$val['tag_id']))}" target="_blank">{$val.tag.name}</a></li>
+	                            </volist>
+                        		</ul>
+                            
                             </div>
 							
 							<div class="score clearfix">
@@ -109,7 +110,7 @@
 							<!--您可能还喜欢开始-->
 							<div class="feature">
 								<h3>您可能还喜欢</h3>
-								<ul class="clearfix">
+								<ul class="clearfix" style="margin:0 0 0 -12px;padding:0;">
                                     <volist name="like_list" id="val">
                                     <li>
 										<a class="feature_pic" href="{:U2('post/index',array('id'=>$val['id']))}" target="_blank"><img src="{:attach($val['img'],'post')}"></a>
@@ -126,7 +127,7 @@
 									<ul>
 										<li class="commentsicon">评论</li>
 										<li class="currentcom"><em>全部评论</em>（<span class="blue" id="J_cmt_total">{$cmt_total}</span>）</li>
-										<li class="leave_mess"><a href="#J_messagebox">我要留言</a></li>
+										<li class="leave_mess"><a href="#J_messagebox" class="J_messagebox">我要留言</a></li>
 									</ul>
 								</div>
 								<div class="comments_body">
@@ -180,7 +181,7 @@
                                                 </div>
 											</div>
 											<div class="exitbox_r fr">
-												<input class="submit_btn" id="J_cmt_submit" type="button" value="提交"/>
+												<input class="btn btn-success" id="J_cmt_submit" type="button" value="提交"/>
 											</div>
 										</div>
 									</div>

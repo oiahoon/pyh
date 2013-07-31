@@ -132,6 +132,11 @@ $(function() {
             $this.html(html); 
             time--;                         
         },1000);
+    });
+    $('a.J_messagebox').click(function(){
+    	id = 'J_messagebox';
+    	scroll_to_id(id);
+    	return false;
     });    
 });
 
@@ -212,6 +217,8 @@ function toggle_content($this) {
 	} else {
 		$this.removeClass('long_content').addClass('short_content').text('展开全文');
 		$showtext_body.animate({height:'186px'}).removeClass('show_all').addClass('show_hidden');
+		var top_offset = $showtext_body.offset().top
+		$("html, body").animate({scrollTop: top_offset-150});
 		// $showtext_body.css({
 		// 	'overflow': 'hidden',
 		// 	'height': '200px'
@@ -281,4 +288,9 @@ function AddFavorite(sURL, sTitle) {
 */
 function get_file_extension(path){
     return $.trim(path.substr(path.lastIndexOf(".")));
+}
+
+function scroll_to_id (id) {
+	var top_offset = $('#'+id).offset().top
+	$("html, body").animate({scrollTop: top_offset});
 }
