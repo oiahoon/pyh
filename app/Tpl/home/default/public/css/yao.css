@@ -189,16 +189,49 @@ div.J_fixed > dl > dd {
     height: 220px;
     overflow: hidden;
 }
-.jky_item .img {
+.jky_item .img, .list img {
     max-width: 1000%;
+}
+.jky_item .img {
     position: absolute;
     clip: rect(0px 220px 220px 0px);
+}
+.new_cmt_list .list .item .fl img{
+    position: absolute;
+    clip: rect(0px 54px 54px 0px);
+}
+.recommend_list .thumb,.recommend_list .thumb img{
+    position: absolute;
+    clip: rect(0px 85px 85px 0px);
+    display: block;
+}
+.jky_img img{
+    position: absolute;
+    clip: rect(0px 310px 310px 0px);
+}
+.img_w_310 {
+    width: 310px;
+}
+.img_h_310 {
+    height: 310px;
 }
 .img_w_220 {
     width: 220px;
 }
 .img_h_220 {
     height: 220px;
+}
+.img_w_54 {
+    width: 54px;
+}
+.img_h_54 {
+    height: 54px;
+}
+.img_w_85 {
+    width: 85px;
+}
+.img_h_85 {
+    height: 85px;
 }
 
 .jky_item .buy_mask {

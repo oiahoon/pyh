@@ -161,10 +161,10 @@
     display: block;
     width: 54px;    
 }
-.new_cmt_list .list .item .fl img{
+/*.new_cmt_list .list .item .fl img{
     width: 54px;
     height: 54px;
-}
+}*/
 .new_cmt_list .list .item .fr{
     width: 130px;
 }
@@ -293,10 +293,10 @@
 .jky_title:hover{
     text-decoration: underline;
 }
-.jky_img img{
+/*.jky_img img{
     width: 310px;
     height: 310px;
-}
+}*/
 .goods_detail{
     float: right;
     width: 363px;
@@ -623,11 +623,11 @@
 .recommend_list .item{
     margin-top: 5px;
 }
-.recommend_list .thumb,.recommend_list .thumb img{
+/*.recommend_list .thumb,.recommend_list .thumb img{
     width: 85px;
     height: 85px;
     display: block;
-}
+}*/
 .recommend_list .fr{
     width: 105px;
 }
