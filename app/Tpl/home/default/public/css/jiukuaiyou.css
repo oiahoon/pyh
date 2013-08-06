@@ -40,8 +40,8 @@
     border: 1px solid #E5E5E5;
 }
 .jky_item .img{
-    width: 220px;
-    height: 220px;
+   /* width: 220px;
+    height: 220px;*/
 }
 
 .jky_item h3 i {

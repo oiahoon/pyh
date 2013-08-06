@@ -184,11 +184,23 @@ div.J_fixed > dl > dd {
     cursor: pointer;
     display: block;
     margin: 0 auto;
-    position: relative;
     text-decoration: none;
     width: 220px;
+    height: 220px;
     overflow: hidden;
 }
+.jky_item .img {
+    max-width: 1000%;
+    position: absolute;
+    clip: rect(0px 220px 220px 0px);
+}
+.img_w_220 {
+    width: 220px;
+}
+.img_h_220 {
+    height: 220px;
+}
+
 .jky_item .buy_mask {
     margin-left: 3px;
 }

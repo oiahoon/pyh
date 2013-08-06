@@ -19,4 +19,15 @@ $(document).ready(function() {
     },function(){
         $('.content',this).hide();
     });
+
+  $('div.pic a.jky_buy_img img').each(function(){
+    var $this=$(this);
+    imgReady($this.attr('src'),function(){
+      if(this.width>this.height){
+        $this.addClass('img_h_220');
+        $this.removeClass('img_w_220');
+      }
+    });
+  });
+
 });
