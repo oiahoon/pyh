@@ -20,7 +20,7 @@ $(document).ready(function() {
         $('.content',this).hide();
     });
 
-  $('div.pic a.jky_buy_img img, .list .item .fl img, .jky_img img').each(function(){
+  $('div.pic a.jky_buy_img img, .list .item .fl img, .jky_img img, .shijiu_list li .pic img').each(function(){
     var $this=$(this);
     var size = $this.attr('data-size')
     imgReady($this.attr('src'),function(){

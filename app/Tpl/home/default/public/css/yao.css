@@ -209,6 +209,10 @@ div.J_fixed > dl > dd {
     position: absolute;
     clip: rect(0px 310px 310px 0px);
 }
+.jiu_shi .shijiu_list li .pic img {
+    position: absolute;
+    clip: rect(0px 148px 148px 0px);
+}
 .img_w_310 {
     width: 310px;
 }
@@ -220,6 +224,12 @@ div.J_fixed > dl > dd {
 }
 .img_h_220 {
     height: 220px;
+}
+.img_w_148 {
+    width: 148px;
+}
+.img_h_148 {
+    height: 148px;
 }
 .img_w_54 {
     width: 54px;

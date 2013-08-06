@@ -496,9 +496,9 @@
     overflow: hidden;
     border: #e5e5e5 solid 1px;
 }
-.jiu_shi .shijiu_list li .pic img {
+/*.jiu_shi .shijiu_list li .pic img {
     width: 148px;
-}
+}*/
 .jiu_shi .shijiu_list li .title_name {
     height: 25px;
     line-height: 25px;
