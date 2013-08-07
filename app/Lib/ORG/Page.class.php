@@ -206,7 +206,7 @@ class Page {
                 $theEnd     =   '';
             }else{
                 $theEndRow  =   $this->totalPages;
-                $theEnd     =   "<i>...</i> <a href='".str_replace('__PAGE__',$theEndRow,$url)."' >".$theEndRow."</a>";
+                $theEnd     =   "<i>...</i> <li><a href='".str_replace('__PAGE__',$theEndRow,$url)."' >".$theEndRow."</a></li>";
             }
         }
 
@@ -288,13 +288,13 @@ class Page {
             if($this->nowPage - $middle < 1){
                 $theFirst   =   '';
             }else{
-                $theFirst   =   "<li><a href='".str_replace('__PAGE__',1,$url)."' >1</a></li> <li class='disable'><i>...</i></li>";
+                $theFirst   =   "<li><a href='".str_replace('__PAGE__',1,$url)."' >1</a></li> <li class='disable'><a><i>...</i></a></li>";
             }
             if($this->nowPage + $middle > $this->totalPages){
                 $theEnd     =   '';
             }else{
                 $theEndRow  =   $this->totalPages;
-                $theEnd     =   "<li class='disable'><a>...</a></li> <a href='".str_replace('__PAGE__',$theEndRow,$url)."' >".$theEndRow."</a></li>";
+                $theEnd     =   "<li class='disable'><a>...</a></li> <li><a href='".str_replace('__PAGE__',$theEndRow,$url)."' >".$theEndRow."</a></li>";
             }
         }
 
