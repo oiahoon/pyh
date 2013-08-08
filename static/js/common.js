@@ -101,13 +101,13 @@ $(function() {
         AddFavorite(window.location,def.site_name);
     });
 
-    $('.J_get_anhao').click(function(){ 
-        if(check_login()){
-            $.post(PINER.root + '/?m=jiukuaiyou&a=anhao',{id:$(this).attr('data-id')}, function(result){            
-                $.dialog({title:'暗号领取成功，使用有效期三天！', content:result, padding:'', fixed:true,lock:true});
-            });     
-        }    
-    });
+    // $('.J_get_anhao').click(function(){ 
+    //     if(check_login()){
+    //         $.post(PINER.root + '/?m=jiukuaiyou&a=anhao',{id:$(this).attr('data-id')}, function(result){            
+    //             $.dialog({title:'暗号领取成功，使用有效期三天！', content:result, padding:'', fixed:true,lock:true});
+    //         });     
+    //     }    
+    // });
     $('.J_remain_time').each(function(){
         $this=$(this);
         var time=parseInt($this.attr('data-time'));

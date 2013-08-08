@@ -20,7 +20,8 @@
             <span class="begin_time"> 开始：{:date("m月d日H时i分",$item['stime'])} </span>
         </div>
         <div class="buy_content">
-            <a target="_blank" href="{:U2('jiukuaiyou/go',array('id'=>$item['id']))}" class="buy_action clearfix">
+            <!-- <a target="_blank" href="{:U2('jiukuaiyou/go',array('id'=>$item['id']))}" class="buy_action clearfix"> -->
+            <a target="_blank" href="{:U2('jiukuaiyou/go',array('id'=>$item['id']))}" class="buy_action clearfix" data-itemid="{$item.taobao_id}" data-rd="1">
                 <span class="price"><em>￥</em>{:intval($item['price'])}
                     <span>.{$item["price"]*100-intval($item['price'])*100}</span>
                 </span>
