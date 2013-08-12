@@ -36,7 +36,7 @@ class jiukuaiyouAction extends frontendAction {
                 $where .= " and stime>=" . (strtotime(date("y-m-d", time()))+3600*24);
                 break;            
             default:
-                $where .= " and `etime`>$time and stime >= " . (strtotime(date("y-m-d", time()))+3600*24)";
+                $where .= " and `etime`>$time and stime >= " . (strtotime(date("y-m-d", time()))+3600*24);
                 break;
         }
         $this->text = "进行中";
