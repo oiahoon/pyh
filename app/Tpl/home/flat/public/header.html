@@ -2,7 +2,9 @@
 <html lang="zh">
   <head>
     <meta charset="utf-8">
-    <title>Flat CJPYH</title>
+    <title>{$page_seo.title}</title>    
+    <meta name="keywords" content="{$page_seo.keywords}" />
+    <meta name="description" content="{$page_seo.description}" /> 
     <base href="{: str_ireplace( 'index.php', '', 'http://'.$_SERVER['SERVER_NAME'].$_SERVER['SCRIPT_NAME'])}"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Loading Bootstrap -->
