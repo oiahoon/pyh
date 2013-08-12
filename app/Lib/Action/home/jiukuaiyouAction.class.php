@@ -25,16 +25,33 @@ class jiukuaiyouAction extends frontendAction {
         $time = time();
         $where = "status=1";
 
-        if ($state == "underway") {
-            $where .= " and `etime`>$time and `stime`<=$time ";
-            $this->text = "进行中";
-        } elseif ($state == "end") {
-            $where .= " and `etime`<$time ";
-            $this->text = "抢光了";
-        } elseif ($state == "notstart") {
-            $where .= " and stime>=" . (strtotime(date("y-m-d", time()))+3600*24);
-            $this->css = "css";
+        switch ($state) {
+            case 'underway':
+                $where .= " and `etime`>$time and `stime`<=$time ";
+                break;
+            case 'end':
+                $where .= " and `etime`<$time ";
+                break;
+            case 'notstart':
+                $where .= " and stime>=" . (strtotime(date("y-m-d", time()))+3600*24);
+                break;            
+            default:
+                $where .= " and `etime`>$time";
+                break;
         }
+        $this->text = "进行中";
+        $this->css = "css";
+
+        // if ($state == "underway") {
+        //     $where .= " and `etime`>$time and `stime`<=$time ";
+        //     $this->text = "进行中";
+        // } elseif ($state == "end") {
+        //     $where .= " and `etime`<$time ";
+        //     $this->text = "抢光了";
+        // } elseif ($state == "notstart") {
+        //     $where .= " and stime>=" . (strtotime(date("y-m-d", time()))+3600*24);
+        //     $this->css = "css";
+        // }
 
         for ($i = 1; $i < 3; $i++) {            
             $cid=intval($_REQUEST["c$i"]);            
