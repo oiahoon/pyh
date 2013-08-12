@@ -36,9 +36,10 @@ class jiukuaiyouAction extends frontendAction {
                 $where .= " and stime>=" . (strtotime(date("y-m-d", time()))+3600*24);
                 break;            
             default:
-                $where .= " and `etime`>$time and stime >= " . (strtotime(date("y-m-d", time()))+3600*24);
+                $where .= " and `etime`>$time and stime <= " . (strtotime(date("y-m-d"." 23:59:59", time()))+3600*24);
                 break;
         }
+
         $this->text = "进行中";
         $this->css = "css";
 
@@ -68,14 +69,15 @@ class jiukuaiyouAction extends frontendAction {
             default:
                 $order = 'id desc';
         }
-        $_order = "stime desc, ";   //按开始时间排序
+        $_order = "etime asc, ";   //按开始时间排序
         $order = $_order . $order;
-
+        $perpage = 150;
+        
         $this->_assign_common();
         $this->assign('type', $type);
         $this->assign('sort',$sort);
         $this->assign('state',$state);
-        $this->_assign_list(D('jky_item'),$where,24,true,$order);
+        $this->_assign_list(D('jky_item'),$where,$perpage,true,$order);
         $this->display();   
     }
     public function detail() {

@@ -31,7 +31,7 @@
             <p data-toggle="detailtip" data-trigger="hover" data-placement="top" title="<if condition="trim($item['intro'])!=''">{$item.intro}<else/>{$item.title}</if>"><a href="{:'jiukuaiyou-go'.$item['id'].'.html'}" data-itemid="{$item.taobao_id}" data-rd="1" target="_blank">{$item.title}</a></p>
             <a class="btn btn-large btn-block {$item.state} <if condition="$item.state eq 'end'">disabled<elseif condition="$item.state eq 'notstart'" />btn-success<else /> btn-danger</if>" target="_blank" href="{:'jiukuaiyou-go'.$item['id'].'.html'}" data-itemid="{$item.taobao_id}" data-rd="1" title="原价{$item.mprice}元 促销价{$item.price}元">
               <span class="price pull-left"><b>&yen;</b> {$item.price} <del>{$item.mprice}</del></span>
-              <span class="filter-option pull-right"><if condition="$item.state eq 'end'">已结束<elseif condition="$item.state eq 'notstart'" />未开始<else />去抢购</if> 
+              <span class="filter-option pull-right"><if condition="$item.state eq 'end'">已结束<elseif condition="$item.state eq 'notstart'" />即将开始<else />去抢购</if> 
                 <i class="fui-arrow-right"></i>
               </span>
             </a>
