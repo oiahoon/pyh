@@ -69,8 +69,8 @@ class jiukuaiyouAction extends frontendAction {
             default:
                 $order = 'id desc';
         }
-        $_order = "etime asc, ";   //按开始时间排序
-        $order = $_order . $order;
+        // $_order = "etime asc, ";   //按开始时间排序
+        // $order = $_order . $order;
         $perpage = 150;
         
         $this->_assign_common();
