@@ -20,7 +20,7 @@ class jiukuaiyouAction extends frontendAction {
         
         $this->assign('c1', intval($_REQUEST['c1']));
         $this->assign('c2', intval($_REQUEST['c2']));
-        $state = $this->_get("state", 'trim','underway');
+        $state = $this->_get("state", 'trim','all');
 
         $time = time();
         $where = "status=1";

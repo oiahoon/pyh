@@ -4,19 +4,32 @@
     margin: 0px;
 }
 </style>
-<load href="__ASSETS__/css/cjpyh.css">
+<load href="__ASSETS__/css/cjpyh.css" />
 
+<div class="subnav">
+  <ul class="nav nav-pills">
+    <li <if condition="$c2 eq 0"> class="disabled"</if>><a href="<if condition="$c2 eq 0">#fakelink<else/>{:U2(MODULE_NAME.'/'.ACTION_NAME,array('c1'=>$c1,'c2'=>0))}</if>">所有</a></li>
+    <volist name="cat_list" id="v">
+      <li <if condition="$c2 eq $v['id']">class="disabled"</if>>
+        <a <if condition="$c2 eq $v['id']">href="#fakelink"<else/>href="{:U2(MODULE_NAME.'/'.ACTION_NAME,array('c1'=>$c1,'c2'=>$v['id']))}"</if>>{$v.name}</a>
+      </li>
+    </volist>
+  </ul>
+</div>
 
     <ul class="row item-tiles">
         <volist name="list" id="item">
         <li class="span-item">
-          <div class="tile 
-          <if condition="$item['orig_id']==1">tile-tmall<elseif condition="$item['orig_id']==2">tile-taobao</if>">
+          <div class="tile <if condition="$item['orig_id'] eq 1">
+            tile-taobao
+          <else/>
+            tile-tmall
+          </if>">
             <img src="__ASSETS__/images/thumb.jpg" data-src="{:attach($item['img'],MODULE_NAME)}" alt="{$item.title}" class="tile-image item-image">
-            <p data-toggle="detailtip" data-trigger="hover" data-placement="top" title="{$item.intro}">{$item.title}</p>
-            <a class="btn btn-large btn-block btn-danger" href="{:'jiukuaiyou-go'.$item['id'].'.html'}" data-itemid="{$item.taobao_id}" data-rd="1">
+            <p data-toggle="detailtip" data-trigger="hover" data-placement="top" title="<if condition="trim($item['intro'])!=''">{$item.intro}<else/>{$item.title}</if>"><a href="{:'jiukuaiyou-go'.$item['id'].'.html'}" data-itemid="{$item.taobao_id}" data-rd="1">{$item.title}</a></p>
+            <a class="btn btn-large btn-block {$item.state} <if condition="$item.state eq 'end'">disabled<elseif condition="$item.state eq 'notstart'" />btn-success<else /> btn-danger</if>" href="{:'jiukuaiyou-go'.$item['id'].'.html'}" data-itemid="{$item.taobao_id}" data-rd="1" title="原价{$item.mprice}元 促销价{$item.price}元">
               <span class="price pull-left"><b>&yen;</b> {$item.price} <del>{$item.mprice}</del></span>
-              <span class="filter-option pull-right">去抢购 
+              <span class="filter-option pull-right"><if condition="$item.state eq 'end'">已结束<elseif condition="$item.state eq 'notstart'" />未开始<else />去抢购</if> 
                 <i class="fui-arrow-right"></i>
               </span>
             </a>

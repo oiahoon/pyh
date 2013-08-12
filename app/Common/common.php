@@ -411,6 +411,10 @@ function U2($url='',$vars='',$suffix=true,$redirect=false,$domain=true){
             if($vars['p']) {
                 return 'jiukuaiyou-'.$vars['p'].".html";
             }
+            if(isset($vars['c1']) && isset($vars['c2'])){
+                if($vars['c1'] == 0 && $vars['c2'] == 0) return 'jiukuaiyou.html';
+                if($vars['c2']) return 'jiukuaiyou-'.$vars['c1']."-".$vars['c2'].".html";
+            }
         break;
         case 'jiukuaiyou/detail':
             if($vars['post_key']) {
