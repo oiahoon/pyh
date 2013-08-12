@@ -60,13 +60,17 @@ class jiukuaiyouAction extends frontendAction {
             $where .= " and (select count(c.item_id) from " . table("jky_cate_re") .
                 " as c where c.cate_id=$cid and c.item_id=" . table("jky_item") . ".id)>0 ";
         }
+        
         switch($sort){
             case 'hot':
-                $order='hits desc';
+                $order = 'hits desc';
             case 'new':
             default:
-                $order='id desc';
+                $order = 'id desc';
         }
+        $_order = "stime desc, ";   //按开始时间排序
+        $order = $_order . $order;
+
         $this->_assign_common();
         $this->assign('type', $type);
         $this->assign('sort',$sort);
