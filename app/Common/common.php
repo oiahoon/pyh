@@ -406,10 +406,11 @@ function check_url($str){
 
 
 function U2($url='',$vars='',$suffix=true,$redirect=false,$domain=true){
+    if($url == '') $url = MODULE_NAME."/".ACTION_NAME;
     switch ($url){
         case 'jiukuaiyou/index':
             if($vars['p']) {
-                return 'jiukuaiyou-'.$vars['p'].".html";
+                return 'jiukuaiyou-p'.$vars['p'].".html";
             }
             if(isset($vars['c1']) && isset($vars['c2'])){
                 if($vars['c1'] == 0 && $vars['c2'] == 0) return 'jiukuaiyou.html';
