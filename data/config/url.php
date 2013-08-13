@@ -18,6 +18,8 @@ return array (
     '/^jiukuaiyou-(\d+).html$/' => 'jiukuaiyou/detail?id=:1',
     '/^jiukuaiyou-p(\d+).html$/' => 'jiukuaiyou/index?p=:1',
     '/^jiukuaiyou-go(\d+).html$/' => 'jiukuaiyou/go?id=:1',
+    '/^jiukuaiyou-comming.html$/' => 'jiukuaiyou/index?state=notstart',
+    '/^jiukuaiyou-comming-p(\d+).html$/' => 'jiukuaiyou/index?state=notstart&p=:1',
     '/^login.html$/' => 'user/login',
     '/^login.html?ret_url=(\w+)$/' => 'user/login?ret_url=:1',
     '/^register.html$/' => 'user/register',

@@ -410,6 +410,9 @@ function U2($url='',$vars='',$suffix=true,$redirect=false,$domain=true){
     switch ($url){
         case 'jiukuaiyou/index':
             if($vars['p']) {
+                if (isset($vars['state']) && $vars['state'] == 'notstart') {
+                    return 'jiukuaiyou-comming-p'.$vars['p'].".html";
+                }
                 return 'jiukuaiyou-p'.$vars['p'].".html";
             }
             if(isset($vars['c1']) && isset($vars['c2'])){

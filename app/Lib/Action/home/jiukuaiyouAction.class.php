@@ -33,10 +33,12 @@ class jiukuaiyouAction extends frontendAction {
                 $where .= " and `etime`<$time ";
                 break;
             case 'notstart':
-                $where .= " and stime>=" . (strtotime(date("y-m-d", time()))+3600*24);
+                $where .= " and stime>=" . $time;
+                // $where .= " and stime>=" . (strtotime(date("y-m-d", time()))+3600*24);
                 break;            
             default:
-                $where .= " and `etime`>$time and stime <= " . (strtotime(date("y-m-d"." 23:59:59", time()))+3600*24);
+                $where .= " and `etime`>$time and `stime`<=$time ";
+                // $where .= " and `etime`>$time and stime <= " . (strtotime(date("y-m-d"." 23:59:59", time()))+3600*24);
                 break;
         }
 
@@ -64,13 +66,15 @@ class jiukuaiyouAction extends frontendAction {
         
         switch($sort){
             case 'hot':
-                $order = 'hits desc';
+                $_order = 'hits desc';
             case 'new':
             default:
-                $order = 'id desc';
+                $_order = 'id desc';
         }
-        // $_order = "etime asc, ";   //按开始时间排序
-        // $order = $_order . $order;
+
+        $order = "stime desc, ordid asc, ";   //按开始时间排序
+        $order .= $_order;
+
         $perpage = 150;
         
         $this->_assign_common();
