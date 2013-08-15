@@ -75,7 +75,7 @@ class jiukuaiyouAction extends frontendAction {
         $order = "stime desc, ordid asc, ";   //按开始时间排序
         $order .= $_order;
 
-        $perpage = 150;
+        $perpage = 18;
         
         $this->_assign_common();
         $this->assign('type', $type);

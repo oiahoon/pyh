@@ -31,7 +31,7 @@
       , $winH = $win.height()				//获取窗口高度
 	  , $img = $(".span-item img.item-image")
 	  , $imgH = parseInt($img.height()/2)	//图片到一半的时候显示
-	  , $srcDef = "images/thumb.jpg"
+	  , $srcDef = "/pyh/app/Tpl/home/flat/public/images/thumb.gif"
 
     processScroll()								//页面初始化
     $win.on('scroll', processScroll)			//页面滚动时

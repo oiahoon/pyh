@@ -17,7 +17,7 @@
   </ul>
 </div>
 
-    <ul class="row item-tiles">
+    <ul class="row item-tiles" id="items-container">
         <include file="public:ajax_jky_item_list" />
       </ul>
 <p id="back-top" style="display: block;">
@@ -25,10 +25,71 @@
     </p>
     </div> <!-- /. item tiles -->
 
-    <div class="pagination pagination-centered">
+    <div class="pagination pagination-centered" id="pagination">
       <ul>
         {$page}
       </ul>
     </div>
 
+<load href="__ASSETS__/js/infinitescroll/jquery.infinitescroll.js" />
+<load href="__ASSETS__/js/infinitescroll/behaviors/manual-trigger.js" />
+<script>  
+
+  $('#items-container').infinitescroll({
+      
+      navSelector   : "div#pagination li:last a",
+      nextSelector  : "div#pagination li:last a",
+      itemSelector  : "#items-container li",
+      // debug     : true,
+      dataType    : 'html',
+      maxPage     : $("div#pagination li:last").prev("li").children('a').html(),
+      prefill     : true,
+      pixelsFromNavToBottom: 300,
+      
+      // extraScrollPx: 150,
+      loading:{finishedMsg  : "下面呢？下面没有了。",},
+
+      // behavior: 'local',
+      // appendCallback : false, // USE FOR PREPENDING
+      // pathParse      : function( pathStr, nextPage ){ return pathStr.replace('2', nextPage ); }
+    }, function(newElements, data, url){
+      show_image();
+      //USE FOR PREPENDING
+      // $(newElements).css('background-color','#ffef00');
+      // $(this).prepend(newElements);
+      //
+      //END OF PREPENDING
+
+//      window.console && console.log('context: ',this);
+//      window.console && console.log('returned: ', newElements);
+      
+    });
+    function show_image(){
+      $(window).on('scroll', processScroll);
+    }
+
+    function processScroll() {
+      $win = $(window);
+      $img = $(".span-item img.item-image");
+      $imgH = parseInt($img.height()/2);
+      $winH = $win.height()
+      $srcDef = "/pyh/app/Tpl/home/flat/public/images/thumb.gif";
+      /* 动态fix分类 */
+      var scrollTop = $win.scrollTop();
+      
+        /* 动态加载当前屏幕的图片 */
+        $img.each(function(i){
+          var $src = $img.eq(i).attr("data-src");
+          var $scroTop = $img.eq(i).offset();
+          if($scroTop.top + $imgH >= $win.scrollTop() && $win.scrollTop() + $winH >= $scroTop.top + $imgH){
+            if($img.eq(i).attr("src") == $srcDef){
+              $img.eq(i).hide();
+            }
+            $img.eq(i).attr("src",function(){return $src}).fadeIn(300);
+          }
+        });
+    }
+
+    
+  </script>
 <include file="public:footer" />
