@@ -21,6 +21,14 @@ body {
 .subnav ul{
   width:980px;
 }
+.pull-left.logo {
+  color: #FF7F50;
+  margin: 5px 25px;
+  width: 88px;
+  height: 40px;
+  background-image: url(../images/logo.png);
+  background-position: 0 40px;
+}
 .navbar-fixed-top .brand {
   border: 0;
   font-family: cursive;
