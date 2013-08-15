@@ -1,13 +1,15 @@
 body {
+  background-color: #ecf0f1;
   background-image: url(../images/grid-18px-masked.png);
   background-repeat: repeat-x;
   background-position: 0 40px;
+  background-attachment:fixed;
 }
 ::selection {
-  color: #fff;background-color: #E74C3C;
+  color: #fff;background-color: #e91b23;
 }   
 ::-moz-selection {
-  color: #fff;background-color: #E74C3C;
+  color: #fff;background-color: #e91b23;
 }  
 .span-item {
   width: 313px;
@@ -28,18 +30,19 @@ body {
   margin-left: 20px;
   float: right;
   font-weight: bolder;
-  color: #eee;
+  color: #fff;
   text-shadow: 0 1px 0px hsla(0, 0%, 0%, 1), 0 0 30px hsla(0, 0%, 0%, 1);
   -webkit-transition: all .2s linear;
   -moz-transition: all .2s linear;
   transition: all .2s linear;
 }
+
 .navbar-fixed-top .brand:hover{
   color: #fff;
   text-shadow: 0 1px 5px hsla(0, 0%, 0%, 1), 0 0 30px hsla(0, 0%, 0%, 1);
 }
 .navbar-inverse .navbar-logo {
-  background-color: #E74C3C;
+  background-color: #444;
 }
 
 .navbar .nav ul li{
@@ -51,12 +54,15 @@ body {
 .navbar .nav ul a:hover {
   background-color: #C0392B;
 }
-.navbar-inverse .nav > li > a {
+.navbar-inverse .nav > li > a,.navbar-inverse .nav.pull-right > li > a {
+  border-radius: 0 0 0 0;
+  border-bottom: 5px solid rgba(0, 0, 0, 0);
+  display: block;
   font-family: "微软雅黑";
-  font-size: 32px;
-  border-bottom: 0px ;
+  font-size: 2em;
+  /*border-bottom: 0px ;*/
   border-left: 0px;
-  color: #eee;
+  color: #fff;
   text-shadow: 0 1px 0 hsla(0, 100%, 100%, 0.1), 0 0 30px hsla(0, 100%, 100%, 0.125);
   -webkit-transition: all .2s linear;
   -moz-transition: all .2s linear;
@@ -67,7 +73,9 @@ body {
 .navbar-inverse .nav > li.active > a, 
 .navbar-inverse .nav > li.active > a:hover{
   color: #fff;
-  background-color: #C0392B;
+  border-bottom: 5px solid #1abc9c;
+  padding-left: 20px;
+  /*background-color: #e91b23;*/
 }
 
 /* 用于navbar 根据滚动条特效 */
@@ -134,32 +142,39 @@ body {
 }
 
 .item-tiles {
-	margin-bottom: 46px;
-	margin-top: 20px;
-	list-style-type: none;
+  margin-bottom: 46px;
+  margin-top: 20px;
+  list-style-type: none;
 }
 .item-tiles li{
-	margin-bottom: 26px;
+  margin-bottom: 26px;
 }
 .tile {
-  border: 2px dashed #FF83C5;
+  border: 2px dashed #fff;
   text-align: left;
   line-height: 16px;
   padding: 9px;
 }
 .tile:hover {
-  border: 2px dashed #ff0523;
+  border: 2px dashed #e74c3c;
 }
 .tile .item-image {
-	height: 190px;
-	margin-top: 0px;
-	margin-bottom: 5px;
-	width: 290px;
+  height: 190px;
+  margin-top: 0px;
+  margin-bottom: 5px;
+  width: 290px;
 }
 .btn.btn-large {
-  font-size: 14.996px;
+  font-size: 0.9em;
   line-height: 31px;
   padding: 5px 1px 5px;
+}
+.tile > p > a {
+  color: #354A5F;
+  text-decoration: none;
+}
+.tile > p > a:hover {
+  text-decoration: underline;
 }
 .tile a {
   height: 43px;
@@ -167,30 +182,23 @@ body {
   width: 291px;
   max-width: 291px;
 }
-.tile > p >a {
-  color:  hsl(210, 29%, 29%);
-  text-decoration: none;
-}
-.tile > p > a:hover {
-  text-decoration: underline;
-}
 .tile h5, .tile span {
   font-family: "微软雅黑";
 }
 .tile p {
-	font-size: 14px;
-	margin-bottom: 4px;
+  font-size: 1em;
+  margin-bottom: 4px;
   max-height: 32px;
   height: 32px;
   overflow: hidden;
 }
 .tile h5 {
-	color: #fff;
-	font-size: 14px;
-	font-weight: 700;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
 }
 .tile span {
-  font-size: 29px;
+  font-size: 2.4em;
   font-weight: bold;
   text-align: left;
   text-indent: 0;
@@ -199,13 +207,12 @@ body {
   font-size: 26px
 }
 .tile del {
-  font: bold 14px/12px "微软雅黑";
+  font: bold 0.4em/12px "微软雅黑";
   color: #2C3E50;
 }
 .tile b {
-   font-size: 18px;
+   font-size: 0.8em;
    font-style: normal;
-   font-family: cursive;
 }
 .tile.tile-taobao:before {
   background: url(../images/tile/taobao.png) 0 0 no-repeat;
@@ -228,19 +235,19 @@ body {
   width: 82px;
 }
 .item-detail {
-	display: none;
-	font-size: 12px;
-	position: absolute;
-	right: 0;
-	top: 313px;
-	bottom: 70px;
-	left: 0;
-	padding: 15px;
-	background: hsl(0, 0%, 20%);
-	background: hsla(0, 0%, 0%, 0.66);
+  display: none;
+  font-size: 12px;
+  position: absolute;
+  right: 0;
+  top: 313px;
+  bottom: 70px;
+  left: 0;
+  padding: 15px;
+  background: hsl(0, 0%, 20%);
+  background: hsla(0, 0%, 0%, 0.66);
 }
 .item-detail p {
-	color: #fff;
+  color: #fff;
 }
 
 .tooltip.in {
