@@ -4,7 +4,7 @@
     margin: 0px;
 }
 </style>
-<load href="__ASSETS__/css/cjpyh.css" />
+
 
 <div class="subnav">
   <ul class="nav nav-pills">
@@ -66,6 +66,7 @@
     });
     function show_image(){
       $(window).on('scroll', processScroll);
+      $("[data-toggle=detailtip]").tooltip("hide");
     }
 
     function processScroll() {
