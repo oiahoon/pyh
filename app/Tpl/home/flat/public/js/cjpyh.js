@@ -45,6 +45,13 @@
 		return false;
 	});
 
+	$(".span-item").mouseover(function(event) {
+		$(this).children('.bdshare').show();//removeClass('bdshare-hidden').addClass('bdshare-display');
+	})
+					.mouseleave(function(event) {
+		$(this).children('.bdshare').hide(500);//removeClass('bdshare-display').addClass('bdshare-hidden');
+	});
+					
     function processScroll() {
     	/* 动态fix分类 */
 		var i, scrollTop = $win.scrollTop()
