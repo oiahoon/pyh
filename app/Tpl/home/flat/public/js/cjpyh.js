@@ -1,27 +1,6 @@
 (function($) {
-	// $(".tile img").each(function(index, el) {
-	// 	var $this = $(this);
-	// 	var $detail = $this.siblings('.item-detail')
-	// 	$this.mousemove(function(event) {
-	// 		$detail.attr('style', 'display:block');
-	// 		$detail.animate({
-				
-	// 			top: '8px' ,
-	// 		},'normal');
-	// 	});
-		
-	// 	$this.parent('div.tile').mouseout(function(event) {
-	// 		$detail.animate({
-	// 			display: 'none',
-	// 			top: '313px' ,
-	// 		},'fast');
-	// 		$detail.attr('style', 'display:none');
-	// 	});
-	// });
-	
 	/* 详情提示  */
     $("[data-toggle=detailtip]").tooltip("hide");
-
     // fix sub nav on scroll
     var $win = $(window)				//窗口对象
       , $topnav = $('.top-nav')			//顶部nav
@@ -44,14 +23,12 @@
 		}, 800);
 		return false;
 	});
-
-	$(".span-item").mouseover(function(event) {
+	$(".span-item").live('mouseover', function(event) {
 		$(this).children('.bdshare').show();//removeClass('bdshare-hidden').addClass('bdshare-display');
 	})
-					.mouseleave(function(event) {
+				   .live('mouseleave', function(event) {
 		$(this).children('.bdshare').hide(500);//removeClass('bdshare-display').addClass('bdshare-hidden');
-	});
-					
+	});	
     function processScroll() {
     	/* 动态fix分类 */
 		var i, scrollTop = $win.scrollTop()

@@ -166,7 +166,7 @@ body {
 }
 .tile {
   border: 2px dashed #fff;
-  text-align: left;
+  text-align: center;
   line-height: 16px;
   padding: 9px;
 }
@@ -177,7 +177,7 @@ body {
   height: 190px;
   margin-top: 0px;
   margin-bottom: 5px;
-  width: 290px;
+  /*width: 290px;*/
 }
 .btn.btn-large {
   font-size: 0.9em;
@@ -206,6 +206,7 @@ body {
   max-height: 32px;
   height: 32px;
   overflow: hidden;
+  text-align: left;
 }
 .tile h5 {
   color: #fff;

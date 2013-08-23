@@ -1,11 +1,4 @@
 <include file="public:header" />
-<style type="text/css">
-#header{
-    margin: 0px;
-}
-</style>
-
-
 <div class="subnav">
   <ul class="nav nav-pills">
     <li <if condition="$c2 eq 0"> class="disabled"</if>><a href="<if condition="$c2 eq 0">#fakelink<else/>{:U2(MODULE_NAME.'/'.ACTION_NAME,array('c1'=>$c1,'c2'=>0))}</if>">所有</a></li>
@@ -18,8 +11,8 @@
 </div>
 
     <ul class="row item-tiles" id="items-container">
-        <include file="public:ajax_jky_item_list" />
-      </ul>
+      <include file="public:ajax_jky_item_list" />
+    </ul>
 <p id="back-top" style="display: block;">
       <a href="#top"><span></span>回到顶部</a>
     </p>
@@ -34,36 +27,19 @@
 <load href="__ASSETS__/js/infinitescroll/jquery.infinitescroll.js" />
 <load href="__ASSETS__/js/infinitescroll/behaviors/manual-trigger.js" />
 <script>  
-
-  $('#items-container').infinitescroll({
-      
+  $('#items-container').infinitescroll({ 
       navSelector   : "div#pagination li:last a",
       nextSelector  : "div#pagination li:last a",
       itemSelector  : "#items-container li",
-      // debug     : true,
-      dataType    : 'html',
-      maxPage     : $("div#pagination li:last").prev("li").children('a').html(),
-      prefill     : true,
-      pixelsFromNavToBottom: 300,
-      
-      // extraScrollPx: 150,
-      loading:{finishedMsg  : "下面呢？下面没有了。",},
-
-      // behavior: 'local',
-      // appendCallback : false, // USE FOR PREPENDING
-      // pathParse      : function( pathStr, nextPage ){ return pathStr.replace('2', nextPage ); }
+      dataType      : 'html',
+      maxPage       : $("div#pagination li:last").prev("li").children('a').html(),
+      prefill       : true,
+      pixelsFromNavToBottom : 300,
+      loading       :{finishedMsg  : "下面呢？下面没有了。",},
     }, function(newElements, data, url){
-      show_image();
-      //USE FOR PREPENDING
-      // $(newElements).css('background-color','#ffef00');
-      // $(this).prepend(newElements);
-      //
-      //END OF PREPENDING
-
-//      window.console && console.log('context: ',this);
-//      window.console && console.log('returned: ', newElements);
-      
+        show_image();
     });
+
     function show_image(){
       $(window).on('scroll', processScroll);
       $("[data-toggle=detailtip]").tooltip("hide");
@@ -76,8 +52,7 @@
       $winH = $win.height()
       $srcDef = "/pyh/app/Tpl/home/flat/public/images/thumb.gif";
       /* 动态fix分类 */
-      var scrollTop = $win.scrollTop();
-      
+      var scrollTop = $win.scrollTop(); 
         /* 动态加载当前屏幕的图片 */
         $img.each(function(i){
           var $src = $img.eq(i).attr("data-src");
